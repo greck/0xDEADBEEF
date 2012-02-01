@@ -1,1 +1,2 @@
-Why are there so many directory's going into src folder?
+Q: Why are there so many directory's going into src folder?
+A: Because I created a proper Java package name, and Eclipse builds the classpath to match.
