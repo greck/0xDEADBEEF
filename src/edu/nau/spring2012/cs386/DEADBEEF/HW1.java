@@ -14,7 +14,7 @@ public class HW1 {
 		FeatureDetector startStop = new TouchFeatureDetector(touch);
 		startStop.addListener(detectorListener);
 
-		while(true);
+		Button.ENTER.waitForPressAndRelease();
 		
 	}
 		
