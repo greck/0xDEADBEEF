@@ -1,5 +1,6 @@
 package edu.nau.spring2012.cs386.DEADBEEF;
 
+import lejos.nxt.*;
 import lejos.robotics.subsumption.*;
 
 public class MovingForward implements Behavior  {
@@ -13,10 +14,24 @@ public class MovingForward implements Behavior  {
 	}
 	
 	public void suppress() {
+	
+		suppressed = true;
 		
 	}
 	
 	public void action() {
+		
+		suppressed = false;
+
+		Motor.A.forward();
+		Motor.B.forward();
+
+		while( !suppressed ) {
+			Thread.yield();
+		}
+
+		Motor.A.stop();
+		Motor.B.stop();
 		
 	}
 	
