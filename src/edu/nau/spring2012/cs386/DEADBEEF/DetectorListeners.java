@@ -10,9 +10,11 @@ public class DetectorListeners implements FeatureListener {
 		if(!Motor.A.isMoving()) {
 
 			Motor.A.forward();
+			Motor.B.forward();
 				
 		} else {
 
+			Motor.B.stop();
 			Motor.A.stop();
 
 		}
