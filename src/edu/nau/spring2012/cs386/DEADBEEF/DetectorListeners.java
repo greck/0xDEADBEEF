@@ -30,7 +30,7 @@ public class DetectorListeners implements FeatureListener {
 
 		}
 		
-		LCD.drawString(sonic.toString(), 0, 0);
+		System.out.println(sonic.toString());
 
 	}
 		
