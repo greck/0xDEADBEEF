@@ -2,7 +2,7 @@ package edu.nau.spring2012.cs386.DEADBEEF;
 
 import lejos.nxt.*;
 
-public class HW1 {
+public class DrivingTest {
 
 	public static void main(String[] args) {
 
