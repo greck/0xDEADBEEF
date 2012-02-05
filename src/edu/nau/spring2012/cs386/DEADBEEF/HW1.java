@@ -37,11 +37,19 @@ public class HW1 {
 		r[5] = new Remediate();
 
 		int[][] s = new int[8][3];
-		
-		s[0][0] = 0; // recipe to execute
-		s[0][1] = 1; // next if true
-		s[0][2] = 1; // next if false
 
+//           +----------+
+//           |          |
+//       	 v          v	
+		s[0][0] = 0; // recipe to execute
+		s[0][1] = 1; // next state if recipe returns true
+		s[0][2] = 1; // next state if recipe returns false
+//        ^       ^
+//        |       |
+//        |       this is the state to transition to
+//        |		
+//        this is the current state
+		
 		s[1][0] = 1;
 		s[1][1] = 2;
 		s[1][2] = 1;
@@ -78,10 +86,10 @@ public class HW1 {
 
 			switch(state) {
 				case 0: LCD.drawString("QUIESCE_________",0,0); break;
-				case 1: LCD.drawString("UP1_____________",0,0); break;
-				case 2: LCD.drawString("DOWN1___________",0,0); break;
-				case 3: LCD.drawString("UP2_____________",0,0); break;
-				case 4: LCD.drawString("DOWN2___________",0,0); break;
+				case 1: LCD.drawString("QTOUCHTESTUP1___",0,0); break;
+				case 2: LCD.drawString("QTOUCHTESTDOWN__",0,0); break;
+				case 3: LCD.drawString("QTOUCHTESTUP2___",0,0); break;
+				case 4: LCD.drawString("TOUCHTESTDOWN___",0,0); break;
 				case 5: LCD.drawString("LINETEST________",0,0); break;
 				case 6: LCD.drawString("STRAIGHT________",0,0); break;
 				case 7: LCD.drawString("REMEDIATE_______",0,0); break;
