@@ -24,10 +24,10 @@ public class RobotState {
 		LCD.drawInt(Motor.A.getSpeed(),5,2,1);
 		LCD.drawInt(Motor.B.getSpeed(),5,11,1);
 		
-		LCD.drawString("Line:      ",0,2);
+		LCD.drawString("LineLvl:   ",0,2);
 		LCD.drawInt(lineLevel,5,11,2);
 
-		LCD.drawString("Lost:      ",0,3);
+		LCD.drawString("LostItrs:  ",0,3);
 		LCD.drawInt(itrsLost,5,11,3);
 		
 		LCD.drawString("Trend:     ",0,4);
@@ -45,7 +45,7 @@ public class RobotState {
 		// LightSensor
 		//
 		lightLevel = light.getNormalizedLightValue();
-		LCD.drawString("Light:      ",0,6);
+		LCD.drawString("LightLvl:   ",0,6);
 		LCD.drawInt(lightLevel,5,11,6);
 				
 		// UltrasonicSensor

@@ -6,7 +6,7 @@ import lejos.nxt.LCD;
 
 public class Remediate implements Recipe {
 
-	private boolean trendIsLeft = true;
+	private boolean trendIsLeft;
 	
 	// tunables
 	//
