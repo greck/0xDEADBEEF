@@ -12,8 +12,12 @@ public class HW1 {
 		System.out.println("can 'see' the");
 		System.out.println("line, and then");
 		System.out.println("press ENTER");
+		System.out.println(" ");
+		System.out.println(" ");
+		System.out.println(" ");
 		Button.ENTER.waitForPressAndRelease();
 
+		LCD.drawString("CALIBRATING_____",0,0);
 		for(int i=0; i<3; i++) {
 			RobotState.poll();
 			RobotState.lineLevel += RobotState.lightLevel;
@@ -21,6 +25,8 @@ public class HW1 {
 			  catch (InterruptedException e) { }
 		}
 		RobotState.lineLevel /= 3;
+
+		LCD.clear();
 		
 		Recipe[] r = new Recipe[6];
 		r[0] = new Quiesce();
@@ -64,10 +70,23 @@ public class HW1 {
 		s[7][1] = 4;
 		s[7][2] = 4;
 		
+		DrivingMacros.stop();
+		
 		int state = 0;
 		
 		while ( RobotState.poll() ) {
 
+			switch(state) {
+				case 0: LCD.drawString("QUIESCE_________",0,0); break;
+				case 1: LCD.drawString("UP1_____________",0,0); break;
+				case 2: LCD.drawString("DOWN1___________",0,0); break;
+				case 3: LCD.drawString("UP2_____________",0,0); break;
+				case 4: LCD.drawString("DOWN2___________",0,0); break;
+				case 5: LCD.drawString("LINETEST________",0,0); break;
+				case 6: LCD.drawString("STRAIGHT________",0,0); break;
+				case 7: LCD.drawString("REMEDIATE_______",0,0); break;
+			}
+			
 			if( r[s[state][0]].execute() ) {
 				state = s[state][1];
 			} else {

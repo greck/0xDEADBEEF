@@ -4,108 +4,34 @@ import lejos.nxt.*;
 
 public class DrivingMacros {
 
-	private static NXTRegulatedMotor leftMotor  = Motor.A;
-	private static NXTRegulatedMotor rightMotor = Motor.B;
-	
-	private static int minSpeed      =  10;
-	private static int maxSpeed      = 100;
-	private static int fullIncrement =  10;
-	private static int halfIncrement =   5;
+	private static NXTRegulatedMotor leftMotor  = Motor.B;
+	private static NXTRegulatedMotor rightMotor = Motor.A;
 
-	public static void setMotors(NXTRegulatedMotor left, NXTRegulatedMotor right) {
-		
-		leftMotor  = left;
-		rightMotor = right;
-
+	public static void start() {
+		RobotState.moving = true;
+		leftMotor.setSpeed(200);
+		leftMotor.forward();
+		rightMotor.setSpeed(200);
+		rightMotor.forward();
 	}
 	
-	public static void straightenUp() {
-		
-		int leftSpeed  = leftMotor.getSpeed();
-		int rightSpeed = rightMotor.getSpeed();
-		
-		if ( leftSpeed > rightSpeed ) {
-			rightMotor.setSpeed(leftSpeed);			
-		} else {
-			leftMotor.setSpeed(rightSpeed);
-		}
-		
-	}
-
-	public static boolean slowDown() {
-
-		int leftSpeed  = leftMotor.getSpeed();
-		int rightSpeed = rightMotor.getSpeed();
-		
-		if ( leftSpeed >= minSpeed + fullIncrement &&
-				rightSpeed >= minSpeed + fullIncrement ) {
-			
-			leftMotor.setSpeed(leftSpeed - fullIncrement);
-			leftMotor.setSpeed(leftSpeed - fullIncrement);
-			return true;
-			
-		} else {
-			
-			return false;
-			
-		}
-		
-	}
-
-	public static boolean speedUp() {
-
-		int leftSpeed  = leftMotor.getSpeed();
-		int rightSpeed = rightMotor.getSpeed();
-		
-		if ( leftSpeed <= maxSpeed - fullIncrement &&
-				rightSpeed <= maxSpeed - fullIncrement ) {
-			
-			leftMotor.setSpeed(leftSpeed + fullIncrement);
-			leftMotor.setSpeed(leftSpeed + fullIncrement);
-			return true;
-			
-		} else {
-			
-			return false;
-
-		}
-		
-	}
-
-	public static void turnLeft() {
-
-		int leftSpeed  = leftMotor.getSpeed();
-		int rightSpeed = rightMotor.getSpeed();
-
-		leftMotor.setSpeed(leftSpeed - halfIncrement);
-		rightMotor.setSpeed(rightSpeed + halfIncrement);
-		
-	}
-
-	public static void turnRight() {
-
-		int leftSpeed  = leftMotor.getSpeed();
-		int rightSpeed = rightMotor.getSpeed();
-
-		leftMotor.setSpeed(leftSpeed + halfIncrement);
-		rightMotor.setSpeed(rightSpeed - halfIncrement);
-		
-	}
-
-	public static void stopImmediately() {
-		
+	public static void stop() {
+		RobotState.moving = false;
 		leftMotor.stop();
 		rightMotor.stop();
-		
 	}
 	
-	public static void stopGently() {
-
-		while(slowDown()) {
-			Thread.yield();
-		}
-		stopImmediately();
-		
+	public static void turnLeft() {
+		leftMotor.setSpeed(100);
+		leftMotor.backward();
+		rightMotor.setSpeed(100);
+		rightMotor.forward();
 	}
 	
+	public static void turnRight() {
+		leftMotor.setSpeed(100);
+		leftMotor.forward();
+		rightMotor.setSpeed(100);
+		rightMotor.backward();
+	}
 }

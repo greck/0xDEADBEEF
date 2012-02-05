@@ -6,12 +6,12 @@ import lejos.nxt.LCD;
 
 public class Remediate implements Recipe {
 
-	private boolean trendIsLeft;
+	private boolean trendIsLeft = true;
 	
 	// tunables
 	//
-	private int slowDownInterval =  2;
-	private int maxItrsLost      = 10;
+	private int slowDownInterval  = 5;
+	private int maxItrsLost      = 25;
 
 	public Remediate() {
 		Random r = new Random(System.currentTimeMillis());
@@ -20,28 +20,30 @@ public class Remediate implements Recipe {
 	
 	public boolean execute() {
 
+		RobotState.itrsLost++;
+		
+		if (RobotState.itrsLost == maxItrsLost) {
+			if (trendIsLeft) {
+				trendIsLeft = false;
+			} else {
+				trendIsLeft = true;
+			}
+		}
+		
 		if (trendIsLeft) {
-			LCD.drawString(" left",4,11);
+			LCD.drawString(" left",11,4);
 		} else {
-			LCD.drawString("right",4,11);
+			LCD.drawString("right",11,4);
 		}
 
-		if (RobotState.itrsLost % slowDownInterval == 0) {
-			DrivingMacros.slowDown();
-		}
+//		if (RobotState.itrsLost % slowDownInterval == 0) {
+//			DrivingMacros.slowDown();
+//		}
 
-		if (RobotState.itrsLost < maxItrsLost) {
-			if (trendIsLeft) {
-				DrivingMacros.turnLeft();
-			} else {
-				DrivingMacros.turnRight();
-			}
+		if (trendIsLeft) {
+			DrivingMacros.turnLeft();
 		} else {
-			if (trendIsLeft) {
-				DrivingMacros.turnRight();
-			} else {
-				DrivingMacros.turnRight();
-			}
+			DrivingMacros.turnRight();
 		}
 
 		return true;

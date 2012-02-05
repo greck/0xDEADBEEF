@@ -12,6 +12,7 @@ public class RobotState {
 	public static int     lightLevel;
 	public static float   range;
 
+	public static boolean moving = false;
 	public static int     lineLevel;
 	public static int     itrsLost = 0;
 	
@@ -19,35 +20,39 @@ public class RobotState {
 
 		Thread.yield();
 
-		LCD.drawString("Line:      ",2,0);
-		LCD.drawInt(lineLevel,5,2,11);
+		LCD.drawString("L        R      ",0,1);
+		LCD.drawInt(Motor.A.getSpeed(),5,2,1);
+		LCD.drawInt(Motor.B.getSpeed(),5,11,1);
+		
+		LCD.drawString("Line:      ",0,2);
+		LCD.drawInt(lineLevel,5,11,2);
 
-		LCD.drawString("Lost:      ",3,0);
-		LCD.drawInt(itrsLost,5,3,11);
+		LCD.drawString("Lost:      ",0,3);
+		LCD.drawInt(itrsLost,5,11,3);
 		
-		LCD.drawString("Trend:      ",4,0);
-		
+		LCD.drawString("Trend:     ",0,4);
+
 		// TouchSensor
 		//
 		touched = touch.isPressed();
-		LCD.drawString("Touched:   ",5,0);
+		LCD.drawString("Touched:   ",0,5);
 		if ( touched ) {
-			LCD.drawString(" true",5,11);
+			LCD.drawString(" true",11,5);
 		} else {
-			LCD.drawString("false",5,11);
+			LCD.drawString("false",11,5);
 		}
 		
 		// LightSensor
 		//
 		lightLevel = light.getNormalizedLightValue();
-		LCD.drawString("Light:      ",6,0);
-		LCD.drawInt(lightLevel,5,6,11);
+		LCD.drawString("Light:      ",0,6);
+		LCD.drawInt(lightLevel,5,11,6);
 				
 		// UltrasonicSensor
 		//
 		range = ultrasonic.getRange();
-		LCD.drawString("Range:      ",7,0);
-		LCD.drawInt((int)range,5,7,11);
+		LCD.drawString("Range:      ",0,7);
+		LCD.drawInt((int)range,5,11,7);
 
 		if ( !Button.ESCAPE.isPressed() ) {
 			return true;

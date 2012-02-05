@@ -5,9 +5,8 @@ public class Straight implements Recipe {
 	public boolean execute() {
 
 		RobotState.itrsLost = 0;
-		
-		DrivingMacros.straightenUp();
-		DrivingMacros.speedUp();
+
+		DrivingMacros.start();
 		
 		return true;
 		

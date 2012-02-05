@@ -4,7 +4,7 @@ public class Quiesce implements Recipe {
 
 	public boolean execute() {
 
-		DrivingMacros.stopGently();
+		DrivingMacros.stop();
 		return true;
 		
 	}
