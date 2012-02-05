@@ -5,67 +5,62 @@ import lejos.nxt.*;
 
 public class Remediate implements Recipe {
 
-	private boolean trendIsLeft;
-	private int       reversals;
-	private int       triesLeft;
+	private boolean   nextTurnIsLeft;
+	private int    firstLineLevelErr;
+	private int[]  lineLevelErrTrend = new int[3];
 	
-	private void displayTrend() {
+	private void displayNextTurn() {
 		
-		if (trendIsLeft) {
-			LCD.drawString("Trend:   L ",0,4);
+		if ( nextTurnIsLeft ) {
+			LCD.drawString("nextTurn: L ",0,4);
 		} else {
-			LCD.drawString("Trend:   R ",0,4);
+			LCD.drawString("nextTurn: R ",0,4);
 		}
 		
 	}
 
-	private void calcTriesLeft() {
-		switch(reversals) {
-		case 0: triesLeft = 1400/DrivingMacros.baseSpeed; break;
-		case 1: triesLeft = 4200/DrivingMacros.baseSpeed; break;
-		case 2: triesLeft = 12600/DrivingMacros.baseSpeed; break;
-		default: triesLeft = 999999/DrivingMacros.baseSpeed;
-		}
-	}
-	
 	public Remediate() {
 		Random r = new Random(System.currentTimeMillis());
-		trendIsLeft = r.nextBoolean();
-		displayTrend();
+		nextTurnIsLeft = r.nextBoolean();
 	}
 		
 	public boolean execute() {
 
-		if ( RobotState.itrsLost == 0 ) {
-			reversals = 0;
-			calcTriesLeft();
-		}
-		
+		int avgLineLevelErr;
+
 		RobotState.itrsLost++;
-		
-		if ( triesLeft == 0 ) {
 
-			if (trendIsLeft) {
-				trendIsLeft = false;
-			} else {
-				trendIsLeft = true;
+		switch(RobotState.itrsLost) {
+		case 1:
+			firstLineLevelErr = RobotState.lineLevelErr;
+			break;
+		case 2:
+		case 3:
+		case 4:
+			lineLevelErrTrend[RobotState.itrsLost] = RobotState.lineLevelErr;
+			break;
+		case 5:
+			avgLineLevelErr = (lineLevelErrTrend[0] +
+					lineLevelErrTrend[1] + lineLevelErrTrend[2]) / 3;
+			if ( avgLineLevelErr > firstLineLevelErr ) {
+				if ( nextTurnIsLeft ) {
+					nextTurnIsLeft = false;
+				} else {
+					nextTurnIsLeft = true;
+				}		
 			}
-
-			reversals++;
-			calcTriesLeft();
-			
+			break;
+		default:
+				
 		}
+				
+		displayNextTurn();
 
-		displayTrend();
-		LCD.drawInt(triesLeft,5,11,4);
-		
-		if (trendIsLeft) {
+		if ( nextTurnIsLeft ) {
 			DrivingMacros.turnLeft();
 		} else {
 			DrivingMacros.turnRight();
 		}
-
-		triesLeft--;
 		
 		return true;
 		
