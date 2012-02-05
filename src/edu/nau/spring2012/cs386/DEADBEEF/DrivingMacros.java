@@ -4,8 +4,8 @@ import lejos.nxt.*;
 
 public class DrivingMacros {
 
-	private static NXTRegulatedMotor leftMotor;
-	private static NXTRegulatedMotor rightMotor;
+	private static NXTRegulatedMotor leftMotor  = Motor.A;
+	private static NXTRegulatedMotor rightMotor = Motor.B;
 	
 	private static int minSpeed      =  10;
 	private static int maxSpeed      = 100;
@@ -25,13 +25,9 @@ public class DrivingMacros {
 		int rightSpeed = rightMotor.getSpeed();
 		
 		if ( leftSpeed > rightSpeed ) {
-			
-			rightMotor.setSpeed(leftSpeed);
-			
+			rightMotor.setSpeed(leftSpeed);			
 		} else {
-			
 			leftMotor.setSpeed(rightSpeed);
-
 		}
 		
 	}
