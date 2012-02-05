@@ -30,8 +30,6 @@ public class RobotState {
 		LCD.drawString("LostItrs:  ",0,3);
 		LCD.drawInt(itrsLost,5,11,3);
 		
-		LCD.drawString("Trend:     ",0,4);
-
 		// TouchSensor
 		//
 		touched = touch.isPressed();
