@@ -12,7 +12,7 @@ public class HW1 {
 		LCD.drawString("robot so that it",0,1);
 		LCD.drawString("can 'see' the   ",0,2);
 		LCD.drawString("line, and then  ",0,3);
-		LCD.drawString("press ENTER     ",0,4);
+		LCD.drawString("press ENTER.    ",0,4);
 		Button.ENTER.waitForPressAndRelease();
 
 		LCD.clear();
