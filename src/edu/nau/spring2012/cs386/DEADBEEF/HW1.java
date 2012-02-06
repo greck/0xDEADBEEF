@@ -27,9 +27,6 @@ public class HW1 {
 		}
 		RobotState.lineLevel /= 4;
 
-		LCD.clear();
-		Sound.beep();
-		
 		Recipe[] r = new Recipe[6];
 		r[0] = new Quiesce();
 		r[1] = new IsNotTouched();
@@ -80,7 +77,9 @@ public class HW1 {
 		s[7][1] = 4;
 		s[7][2] = 4;
 		
-		DrivingMacros.stop();
+		// free and clear to navigate!
+		//
+		Sound.twoBeeps();
 		
 		int state = 0;
 
