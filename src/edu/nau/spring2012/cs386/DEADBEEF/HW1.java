@@ -7,22 +7,19 @@ public class HW1 {
 	public static void main(String[] args) {
 		
 		LCD.clear();
-		System.out.println("Please place the");
-		System.out.println("robot so that it");
-		System.out.println("can 'see' the");
-		System.out.println("line, and then");
-		System.out.println("press ENTER");
-		System.out.println(" ");
-		System.out.println(" ");
-		System.out.println(" ");
+
+		LCD.drawString("Please place the",0,0);
+		LCD.drawString("robot so that it",0,1);
+		LCD.drawString("can 'see' the   ",0,2);
+		LCD.drawString("line, and then  ",0,3);
+		LCD.drawString("press ENTER     ",0,4);
 		Button.ENTER.waitForPressAndRelease();
 
+		LCD.clear();
 		LCD.drawString("CALIBRATING_____",0,0);
 		for(int i=0; i<3; i++) {
 			RobotState.poll();
 			RobotState.lineLevel += RobotState.lightLevel;
-			try { Thread.sleep(250); }
-			  catch (InterruptedException e) { }
 		}
 		RobotState.lineLevel /= 3;
 

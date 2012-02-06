@@ -1,51 +1,64 @@
 package edu.nau.spring2012.cs386.DEADBEEF;
 
 import java.util.Random;
-
-import lejos.nxt.LCD;
+import lejos.nxt.*;
 
 public class Remediate implements Recipe {
 
-	private boolean trendIsLeft;
+	private boolean nextTurnIsLeft;
+	private int     initialError;
+	private int     errorTrend;
 	
 	// tunables
-	//
-	private int slowDownInterval  = 5;
-	private int maxItrsLost      = 25;
+	private int     reversalThreshold = 3500/DrivingMacros.baseSpeed;
+	
+	private void displayNextTurn() {
+		
+		if ( nextTurnIsLeft ) {
+			LCD.drawString("Turning: L ",0,4);
+		} else {
+			LCD.drawString("Turning: R ",0,4);
+		}
+		
+	}
 
 	public Remediate() {
 		Random r = new Random(System.currentTimeMillis());
-		trendIsLeft = r.nextBoolean();
+		nextTurnIsLeft = r.nextBoolean();
+		displayNextTurn();
 	}
-	
+		
 	public boolean execute() {
 
 		RobotState.itrsLost++;
+
+		if ( RobotState.itrsLost == 1 ) {
+			initialError = RobotState.lineLevelErr;
+		}
 		
-		if (RobotState.itrsLost == maxItrsLost) {
-			if (trendIsLeft) {
-				trendIsLeft = false;
-			} else {
-				trendIsLeft = true;
+		if ( RobotState.itrsLost < reversalThreshold ) {
+			errorTrend += RobotState.lineLevelErr;
+		}
+		
+		if ( RobotState.itrsLost == reversalThreshold ) {
+			errorTrend /= reversalThreshold - 1;
+			if ( errorTrend > initialError ) {
+				if ( nextTurnIsLeft ) {
+					nextTurnIsLeft = false;
+				} else {
+					nextTurnIsLeft = true;
+				}
 			}
 		}
+
+		displayNextTurn();
 		
-		if (trendIsLeft) {
-			LCD.drawString(" left",11,4);
-		} else {
-			LCD.drawString("right",11,4);
-		}
-
-//		if (RobotState.itrsLost % slowDownInterval == 0) {
-//			DrivingMacros.slowDown();
-//		}
-
-		if (trendIsLeft) {
+		if ( nextTurnIsLeft ) {
 			DrivingMacros.turnLeft();
 		} else {
 			DrivingMacros.turnRight();
 		}
-
+		
 		return true;
 		
 	}

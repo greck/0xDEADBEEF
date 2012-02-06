@@ -4,11 +4,11 @@ public class LineTest implements Recipe {
 
 	// tunables
 	//
-	private int varianceAllowed = 100;
+	private int varianceAllowed = 50;
 	
 	public boolean execute() {
 
-		if ( Math.abs(RobotState.lightLevel - RobotState.lineLevel) < varianceAllowed ) {
+		if ( RobotState.lineLevelErr < varianceAllowed ) {
 			return true;
 		} else {
 			return false;

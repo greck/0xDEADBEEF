@@ -12,9 +12,10 @@ public class RobotState {
 	public static int     lightLevel;
 	public static float   range;
 
-	public static boolean moving = false;
+	public static boolean    moving = false;
 	public static int     lineLevel;
-	public static int     itrsLost = 0;
+	public static int  lineLevelErr;
+	public static int      itrsLost = 0;
 	
 	public static boolean poll() {
 
@@ -30,8 +31,6 @@ public class RobotState {
 		LCD.drawString("LostItrs:  ",0,3);
 		LCD.drawInt(itrsLost,5,11,3);
 		
-		LCD.drawString("Trend:     ",0,4);
-
 		// TouchSensor
 		//
 		touched = touch.isPressed();
@@ -47,6 +46,8 @@ public class RobotState {
 		lightLevel = light.getNormalizedLightValue();
 		LCD.drawString("LightLvl:   ",0,6);
 		LCD.drawInt(lightLevel,5,11,6);
+		lineLevelErr = Math.abs(lightLevel - lineLevel);
+		LCD.drawInt(lineLevelErr,4,12,4);
 				
 		// UltrasonicSensor
 		//
