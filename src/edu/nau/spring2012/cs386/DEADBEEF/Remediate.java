@@ -5,16 +5,19 @@ import lejos.nxt.*;
 
 public class Remediate implements Recipe {
 
-	private boolean   nextTurnIsLeft;
-	private int    firstLineLevelErr;
-	private int[]  lineLevelErrTrend = new int[3];
+	private boolean nextTurnIsLeft;
+	private int     initialError;
+	private int     errorTrend;
+	
+	// tunables
+	private int     reversalThreshold = 3500/DrivingMacros.baseSpeed;
 	
 	private void displayNextTurn() {
 		
 		if ( nextTurnIsLeft ) {
-			LCD.drawString("nextTurn: L ",0,4);
+			LCD.drawString("Turning: L ",0,4);
 		} else {
-			LCD.drawString("nextTurn: R ",0,4);
+			LCD.drawString("Turning: R ",0,4);
 		}
 		
 	}
@@ -22,40 +25,34 @@ public class Remediate implements Recipe {
 	public Remediate() {
 		Random r = new Random(System.currentTimeMillis());
 		nextTurnIsLeft = r.nextBoolean();
+		displayNextTurn();
 	}
 		
 	public boolean execute() {
 
-		int avgLineLevelErr;
-
 		RobotState.itrsLost++;
 
-		switch(RobotState.itrsLost) {
-		case 1:
-			firstLineLevelErr = RobotState.lineLevelErr;
-			break;
-		case 2:
-		case 3:
-		case 4:
-			lineLevelErrTrend[RobotState.itrsLost] = RobotState.lineLevelErr;
-			break;
-		case 5:
-			avgLineLevelErr = (lineLevelErrTrend[0] +
-					lineLevelErrTrend[1] + lineLevelErrTrend[2]) / 3;
-			if ( avgLineLevelErr > firstLineLevelErr ) {
+		if ( RobotState.itrsLost == 1 ) {
+			initialError = RobotState.lineLevelErr;
+		}
+		
+		if ( RobotState.itrsLost < reversalThreshold ) {
+			errorTrend += RobotState.lineLevelErr;
+		}
+		
+		if ( RobotState.itrsLost == reversalThreshold ) {
+			errorTrend /= reversalThreshold - 1;
+			if ( errorTrend > initialError ) {
 				if ( nextTurnIsLeft ) {
 					nextTurnIsLeft = false;
 				} else {
 					nextTurnIsLeft = true;
-				}		
+				}
 			}
-			break;
-		default:
-				
 		}
-				
-		displayNextTurn();
 
+		displayNextTurn();
+		
 		if ( nextTurnIsLeft ) {
 			DrivingMacros.turnLeft();
 		} else {

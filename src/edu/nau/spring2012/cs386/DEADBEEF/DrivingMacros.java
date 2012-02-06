@@ -7,7 +7,7 @@ public class DrivingMacros {
 	private static NXTRegulatedMotor leftMotor  = Motor.B;
 	private static NXTRegulatedMotor rightMotor = Motor.A;
 
-	public static int baseSpeed = 400;
+	public static int baseSpeed = 200;
 	
 	public static void start() {
 		RobotState.moving = true;
