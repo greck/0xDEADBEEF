@@ -12,6 +12,7 @@ public class RobotState {
 	public static int     lightLevel;
 	public static float   range;
 
+	public static int     totalItrs = 0;
 	public static boolean    moving = false;
 	public static int     lineLevel;
 	public static int  lineLevelErr;
@@ -19,6 +20,8 @@ public class RobotState {
 	
 	public static boolean poll() {
 
+		totalItrs++;
+		
 		LCD.drawString("L        R      ",0,1);
 		LCD.drawInt(Motor.A.getSpeed(),5,2,1);
 		LCD.drawInt(Motor.B.getSpeed(),5,11,1);

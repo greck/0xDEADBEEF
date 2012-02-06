@@ -84,13 +84,10 @@ public class HW1 {
 		
 		int state = 0;
 
-		int totalItrs = 0;
 		long start = System.currentTimeMillis();
 		
 		while ( RobotState.poll() ) {
 
-			totalItrs++;
-			
 			switch(state) {
 				case 0: LCD.drawString("QUIESCE_________",0,0); break;
 				case 1: LCD.drawString("QTOUCHTESTUP1___",0,0); break;
@@ -110,11 +107,11 @@ public class HW1 {
 		
 		}
 
-		LCD.clear();
-		
 		long stop = System.currentTimeMillis();
 
-		float timePerItr = ( (float)stop - (float)start ) / (float)totalItrs;
+		float timePerItr = ( (float)stop - (float)start ) / (float)RobotState.totalItrs;
+
+		LCD.clear();
 
 		System.out.println("average");
 		System.out.println("milliseconds");
