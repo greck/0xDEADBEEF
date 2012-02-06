@@ -1,0 +1,35 @@
+digraph FSM {
+
+"START" [ shape=circle label="start" ];
+START -> QUIESCE;
+
+"QUIESCE" [ shape=box label=<<table border="0"><tr><td align="left">QUIESCE</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+QUIESCE -> QTOUCHTESTUP1 [ label = "T/F" ];
+
+"QTOUCHTESTUP1" [ shape=box label=<<table border="0"><tr><td align="left">QTOUCHTESTUP1</td></tr><tr><td align="left">r=IsNotTouched</td></tr></table>> ]:
+QTOUCHTESTUP1 -> QTOUCHTESTDOWN [ label = "T" ];
+QTOUCHTESTUP1 -> QTOUCHTESTUP1 [ label = "F" ];
+
+"QTOUCHTESTDOWN" [ shape=box label=<<table border="0"><tr><td align="left">QTOUCHTESTDOWN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ]:
+QTOUCHTESTDOWN -> QTOUCHTESTUP2 [ label = "T" ];
+QTOUCHTESTDOWN -> QTOUCHTESTDOWN [ label = "F" ];
+
+"QTOUCHTESTUP2" [ shape=box label=<<table border="0"><tr><td align="left">QTOUCHTESTUP2</td></tr><tr><td align="left">r=IsNotTouched</td></tr></table>> ]:
+QTOUCHTESTUP2 -> TOUCHTESTDOWN [ label = "T" ];
+QTOUCHTESTUP2 -> QTOUCHTESTUP2 [ label = "F" ];
+
+"TOUCHTESTDOWN" [ shape=box label=<<table border="0"><tr><td align="left">TOUCHTESTDOWN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ]:
+TOUCHTESTDOWN -> QUIESCE [ label = "T" ];
+TOUCHTESTDOWN -> LINETEST [ label = "F" ];
+
+"LINETEST" [ shape=box label=<<table border="0"><tr><td align="left">LINETEST</td></tr><tr><td align="left">r=LineTest</td></tr></table>> ]:
+LINETEST -> STRAIGHT [ label = "T" ];
+LINETEST -> REMEDIATE [ label = "F" ];
+
+"STRAIGHT" [ shape=box label=<<table border="0"><tr><td align="left">STRAIGHT</td></tr><tr><td align="left">r=Straight</td></tr></table>> ]:
+STRAIGHT -> TOUCHTESTDOWN [ label = "T/F" ];
+
+"REMEDIATE" [ shape=box label=<<table border="0"><tr><td align="left">REMEDIATE</td></tr><tr><td align="left">r=Remediate</td></tr></table>> ]:
+REMEDIATE -> TOUCHTESTDOWN [ label = "T/F" ];
+
+}
