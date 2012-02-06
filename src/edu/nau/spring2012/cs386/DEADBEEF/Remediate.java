@@ -51,7 +51,7 @@ public class Remediate implements Recipe {
 		}
 
 		lastError = RobotState.lineLevelErr;
-		
+
 		displayNextTurn();
 		
 		if ( nextTurnIsLeft ) {
