@@ -6,11 +6,11 @@ import lejos.nxt.*;
 public class Remediate implements Recipe {
 
 	private boolean nextTurnIsLeft;
-	private int     initialError;
-	private int     errorTrend;
+	private int     lastError;
+	private int     consecutiveErrs;
 	
 	// tunables
-	private int     reversalThreshold = 3500/DrivingMacros.baseSpeed;
+	private int  maxConsecutiveErrs = 15;
 	
 	private void displayNextTurn() {
 		
@@ -30,27 +30,28 @@ public class Remediate implements Recipe {
 		
 	public boolean execute() {
 
+		if ( RobotState.itrsLost == 0 ) {
+			lastError = RobotState.lineLevelErr;
+			consecutiveErrs = 0;
+		}
+		
 		RobotState.itrsLost++;
 
-		if ( RobotState.itrsLost == 1 ) {
-			initialError = RobotState.lineLevelErr;
-		}
-		
-		if ( RobotState.itrsLost < reversalThreshold ) {
-			errorTrend += RobotState.lineLevelErr;
-		}
-		
-		if ( RobotState.itrsLost == reversalThreshold ) {
-			errorTrend /= reversalThreshold - 1;
-			if ( errorTrend > initialError ) {
-				if ( nextTurnIsLeft ) {
-					nextTurnIsLeft = false;
-				} else {
-					nextTurnIsLeft = true;
-				}
+		if ( RobotState.lineLevelErr > lastError ) {
+			consecutiveErrs++;
+		} else {
+			if ( consecutiveErrs > 0 ) {
+				consecutiveErrs--;
 			}
 		}
 
+		if ( consecutiveErrs == maxConsecutiveErrs ) {
+			nextTurnIsLeft = !nextTurnIsLeft;
+			consecutiveErrs = 0;
+		}
+
+		lastError = RobotState.lineLevelErr;
+		
 		displayNextTurn();
 		
 		if ( nextTurnIsLeft ) {

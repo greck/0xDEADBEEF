@@ -4,7 +4,7 @@ public class LineTest implements Recipe {
 
 	// tunables
 	//
-	private int varianceAllowed = 50;
+	private int varianceAllowed = 70;
 	
 	public boolean execute() {
 

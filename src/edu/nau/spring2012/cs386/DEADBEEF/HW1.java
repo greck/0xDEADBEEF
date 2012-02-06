@@ -5,25 +5,30 @@ import lejos.nxt.*;
 public class HW1 {
 	
 	public static void main(String[] args) {
-		
-		LCD.clear();
 
-		LCD.drawString("Please place the",0,0);
-		LCD.drawString("robot so that it",0,1);
-		LCD.drawString("can 'see' the   ",0,2);
-		LCD.drawString("line, and then  ",0,3);
-		LCD.drawString("press ENTER     ",0,4);
+		System.out.println("Please place the");
+		System.out.println("robot so that it");
+		System.out.println("can 'see' the   ");
+		System.out.println("line, and then  ");
+		System.out.println("press ENTER     ");
+		System.out.println("                ");
+		System.out.println("                ");
+		System.out.println("                ");
+
 		Button.ENTER.waitForPressAndRelease();
 
 		LCD.clear();
 		LCD.drawString("CALIBRATING_____",0,0);
-		for(int i=0; i<3; i++) {
+
+		for(int i=0; i<4; i++) {
 			RobotState.poll();
 			RobotState.lineLevel += RobotState.lightLevel;
+			try { Thread.sleep(250); } catch( Exception e) { }
 		}
-		RobotState.lineLevel /= 3;
+		RobotState.lineLevel /= 4;
 
 		LCD.clear();
+		Sound.beep();
 		
 		Recipe[] r = new Recipe[6];
 		r[0] = new Quiesce();
@@ -78,9 +83,14 @@ public class HW1 {
 		DrivingMacros.stop();
 		
 		int state = 0;
+
+		int totalItrs = 0;
+		long start = System.currentTimeMillis();
 		
 		while ( RobotState.poll() ) {
 
+			totalItrs++;
+			
 			switch(state) {
 				case 0: LCD.drawString("QUIESCE_________",0,0); break;
 				case 1: LCD.drawString("QTOUCHTESTUP1___",0,0); break;
@@ -99,6 +109,20 @@ public class HW1 {
 			}
 		
 		}
+
+		LCD.clear();
+		
+		long stop = System.currentTimeMillis();
+
+		float timePerItr = ( (float)stop - (float)start ) / (float)totalItrs;
+
+		System.out.println("average");
+		System.out.println("milliseconds");
+		System.out.println("per");
+		System.out.println("main loop:");
+		System.out.println(timePerItr);
+
+		Button.ENTER.waitForPressAndRelease();
 		
 	}
 

@@ -7,7 +7,7 @@ public class DrivingMacros {
 	private static NXTRegulatedMotor leftMotor  = Motor.B;
 	private static NXTRegulatedMotor rightMotor = Motor.A;
 
-	public static int baseSpeed = 200;
+	public static int baseSpeed = 250;
 	
 	public static void start() {
 		RobotState.moving = true;
@@ -19,21 +19,21 @@ public class DrivingMacros {
 	
 	public static void stop() {
 		RobotState.moving = false;
-		leftMotor.stop();
-		rightMotor.stop();
+		leftMotor.stop(true);
+		rightMotor.stop(true);
 	}
 	
 	public static void turnLeft() {
-		leftMotor.setSpeed(2*baseSpeed/3);
+		leftMotor.setSpeed(baseSpeed/2);
 		leftMotor.backward();
-		rightMotor.setSpeed(2*baseSpeed/3);
+		rightMotor.setSpeed(baseSpeed/2);
 		rightMotor.forward();
 	}
 	
 	public static void turnRight() {
-		leftMotor.setSpeed(2*baseSpeed/3);
+		leftMotor.setSpeed(baseSpeed/2);
 		leftMotor.forward();
-		rightMotor.setSpeed(2*baseSpeed/3);
+		rightMotor.setSpeed(baseSpeed/2);
 		rightMotor.backward();
 	}
 }
