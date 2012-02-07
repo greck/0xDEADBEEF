@@ -1,2 +1,8 @@
-Q: Why are there so many directory's going into src folder?
-A: Because I created a proper Java package name, and Eclipse builds the classpath to match.
+This is the final code for HW1 as executed
+in the video and delivered in printed form.
+
+Prototype robot behaviour video:
+http://www.youtube.com/watch?v=WNbQXE0Z-H8
+
+Final robot behaviour video:
+http://www.youtube.com/watch?v=sX-cz4DgmCc
