@@ -4,7 +4,7 @@ public class LineTest implements Recipe {
 
 	// tunables
 	//
-	private int varianceAllowed = 50;
+	private int varianceAllowed = Math.abs(RobotState.nonLineLevel - RobotState.lineLevel) / 3;
 	
 	public boolean execute() {
 

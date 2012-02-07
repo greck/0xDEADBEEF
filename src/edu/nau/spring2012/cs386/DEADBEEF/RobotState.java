@@ -15,8 +15,17 @@ public class RobotState {
 	public static int     totalItrs = 0;
 	public static boolean    moving = false;
 	public static int     lineLevel;
+	public static int  nonLineLevel;
 	public static int  lineLevelErr;
 	public static int      itrsLost = 0;
+		
+	public static void preCalibrateLight() {
+		light.setFloodlight(true);
+	}
+
+	public static void calibrateLight() {
+		lightLevel = light.getNormalizedLightValue();
+	}
 	
 	public static boolean poll() {
 

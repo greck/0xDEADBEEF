@@ -6,11 +6,13 @@ public class HW1 {
 	
 	public static void main(String[] args) {
 
+		RobotState.preCalibrateLight();
+		
 		System.out.println("Please place the");
 		System.out.println("robot so that it");
 		System.out.println("can 'see' the   ");
-		System.out.println("line, and then  ");
-		System.out.println("press ENTER     ");
+		System.out.println("LINE, and then  ");
+		System.out.println("press ENTER.    ");
 		System.out.println("                ");
 		System.out.println("                ");
 		System.out.println("                ");
@@ -21,12 +23,33 @@ public class HW1 {
 		LCD.drawString("CALIBRATING_____",0,0);
 
 		for(int i=0; i<4; i++) {
-			RobotState.poll();
+			RobotState.calibrateLight();
 			RobotState.lineLevel += RobotState.lightLevel;
 			try { Thread.sleep(250); } catch( Exception e) { }
 		}
 		RobotState.lineLevel /= 4;
 
+		System.out.println("Please place the");
+		System.out.println("robot so that it");
+		System.out.println("can 'see'       ");
+		System.out.println("BESIDE THE LINE,");
+		System.out.println("and then press  ");
+		System.out.println("ENTER.          ");
+		System.out.println("                ");
+		System.out.println("                ");
+
+		Button.ENTER.waitForPressAndRelease();
+
+		LCD.clear();
+		LCD.drawString("CALIBRATING_____",0,0);
+
+		for(int i=0; i<4; i++) {
+			RobotState.calibrateLight();
+			RobotState.nonLineLevel += RobotState.lightLevel;
+			try { Thread.sleep(250); } catch( Exception e) { }
+		}
+		RobotState.nonLineLevel /= 4;
+		
 		Recipe[] r = new Recipe[6];
 		r[0] = new Quiesce();
 		r[1] = new IsNotTouched();
