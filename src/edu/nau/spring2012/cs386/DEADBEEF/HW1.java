@@ -6,6 +6,8 @@ public class HW1 {
 	
 	public static void main(String[] args) {
 
+		try { Thread.sleep(500); } catch ( Exception e ) { }
+		
 		RobotState.preCalibrateLight();
 		
 		System.out.println("Please place the");
@@ -31,10 +33,10 @@ public class HW1 {
 
 		System.out.println("Please place the");
 		System.out.println("robot so that it");
-		System.out.println("can 'see'       ");
-		System.out.println("BESIDE THE LINE,");
-		System.out.println("and then press  ");
-		System.out.println("ENTER.          ");
+		System.out.println("can 'see' THE    ");
+		System.out.println("BACKGROUND BEHIND");
+		System.out.println("THE LINE, and    ");
+		System.out.println("then press ENTER.");
 		System.out.println("                ");
 		System.out.println("                ");
 
