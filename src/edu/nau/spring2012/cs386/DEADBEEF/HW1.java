@@ -37,7 +37,7 @@ public class HW1 {
 		System.out.println("BACKGROUND      ");
 		System.out.println("BEHIND THE LINE,");
 		System.out.println("and then press  ");
-		System.out.println("ENTER           ");
+		System.out.println("ENTER.          ");
 		System.out.println("                ");
 
 		Button.ENTER.waitForPressAndRelease();
