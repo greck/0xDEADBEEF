@@ -1,8 +1,4 @@
-This is the final code for HW1 as executed
-in the video and delivered in printed form.
-
-Prototype robot behaviour video:
-http://www.youtube.com/watch?v=WNbQXE0Z-H8
-
-Final robot behaviour video:
-http://www.youtube.com/watch?v=sX-cz4DgmCc
+This is the master branch.  It should
+contain "the state of the art"--i.e. the
+latest tested code with only functional
+features.
