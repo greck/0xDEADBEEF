@@ -81,3 +81,19 @@ for ( my $i = 0; $i < $stateCount; $i++ ) {
 	print "\n" if $i < $stateCount - 1;
 
 }
+
+print "\n###########################\n\n";
+
+for ( my $i = 0; $i < $stateCount; $i++ ) {
+
+	foreach $s ( keys %states ) {
+
+		$stateStr = $s if $states{$s} == $i;
+
+	}
+
+    $stateStr .= '_' x ( 16 - length($stateStr) );  
+
+	print "\t\tcase $i: LCD.drawString(\"$stateStr\",0,0); break;\n";
+
+}

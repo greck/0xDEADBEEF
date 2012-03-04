@@ -6,7 +6,7 @@ public class Straight implements Recipe {
 
 		RobotState.itrsLost = 0;
 
-		DrivingMacros.start();
+		Robot.pilot.forward();
 		
 		return true;
 		

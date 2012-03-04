@@ -1,21 +1,25 @@
 package edu.nau.spring2012.cs386.DEADBEEF;
 
 import lejos.nxt.*;
+import lejos.robotics.navigation.DifferentialPilot;
 
-public class HW1 {
-	
+public class Robot {
+
+	public static DifferentialPilot pilot =
+	  new DifferentialPilot(2.1f, 4.4f, Motor.A, Motor.B);
+
 	public static void main(String[] args) {
 
 		try { Thread.sleep(500); } catch ( Exception e ) { }
-		
+
 		RobotState.preCalibrateLight();
 		
 		System.out.println("Please place the");
 		System.out.println("robot so that it");
 		System.out.println("can 'see' the   ");
-		System.out.println("LINE, and then  ");
-		System.out.println("press ENTER.    ");
-		System.out.println("                ");
+		System.out.println("BOUNDARY LINE,  ");
+		System.out.println("and then press  ");
+		System.out.println("ENTER.           ");
 		System.out.println("                ");
 		System.out.println("                ");
 
@@ -35,10 +39,10 @@ public class HW1 {
 		System.out.println("robot so that it");
 		System.out.println("can 'see' THE   ");
 		System.out.println("BACKGROUND      ");
-		System.out.println("BEHIND THE LINE,");
+		System.out.println("BEHIND THE      ");
+		System.out.println("BOUNDARY LINE,  ");
 		System.out.println("and then press  ");
 		System.out.println("ENTER.          ");
-		System.out.println("                ");
 
 		Button.ENTER.waitForPressAndRelease();
 
@@ -58,22 +62,22 @@ public class HW1 {
 		r[2] = new IsTouched();
 		r[3] = new LineTest();
 		r[4] = new Straight();
-		r[5] = new Remediate();
+		r[5] = new Sweep();
 
 		int[][] s = new int[8][3];
 
-//           +----------+
-//           |          |
-//       	 v          v	
+//		     +----------+
+//		     |          |
+//		     v          v
 		s[0][0] = 0; // recipe to execute
-		s[0][1] = 1; // next state if recipe returns true
+		s[0][1] = 1; // next state if recipe return true
 		s[0][2] = 1; // next state if recipe returns false
-//        ^       ^
-//        |       |
-//        |       this is the state to transition to
-//        |		
-//        this is the current state
-		
+//		  ^       ^
+//		  |       |
+//		  |       this is the state to transition to
+//		  |		
+//		  this is the current state
+
 		s[1][0] = 1;
 		s[1][1] = 2;
 		s[1][2] = 1;
@@ -94,11 +98,11 @@ public class HW1 {
 		s[5][1] = 6;
 		s[5][2] = 7;
 
-		s[6][0] = 4;
+		s[6][0] = 5;
 		s[6][1] = 4;
 		s[6][2] = 4;
 
-		s[7][0] = 5;
+		s[7][0] = 4;
 		s[7][1] = 4;
 		s[7][2] = 4;
 		
@@ -118,9 +122,9 @@ public class HW1 {
 				case 2: LCD.drawString("QTOUCHTESTDOWN__",0,0); break;
 				case 3: LCD.drawString("QTOUCHTESTUP2___",0,0); break;
 				case 4: LCD.drawString("TOUCHTESTDOWN___",0,0); break;
-				case 5: LCD.drawString("LINETEST________",0,0); break;
-				case 6: LCD.drawString("STRAIGHT________",0,0); break;
-				case 7: LCD.drawString("REMEDIATE_______",0,0); break;
+				case 5: LCD.drawString("BOUNDARYCHECK___",0,0); break;
+				case 6: LCD.drawString("SWEEP___________",0,0); break;
+				case 7: LCD.drawString("STRAIGHT________",0,0); break;
 			}
 			
 			if( r[s[state][0]].execute() ) {

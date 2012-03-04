@@ -4,7 +4,7 @@ public class Quiesce implements Recipe {
 
 	public boolean execute() {
 
-		DrivingMacros.stop();
+		Robot.pilot.stop();
 		return true;
 		
 	}

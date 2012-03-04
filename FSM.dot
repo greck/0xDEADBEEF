@@ -20,16 +20,16 @@ QTOUCHTESTUP2 -> QTOUCHTESTUP2 [ label = "F" ];
 
 "TOUCHTESTDOWN" [ shape=box label=<<table border="0"><tr><td align="left">TOUCHTESTDOWN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ]:
 TOUCHTESTDOWN -> QUIESCE [ label = "T" ];
-TOUCHTESTDOWN -> LINETEST [ label = "F" ];
+TOUCHTESTDOWN -> BOUNDARYCHECK [ label = "F" ];
 
-"LINETEST" [ shape=box label=<<table border="0"><tr><td align="left">LINETEST</td></tr><tr><td align="left">r=LineTest</td></tr></table>> ]:
-LINETEST -> STRAIGHT [ label = "T" ];
-LINETEST -> REMEDIATE [ label = "F" ];
+"BOUNDARYCHECK" [ shape=box label=<<table border="0"><tr><td align="left">BOUNDARYCHECK</td></tr><tr><td align="left">r=LineTest</td></tr></table>> ]:
+BOUNDARYCHECK -> SWEEP [ label = "T" ];
+BOUNDARYCHECK -> STRAIGHT [ label = "F" ];
 
 "STRAIGHT" [ shape=box label=<<table border="0"><tr><td align="left">STRAIGHT</td></tr><tr><td align="left">r=Straight</td></tr></table>> ]:
 STRAIGHT -> TOUCHTESTDOWN [ label = "T/F" ];
 
-"REMEDIATE" [ shape=box label=<<table border="0"><tr><td align="left">REMEDIATE</td></tr><tr><td align="left">r=Remediate</td></tr></table>> ]:
-REMEDIATE -> TOUCHTESTDOWN [ label = "T/F" ];
+"SWEEP" [ shape=box label=<<table border="0"><tr><td align="left">SWEEP</td></tr><tr><td align="left">r=Sweep</td></tr></table>> ]:
+SWEEP -> TOUCHTESTDOWN [ label = "T/F" ];
 
 }
