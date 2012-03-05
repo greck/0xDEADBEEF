@@ -1,42 +1,87 @@
 digraph FSM {
 
 "START" [ shape=circle label="start" ];
-START -> QUIESCE;
 
-"QUIESCE" [ shape=box label=<<table border="0"><tr><td align="left">QUIESCE</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-QUIESCE -> QTOUCHTESTUP1 [ label = "T/F" ];
+	subgraph cluster_0 {
 
-"QTOUCHTESTUP1" [ shape=box label=<<table border="0"><tr><td align="left">QTOUCHTESTUP1</td></tr><tr><td align="left">r=IsNotTouched</td></tr></table>> ]:
-QTOUCHTESTUP1 -> QTOUCHTESTDOWN [ label = "T" ];
-QTOUCHTESTUP1 -> QTOUCHTESTUP1 [ label = "F" ];
+		color = gray;
 
-"QTOUCHTESTDOWN" [ shape=box label=<<table border="0"><tr><td align="left">QTOUCHTESTDOWN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ]:
-QTOUCHTESTDOWN -> QTOUCHTESTUP2 [ label = "T" ];
-QTOUCHTESTDOWN -> QTOUCHTESTDOWN [ label = "F" ];
+		Q_QUIESCE        [ shape=box label=<<table border="0"><tr><td align="left">Q_QUIESCE</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		Q_WAIT_STOP_UP   [ shape=box label=<<table border="0"><tr><td align="left">Q_WAIT_STOP_UP</td></tr><tr><td align="left">r=IsNotTouched</td></tr></table>> ]:
+		Q_WAIT_START_DN  [ shape=box label=<<table border="0"><tr><td align="left">Q_WAIT_START_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ]:
+		Q_WAIT_START_UP  [ shape=box label=<<table border="0"><tr><td align="left">Q_WAIT_START_UP</td></tr><tr><td align="left">r=IsNotTouched</td></tr></table>> ]:
 
-"QTOUCHTESTUP2" [ shape=box label=<<table border="0"><tr><td align="left">QTOUCHTESTUP2</td></tr><tr><td align="left">r=IsNotTouched</td></tr></table>> ]:
-QTOUCHTESTUP2 -> TOUCHTESTDOWN [ label = "T" ];
-QTOUCHTESTUP2 -> QTOUCHTESTUP2 [ label = "F" ];
+	}
 
-"TOUCHTESTDOWN" [ shape=box label=<<table border="0"><tr><td align="left">TOUCHTESTDOWN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ]:
-TOUCHTESTDOWN -> QUIESCE [ label = "T" ];
-TOUCHTESTDOWN -> DETECTBALL [ label = "F" ];
 
-"DETECTBALL" [ shape=box label=<<table border="0"><tr><td align="left">DETECTBALL</td></tr><tr><td align="left">r=DetectBall</td></tr></table>> ]:
-DETECTBALL -> AVOIDBALL [ label = "T" ];
-DETECTBALL -> BOUNDARYCHECK [ label = "F" ];
+	subgraph cluster_1 {
+	
+		color = gray;
 
-"AVOIDBALL" [ shape=box label=<<table border="0"><tr><td align="left">AVOIDBALL</td></tr><tr><td align="left">r=AvoidBall</td></tr></table>> ]:
-AVOIDBALL -> BOUNDARYCHECK [ label = "T/F" ];
+		S_STRAIGHT       [ shape=box label=<<table border="0"><tr><td align="left">S_STRAIGHT</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		S_BOUNDARY_CHECK [ shape=box label=<<table border="0"><tr><td align="left">S_BOUNDARY_CHECK</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		S_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">S_DETECT_BALL</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		S_CHECK_STOP_DN  [ shape=box label=<<table border="0"><tr><td align="left">S_CHECK_STOP_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ]:
 
-"BOUNDARYCHECK" [ shape=box label=<<table border="0"><tr><td align="left">BOUNDARYCHECK</td></tr><tr><td align="left">r=LineTest</td></tr></table>> ]:
-BOUNDARYCHECK -> SWEEP [ label = "T" ];
-BOUNDARYCHECK -> STRAIGHT [ label = "F" ];
+	}		
 
-"STRAIGHT" [ shape=box label=<<table border="0"><tr><td align="left">STRAIGHT</td></tr><tr><td align="left">r=Straight</td></tr></table>> ]:
-STRAIGHT -> TOUCHTESTDOWN [ label = "T/F" ];
+	subgraph cluster_2 {
+	
+		color = gray;
 
-"SWEEP" [ shape=box label=<<table border="0"><tr><td align="left">SWEEP</td></tr><tr><td align="left">r=Sweep</td></tr></table>> ]:
-SWEEP -> TOUCHTESTDOWN [ label = "T/F" ];
+		P_SEARCH_PATTERN [ shape=box label=<<table border="0"><tr><td align="left">P_SEARCH_PATTERN</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		P_BOUNDARY_CHECK [ shape=box label=<<table border="0"><tr><td align="left">P_BOUNDARY_CHECK</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		P_UNDO           [ shape=box label=<<table border="0"><tr><td align="left">U_UNDO</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		P_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">P_DETECT_BALL</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		P_CHECK_STOP_DN  [ shape=box label=<<table border="0"><tr><td align="left">P_CHECK_STOP_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ]:
+
+	}		
+
+	subgraph cluster_3 {
+	
+		color = gray;
+
+		B_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">B_CHECK_COLOR</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		B_CAPTURE        [ shape=box label=<<table border="0"><tr><td align="left">B_CAPTURE</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		B_AVOIDING       [ shape=box label=<<table border="0"><tr><td align="left">B_AVOIDING</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		B_BOUNDARY_CHECK [ shape=box label=<<table border="0"><tr><td align="left">B_BOUNDARY_CHECK</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		B_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">B_DETECT_BALL</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		B_CHECK_STOP_DN  [ shape=box label=<<table border="0"><tr><td align="left">B_CHECK_STOP_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ]:
+
+	}		
+
+	START            -> Q_QUIESCE;
+	Q_QUIESCE        -> Q_WAIT_STOP_UP   [ label = "T/F" ];
+	Q_WAIT_STOP_UP   -> Q_WAIT_START_DN  [ label = "T" ];
+	Q_WAIT_STOP_UP   -> Q_WAIT_STOP_UP   [ label = "F" ];
+	Q_WAIT_START_DN  -> Q_WAIT_START_UP  [ label = "T" ];
+	Q_WAIT_START_DN  -> Q_WAIT_START_DN  [ label = "F" ];
+	Q_WAIT_START_UP  -> S_STRAIGHT       [ label = "T" ];
+	Q_WAIT_START_UP  -> Q_WAIT_START_UP  [ label = "F" ];
+
+	S_STRAIGHT       -> S_BOUNDARY_CHECK [ label = "T/F" ];
+	S_BOUNDARY_CHECK -> P_SEARCH_PATTERN [ label = "T" ];
+	S_BOUNDARY_CHECK -> S_DETECT_BALL    [ label = "F" ];
+	S_DETECT_BALL    -> B_CHECK_COLOR    [ label = "T" ];
+	S_DETECT_BALL    -> S_CHECK_STOP_DN  [ label = "F" ];
+	S_CHECK_STOP_DN  -> Q_QUIESCE        [ label = "T" ];
+	S_CHECK_STOP_DN  -> S_STRAIGHT       [ label = "F" ];
+
+	P_SEARCH_PATTERN -> P_BOUNDARY_CHECK [ label = "T/F" ];
+	P_BOUNDARY_CHECK -> P_UNDO           [ label = "T" ];
+	P_UNDO           -> P_SEARCH_PATTERN [ label = "T/F" ];
+	P_BOUNDARY_CHECK -> P_DETECT_BALL    [ label = "F" ];
+	P_DETECT_BALL    -> P_CHECK_STOP_DN  [ label = "F" ];
+	P_CHECK_STOP_DN  -> Q_QUIESCE        [ label = "T" ];
+	P_CHECK_STOP_DN  -> P_SEARCH_PATTERN [ label = "F" ];
+
+	B_CHECK_COLOR    -> B_CAPTURE        [ label = "T" ];
+	B_CAPTURE        -> H_GO_HOME        [ label = "T/F" ];
+	B_CHECK_COLOR    -> B_AVOIDING       [ label = "T/F" ];
+	B_AVOIDING       -> B_BOUNDARY_CHECK [ label = "T/F" ];
+	B_BOUNDARY_CHECK -> B_DETECT_BALL    [ label = "F" ];
+	B_DETECT_BALL    -> B_CHECK_STOP_DN  [ label = "F" ];
+	B_CHECK_STOP_DN  -> Q_QUIESCE        [ label = "T" ];	
+	B_CHECK_STOP_DN  -> B_AVOIDING       [ label = "F" ];	
 
 }
