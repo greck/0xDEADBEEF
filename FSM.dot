@@ -20,7 +20,14 @@ QTOUCHTESTUP2 -> QTOUCHTESTUP2 [ label = "F" ];
 
 "TOUCHTESTDOWN" [ shape=box label=<<table border="0"><tr><td align="left">TOUCHTESTDOWN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ]:
 TOUCHTESTDOWN -> QUIESCE [ label = "T" ];
-TOUCHTESTDOWN -> BOUNDARYCHECK [ label = "F" ];
+TOUCHTESTDOWN -> DETECTBALL [ label = "F" ];
+
+"DETECTBALL" [ shape=box label=<<table border="0"><tr><td align="left">DETECTBALL</td></tr><tr><td align="left">r=DetectBall</td></tr></table>> ]:
+DETECTBALL -> AVOIDBALL [ label = "T" ];
+DETECTBALL -> BOUNDARYCHECK [ label = "F" ];
+
+"AVOIDBALL" [ shape=box label=<<table border="0"><tr><td align="left">AVOIDBALL</td></tr><tr><td align="left">r=AvoidBall</td></tr></table>> ]:
+AVOIDBALL -> BOUNDARYCHECK [ label = "T/F" ];
 
 "BOUNDARYCHECK" [ shape=box label=<<table border="0"><tr><td align="left">BOUNDARYCHECK</td></tr><tr><td align="left">r=LineTest</td></tr></table>> ]:
 BOUNDARYCHECK -> SWEEP [ label = "T" ];

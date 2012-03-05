@@ -5,11 +5,16 @@ import lejos.robotics.navigation.DifferentialPilot;
 
 public class Robot {
 
+	public static final double trackWidth = 14.5;
+
 	public static DifferentialPilot pilot =
-	  new DifferentialPilot(2.1f, 4.4f, Motor.A, Motor.B);
+	  new DifferentialPilot(5.6f, 5.6f, trackWidth, Motor.A, Motor.B, false);
 
 	public static void main(String[] args) {
 
+		pilot.setRotateSpeed(45);
+		pilot.setTravelSpeed(20);
+		
 		try { Thread.sleep(500); } catch ( Exception e ) { }
 
 		RobotState.preCalibrateLight();
@@ -19,7 +24,7 @@ public class Robot {
 		System.out.println("can 'see' the   ");
 		System.out.println("BOUNDARY LINE,  ");
 		System.out.println("and then press  ");
-		System.out.println("ENTER.           ");
+		System.out.println("ENTER.          ");
 		System.out.println("                ");
 		System.out.println("                ");
 
@@ -56,15 +61,17 @@ public class Robot {
 		}
 		RobotState.nonLineLevel /= 4;
 		
-		Recipe[] r = new Recipe[6];
+		Recipe[] r = new Recipe[8];
 		r[0] = new Quiesce();
 		r[1] = new IsNotTouched();
 		r[2] = new IsTouched();
-		r[3] = new LineTest();
-		r[4] = new Straight();
-		r[5] = new Sweep();
+		r[3] = new DetectBall();
+		r[4] = new AvoidBall();
+		r[5] = new LineTest();
+		r[6] = new Straight();
+		r[7] = new Sweep();
 
-		int[][] s = new int[8][3];
+		int[][] s = new int[10][3];
 
 //		     +----------+
 //		     |          |
@@ -98,14 +105,22 @@ public class Robot {
 		s[5][1] = 6;
 		s[5][2] = 7;
 
-		s[6][0] = 5;
-		s[6][1] = 4;
-		s[6][2] = 4;
+		s[6][0] = 4;
+		s[6][1] = 7;
+		s[6][2] = 7;
 
-		s[7][0] = 4;
-		s[7][1] = 4;
-		s[7][2] = 4;
-		
+		s[7][0] = 5;
+		s[7][1] = 8;
+		s[7][2] = 9;
+
+		s[8][0] = 7;
+		s[8][1] = 4;
+		s[8][2] = 4;
+
+		s[9][0] = 6;
+		s[9][1] = 4;
+		s[9][2] = 4;
+
 		// free and clear to navigate!
 		//
 		Sound.twoBeeps();
@@ -122,9 +137,11 @@ public class Robot {
 				case 2: LCD.drawString("QTOUCHTESTDOWN__",0,0); break;
 				case 3: LCD.drawString("QTOUCHTESTUP2___",0,0); break;
 				case 4: LCD.drawString("TOUCHTESTDOWN___",0,0); break;
-				case 5: LCD.drawString("BOUNDARYCHECK___",0,0); break;
-				case 6: LCD.drawString("SWEEP___________",0,0); break;
-				case 7: LCD.drawString("STRAIGHT________",0,0); break;
+				case 5: LCD.drawString("DETECTBALL______",0,0); break;
+				case 6: LCD.drawString("AVOIDBALL_______",0,0); break;
+				case 7: LCD.drawString("BOUNDARYCHECK___",0,0); break;
+				case 8: LCD.drawString("SWEEP___________",0,0); break;
+				case 9: LCD.drawString("STRAIGHT________",0,0); break;
 			}
 			
 			if( r[s[state][0]].execute() ) {

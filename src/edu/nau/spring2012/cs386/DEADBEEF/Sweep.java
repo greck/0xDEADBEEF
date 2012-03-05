@@ -7,9 +7,6 @@ public class Sweep implements Recipe {
 	private boolean nextTurnIsLeft = true;
 	private boolean sprinting      = true;
 	
-	// tunable
-	private int sweepWidth = 10;
-	
 	private void displayNextTurn() {
 		
 		if ( nextTurnIsLeft ) {
@@ -26,33 +23,29 @@ public class Sweep implements Recipe {
 		
 	public boolean execute() {
 
-		Robot.pilot.travel(-sweepWidth);	
-
+		Robot.pilot.travel(-Robot.trackWidth);	
+		
 		if ( !sprinting ) {
 
 			if ( nextTurnIsLeft ) {
-				Robot.pilot.rotate(-90);
-				Robot.pilot.travel(sweepWidth);
-				Robot.pilot.rotate(-90);
+				Robot.pilot.rotate(90);
+				Robot.pilot.travel(Robot.trackWidth);
+				Robot.pilot.rotate(90);
 			} else {
-				Robot.pilot.rotate(90);
-				Robot.pilot.travel(sweepWidth);
-				Robot.pilot.rotate(90);
+				Robot.pilot.rotate(-90);
+				Robot.pilot.travel(Robot.trackWidth);
+				Robot.pilot.rotate(-90);
 			}
+
+			nextTurnIsLeft = !nextTurnIsLeft;
 			
 		} else {
-			
+
 			sprinting = false;
-				
-			if ( nextTurnIsLeft ) {
-				Robot.pilot.rotate(-90);
-			} else {
-				Robot.pilot.rotate(90);
-			}
+			Robot.pilot.rotate(90);
 			
 		}
 		
-		nextTurnIsLeft = !nextTurnIsLeft;
 		displayNextTurn();
 		
 		return true;
