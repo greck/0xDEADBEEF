@@ -21,6 +21,9 @@ digraph FSM {
 		S_STRAIGHT       [ shape=box label=<<table border="0"><tr><td align="left">S_STRAIGHT</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
 		S_BOUNDARY_CHECK [ shape=box label=<<table border="0"><tr><td align="left">S_BOUNDARY_CHECK</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
 		S_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">S_DETECT_BALL</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		S_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">B_CHECK_COLOR</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		S_CAPTURE        [ shape=box label=<<table border="0"><tr><td align="left">B_CAPTURE</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		S_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">B_AVOID</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
 		S_CHECK_STOP_DN  [ shape=box label=<<table border="0"><tr><td align="left">S_CHECK_STOP_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ]:
 
 	}		
@@ -33,20 +36,10 @@ digraph FSM {
 		P_BOUNDARY_CHECK [ shape=box label=<<table border="0"><tr><td align="left">P_BOUNDARY_CHECK</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
 		P_UNDO           [ shape=box label=<<table border="0"><tr><td align="left">U_UNDO</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
 		P_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">P_DETECT_BALL</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		P_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">B_CHECK_COLOR</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		P_CAPTURE        [ shape=box label=<<table border="0"><tr><td align="left">B_CAPTURE</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		P_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">B_AVOID</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
 		P_CHECK_STOP_DN  [ shape=box label=<<table border="0"><tr><td align="left">P_CHECK_STOP_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ]:
-
-	}		
-
-	subgraph cluster_3 {
-	
-		color = gray;
-
-		B_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">B_CHECK_COLOR</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		B_CAPTURE        [ shape=box label=<<table border="0"><tr><td align="left">B_CAPTURE</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		B_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">B_AVOID</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		B_BOUNDARY_CHECK [ shape=box label=<<table border="0"><tr><td align="left">B_BOUNDARY_CHECK</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		B_UNDO           [ shape=box label=<<table border="0"><tr><td align="left">B_UNDO</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		B_CHECK_STOP_DN  [ shape=box label=<<table border="0"><tr><td align="left">B_CHECK_STOP_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ]:
 
 	}		
 
@@ -62,8 +55,12 @@ digraph FSM {
 	S_STRAIGHT       -> S_BOUNDARY_CHECK [ label = "T/F" ];
 	S_BOUNDARY_CHECK -> P_SEARCH_PATTERN [ label = "T" ];
 	S_BOUNDARY_CHECK -> S_DETECT_BALL    [ label = "F" ];
-	S_DETECT_BALL    -> B_CHECK_COLOR    [ label = "T" ];
+	S_DETECT_BALL    -> S_CHECK_COLOR    [ label = "T" ];
 	S_DETECT_BALL    -> S_CHECK_STOP_DN  [ label = "F" ];
+	S_CHECK_COLOR    -> S_CAPTURE        [ label = "T" ];
+	S_CHECK_COLOR    -> S_AVOID          [ label = "F" ];
+	S_CAPTURE        -> H_GO_HOME        [ label = "T/F" ];
+	S_AVOID          -> S_STRAIGHT       [ label = "T/F" ];
 	S_CHECK_STOP_DN  -> Q_QUIESCE        [ label = "T" ];
 	S_CHECK_STOP_DN  -> S_STRAIGHT       [ label = "F" ];
 
@@ -74,13 +71,5 @@ digraph FSM {
 	P_DETECT_BALL    -> P_CHECK_STOP_DN  [ label = "F" ];
 	P_CHECK_STOP_DN  -> Q_QUIESCE        [ label = "T" ];
 	P_CHECK_STOP_DN  -> P_SEARCH_PATTERN [ label = "F" ];
-
-	B_CHECK_COLOR    -> B_CAPTURE        [ label = "T" ];
-	B_CHECK_COLOR    -> B_AVOID          [ label = "F" ];
-	B_CAPTURE        -> H_GO_HOME        [ label = "T/F" ];
-	B_AVOID          -> B_BOUNDARY_CHECK [ label = "T/F" ];
-	B_BOUNDARY_CHECK -> B_UNDO           [ label = "T" ];
-	B_BOUNDARY_CHECK -> B_AVOID          [ label = "F" ];
-
 	
 }
