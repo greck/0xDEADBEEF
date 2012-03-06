@@ -21,9 +21,9 @@ digraph FSM {
 		S_STRAIGHT       [ shape=box label=<<table border="0"><tr><td align="left">S_STRAIGHT</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
 		S_BOUNDARY_CHECK [ shape=box label=<<table border="0"><tr><td align="left">S_BOUNDARY_CHECK</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
 		S_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">S_DETECT_BALL</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		S_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">B_CHECK_COLOR</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		S_CAPTURE        [ shape=box label=<<table border="0"><tr><td align="left">B_CAPTURE</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		S_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">B_AVOID</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		S_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">S_CHECK_COLOR</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		S_CAPTURE        [ shape=box label=<<table border="0"><tr><td align="left">S_CAPTURE</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		S_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">S_AVOID</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
 		S_CHECK_STOP_DN  [ shape=box label=<<table border="0"><tr><td align="left">S_CHECK_STOP_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ]:
 
 	}		
@@ -33,12 +33,10 @@ digraph FSM {
 		color = gray;
 
 		P_SEARCH_PATTERN [ shape=box label=<<table border="0"><tr><td align="left">P_SEARCH_PATTERN</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		P_BOUNDARY_CHECK [ shape=box label=<<table border="0"><tr><td align="left">P_BOUNDARY_CHECK</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		P_UNDO           [ shape=box label=<<table border="0"><tr><td align="left">U_UNDO</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
 		P_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">P_DETECT_BALL</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		P_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">B_CHECK_COLOR</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		P_CAPTURE        [ shape=box label=<<table border="0"><tr><td align="left">B_CAPTURE</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		P_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">B_AVOID</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		P_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">P_CHECK_COLOR</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		P_CAPTURE        [ shape=box label=<<table border="0"><tr><td align="left">P_CAPTURE</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		P_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">P_AVOID</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
 		P_CHECK_STOP_DN  [ shape=box label=<<table border="0"><tr><td align="left">P_CHECK_STOP_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ]:
 
 	}		
@@ -64,11 +62,13 @@ digraph FSM {
 	S_CHECK_STOP_DN  -> Q_QUIESCE        [ label = "T" ];
 	S_CHECK_STOP_DN  -> S_STRAIGHT       [ label = "F" ];
 
-	P_SEARCH_PATTERN -> P_BOUNDARY_CHECK [ label = "T/F" ];
-	P_BOUNDARY_CHECK -> P_UNDO           [ label = "T" ];
-	P_UNDO           -> P_SEARCH_PATTERN [ label = "T/F" ];
-	P_BOUNDARY_CHECK -> P_DETECT_BALL    [ label = "F" ];
+	P_SEARCH_PATTERN -> P_DETECT_BALL    [ label = "T/F" ];
+	P_DETECT_BALL    -> P_CHECK_COLOR    [ label = "T" ];
 	P_DETECT_BALL    -> P_CHECK_STOP_DN  [ label = "F" ];
+	P_CHECK_COLOR    -> P_CAPTURE        [ label = "T" ];
+	P_CHECK_COLOR    -> P_AVOID          [ label = "F" ];
+	P_CAPTURE        -> H_GO_HOME        [ label = "T/F" ];
+	P_AVOID          -> P_SEARCH_PATTERN [ label = "T/F" ];
 	P_CHECK_STOP_DN  -> Q_QUIESCE        [ label = "T" ];
 	P_CHECK_STOP_DN  -> P_SEARCH_PATTERN [ label = "F" ];
 	
