@@ -4,11 +4,11 @@ public class DetectBall implements Recipe {
 
 	public boolean execute() {
 
-		if ( RobotState.range < 30 ) {
-			return true;
-		} else {
+//		if ( RobotState.range < 30 ) {
+//			return true;
+//		} else {
 			return false;
-		}
+//		}
 		
 	}
 
