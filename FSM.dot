@@ -18,12 +18,12 @@ digraph FSM {
 	
 		color = gray;
 
-		S_STRAIGHT       [ shape=box label=<<table border="0"><tr><td align="left">S_STRAIGHT</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		S_BOUNDARY_CHECK [ shape=box label=<<table border="0"><tr><td align="left">S_BOUNDARY_CHECK</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		S_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">S_DETECT_BALL</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		S_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">S_CHECK_COLOR</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		S_CAPTURE        [ shape=box label=<<table border="0"><tr><td align="left">S_CAPTURE</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		S_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">S_AVOID</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		S_STRAIGHT       [ shape=box label=<<table border="0"><tr><td align="left">S_STRAIGHT</td></tr><tr><td align="left">r=Straight</td></tr></table>> ]:
+		S_BOUNDARY_CHECK [ shape=box label=<<table border="0"><tr><td align="left">S_BOUNDARY_CHECK</td></tr><tr><td align="left">r=BoundaryCheck</td></tr></table>> ]:
+		S_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">S_DETECT_BALL</td></tr><tr><td align="left">r=DetectBall</td></tr></table>> ]:
+		S_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">S_CHECK_COLOR</td></tr><tr><td align="left">r=CheckColor</td></tr></table>> ]:
+		S_CAPTURE        [ shape=box label=<<table border="0"><tr><td align="left">S_CAPTURE</td></tr><tr><td align="left">r=Capture</td></tr></table>> ]:
+		S_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">S_AVOID</td></tr><tr><td align="left">r=Avoid</td></tr></table>> ]:
 		S_CHECK_STOP_DN  [ shape=box label=<<table border="0"><tr><td align="left">S_CHECK_STOP_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ]:
 
 	}		
@@ -32,11 +32,11 @@ digraph FSM {
 	
 		color = gray;
 
-		P_SEARCH_PATTERN [ shape=box label=<<table border="0"><tr><td align="left">P_SEARCH_PATTERN</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		P_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">P_DETECT_BALL</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		P_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">P_CHECK_COLOR</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		P_CAPTURE        [ shape=box label=<<table border="0"><tr><td align="left">P_CAPTURE</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		P_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">P_AVOID</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		P_SEARCH_PATTERN [ shape=box label=<<table border="0"><tr><td align="left">P_SEARCH_PATTERN</td></tr><tr><td align="left">r=Sweep</td></tr></table>> ]:
+		P_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">P_DETECT_BALL</td></tr><tr><td align="left">r=DetectBall</td></tr></table>> ]:
+		P_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">P_CHECK_COLOR</td></tr><tr><td align="left">r=CheckColor</td></tr></table>> ]:
+		P_CAPTURE        [ shape=box label=<<table border="0"><tr><td align="left">P_CAPTURE</td></tr><tr><td align="left">r=Capture</td></tr></table>> ]:
+		P_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">P_AVOID</td></tr><tr><td align="left">r=Avoid</td></tr></table>> ]:
 		P_CHECK_STOP_DN  [ shape=box label=<<table border="0"><tr><td align="left">P_CHECK_STOP_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ]:
 
 	}		
