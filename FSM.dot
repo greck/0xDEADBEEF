@@ -43,9 +43,9 @@ digraph FSM {
 
 		B_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">B_CHECK_COLOR</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
 		B_CAPTURE        [ shape=box label=<<table border="0"><tr><td align="left">B_CAPTURE</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		B_AVOIDING       [ shape=box label=<<table border="0"><tr><td align="left">B_AVOIDING</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		B_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">B_AVOID</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
 		B_BOUNDARY_CHECK [ shape=box label=<<table border="0"><tr><td align="left">B_BOUNDARY_CHECK</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
-		B_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">B_DETECT_BALL</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
+		B_UNDO           [ shape=box label=<<table border="0"><tr><td align="left">B_UNDO</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ]:
 		B_CHECK_STOP_DN  [ shape=box label=<<table border="0"><tr><td align="left">B_CHECK_STOP_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ]:
 
 	}		
@@ -76,12 +76,11 @@ digraph FSM {
 	P_CHECK_STOP_DN  -> P_SEARCH_PATTERN [ label = "F" ];
 
 	B_CHECK_COLOR    -> B_CAPTURE        [ label = "T" ];
+	B_CHECK_COLOR    -> B_AVOID          [ label = "F" ];
 	B_CAPTURE        -> H_GO_HOME        [ label = "T/F" ];
-	B_CHECK_COLOR    -> B_AVOIDING       [ label = "T/F" ];
-	B_AVOIDING       -> B_BOUNDARY_CHECK [ label = "T/F" ];
-	B_BOUNDARY_CHECK -> B_DETECT_BALL    [ label = "F" ];
-	B_DETECT_BALL    -> B_CHECK_STOP_DN  [ label = "F" ];
-	B_CHECK_STOP_DN  -> Q_QUIESCE        [ label = "T" ];	
-	B_CHECK_STOP_DN  -> B_AVOIDING       [ label = "F" ];	
+	B_AVOID          -> B_BOUNDARY_CHECK [ label = "T/F" ];
+	B_BOUNDARY_CHECK -> B_UNDO           [ label = "T" ];
+	B_BOUNDARY_CHECK -> B_AVOID          [ label = "F" ];
 
+	
 }
