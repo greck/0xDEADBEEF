@@ -61,22 +61,24 @@ public class Robot {
 		}
 		RobotState.nonLineLevel /= 4;
 		
-		Recipe[] r = new Recipe[8];
+		Recipe[] r = new Recipe[10];
 		r[0] = new Quiesce();
 		r[1] = new IsNotTouched();
 		r[2] = new IsTouched();
-		r[3] = new DetectBall();
-		r[4] = new AvoidBall();
-		r[5] = new LineTest();
-		r[6] = new Straight();
-		r[7] = new Sweep();
+		r[3] = new Straight();
+		r[4] = new BoundaryCheck();
+		r[5] = new DetectBall();
+		r[6] = new CheckColor();
+		r[7] = new Capture();
+		r[8] = new Avoid();
+		r[9] = new Sweep();
 
-		int[][] s = new int[10][3];
+		int[][] s = new int[18][3];
 
 //		     +----------+
 //		     |          |
 //		     v          v
-		s[0][0] = 0; // recipe to execute
+		s[0][0] = 2; // recipe to execute
 		s[0][1] = 1; // next state if recipe return true
 		s[0][2] = 1; // next state if recipe returns false
 //		  ^       ^
@@ -85,7 +87,7 @@ public class Robot {
 //		  |		
 //		  this is the current state
 
-		s[1][0] = 1;
+		s[1][0] = 2;
 		s[1][1] = 2;
 		s[1][2] = 1;
 
@@ -93,33 +95,69 @@ public class Robot {
 		s[2][1] = 3;
 		s[2][2] = 2;
 
-		s[3][0] = 1;
+		s[3][0] = 2;
 		s[3][1] = 4;
 		s[3][2] = 3;
 
 		s[4][0] = 2;
-		s[4][1] = 0;
+		s[4][1] = 5;
 		s[4][2] = 5;
 
-		s[5][0] = 3;
+		s[5][0] = 2;
 		s[5][1] = 6;
 		s[5][2] = 7;
 
-		s[6][0] = 4;
-		s[6][1] = 7;
-		s[6][2] = 7;
+		s[6][0] = 2;
+		s[6][1] = 13;
+		s[6][2] = 13;
 
-		s[7][0] = 5;
+		s[7][0] = 2;
 		s[7][1] = 8;
 		s[7][2] = 9;
 
-		s[8][0] = 7;
-		s[8][1] = 4;
-		s[8][2] = 4;
+		s[8][0] = 2;
+		s[8][1] = 10;
+		s[8][2] = 11;
 
-		s[9][0] = 6;
-		s[9][1] = 4;
+		s[9][0] = 2;
+		s[9][1] = 0;
 		s[9][2] = 4;
+
+		s[10][0] = 2;
+		s[10][1] = 12;
+		s[10][2] = 12;
+
+		s[11][0] = 2;
+		s[11][1] = 4;
+		s[11][2] = 4;
+
+// This is the H_GO_HOME state;
+// if we get here, the behavior
+// is currently undefined.
+//
+//		s[12][0] = ;
+//		s[12][1] = ;
+//		s[12][2] = ;
+
+		s[13][0] = 2;
+		s[13][1] = 14;
+		s[13][2] = 15;
+
+		s[14][0] = 2;
+		s[14][1] = 16;
+		s[14][2] = 17;
+
+		s[15][0] = 2;
+		s[15][1] = 0;
+		s[15][2] = 6;
+
+		s[16][0] = 2;
+		s[16][1] = 12;
+		s[16][2] = 12;
+
+		s[17][0] = 2;
+		s[17][1] = 6;
+		s[17][2] = 6;
 
 		// free and clear to navigate!
 		//
@@ -132,16 +170,26 @@ public class Robot {
 		while ( RobotState.poll() ) {
 
 			switch(state) {
-				case 0: LCD.drawString("QUIESCE_________",0,0); break;
-				case 1: LCD.drawString("QTOUCHTESTUP1___",0,0); break;
-				case 2: LCD.drawString("QTOUCHTESTDOWN__",0,0); break;
-				case 3: LCD.drawString("QTOUCHTESTUP2___",0,0); break;
-				case 4: LCD.drawString("TOUCHTESTDOWN___",0,0); break;
-				case 5: LCD.drawString("DETECTBALL______",0,0); break;
-				case 6: LCD.drawString("AVOIDBALL_______",0,0); break;
-				case 7: LCD.drawString("BOUNDARYCHECK___",0,0); break;
-				case 8: LCD.drawString("SWEEP___________",0,0); break;
-				case 9: LCD.drawString("STRAIGHT________",0,0); break;
+
+				case  0: LCD.drawString("Q_QUIESCE_______",0,0); break;
+				case  1: LCD.drawString("Q_WAIT_STOP_UP__",0,0); break;
+				case  2: LCD.drawString("Q_WAIT_START_DN_",0,0); break;
+				case  3: LCD.drawString("Q_WAIT_START_UP_",0,0); break;
+				case  4: LCD.drawString("S_STRAIGHT______",0,0); break;
+				case  5: LCD.drawString("S_BOUNDARY_CHECK",0,0); break;
+				case  6: LCD.drawString("P_SEARCH_PATTERN",0,0); break;
+				case  7: LCD.drawString("S_DETECT_BALL___",0,0); break;
+				case  8: LCD.drawString("S_CHECK_COLOR___",0,0); break;
+				case  9: LCD.drawString("S_CHECK_STOP_DN_",0,0); break;
+				case 10: LCD.drawString("S_CAPTURE_______",0,0); break;
+				case 11: LCD.drawString("S_AVOID_________",0,0); break;
+				case 12: LCD.drawString("H_GO_HOME_______",0,0); break;
+				case 13: LCD.drawString("P_DETECT_BALL___",0,0); break;
+				case 14: LCD.drawString("P_CHECK_COLOR___",0,0); break;
+				case 15: LCD.drawString("P_CHECK_STOP_DN_",0,0); break;
+				case 16: LCD.drawString("P_CAPTURE_______",0,0); break;
+				case 17: LCD.drawString("P_AVOID_________",0,0); break;
+
 			}
 			
 			if( r[s[state][0]].execute() ) {

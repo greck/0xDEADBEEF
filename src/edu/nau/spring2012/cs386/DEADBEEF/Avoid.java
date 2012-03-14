@@ -2,7 +2,7 @@ package edu.nau.spring2012.cs386.DEADBEEF;
 
 import lejos.nxt.Sound;
 
-public class AvoidBall implements Recipe {
+public class Avoid implements Recipe {
 
 	public boolean execute() {
 

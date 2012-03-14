@@ -6,30 +6,29 @@ while ( <FSM> ) {
 
 	( $recipe ) = /r=(\w+)/ if /r=(\w+)/;
 
-	( $src_state, $dst_state, $condition ) = /(\w+) -> (\w+) \[ label = \"(.+)\" \]/;
+	( $src_state, $dst_state, $condition ) = /(\w+)\s+-> (\w+)\s+\[ label = \"(.+)\" \]/;
 
 #	print "[$src_state][$dst_state][$condition][$recipe];\n" if $condition;
 
+	if ( $recipe ne "" and !defined($recipes{$recipe}) ) {
+	
+		$recipes{$recipe} = $recipeCount++;
+		
+	}
+
+	if ( $src_state ne "" and !defined($states{$src_state}) ) {
+	
+		$states{$src_state} = $stateCount++;
+		
+	}
+
+	if ( $dst_state ne "" and !defined($states{$dst_state}) ) {
+
+		$states{$dst_state} = $stateCount++;
+
+	}
+
 	if ( $condition ) {
-
-		if ( !defined($recipes{$recipe}) ) {
-		
-			$recipes{$recipe} = $recipeCount++;
-			
-		}
-
-		if ( !defined($states{$src_state}) ) {
-		
-			$states{$src_state} = $stateCount++;
-			
-		}
-
-		if ( !defined($states{$dst_state}) ) {
-		
-			$states{$dst_state} = $stateCount++;
-			
-		}
-		
 
 		$state_machine[$states{$src_state}][0] = $recipes{$recipe};
 		$state_machine[$states{$src_state}][1] = $states{$dst_state} if $condition =~ /T/;		
@@ -94,6 +93,8 @@ for ( my $i = 0; $i < $stateCount; $i++ ) {
 
     $stateStr .= '_' x ( 16 - length($stateStr) );  
 
-	print "\t\tcase $i: LCD.drawString(\"$stateStr\",0,0); break;\n";
+	print "\t\tcase ";
+	print $i>9?"":" ";
+	print "$i: LCD.drawString(\"$stateStr\",0,0); break;\n";
 
 }
