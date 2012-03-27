@@ -1,12 +1,16 @@
 package edu.nau.spring2012.cs386.DEADBEEF;
 
 import lejos.nxt.*;
+import lejos.robotics.localization.OdometryPoseProvider;
+import lejos.robotics.navigation.DifferentialPilot;
 
 public class RobotState {
 
 	private static TouchSensor      touch      = new TouchSensor(SensorPort.S1);
 	private static LightSensor      light      = new LightSensor(SensorPort.S2);
 	private static UltrasonicSensor ultrasonic = new UltrasonicSensor(SensorPort.S3);
+
+	public static double trackWidth = 14.5;
 	
 	public static boolean touched;
 	public static int     lightLevel;
@@ -18,7 +22,13 @@ public class RobotState {
 	public static int  nonLineLevel;
 	public static int  lineLevelErr;
 	public static int      itrsLost = 0;
-		
+
+	public static DifferentialPilot pilot =
+			  new DifferentialPilot(5.6f, 5.6f, trackWidth, Motor.A, Motor.B, false);
+
+	public static OdometryPoseProvider poseProvider =
+			  new OdometryPoseProvider(pilot);
+	
 	public static void preCalibrateLight() {
 		light.setFloodlight(true);
 	}

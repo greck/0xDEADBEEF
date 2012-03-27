@@ -1,19 +1,13 @@
 package edu.nau.spring2012.cs386.DEADBEEF;
 
 import lejos.nxt.*;
-import lejos.robotics.navigation.DifferentialPilot;
 
 public class Robot {
 
-	public static final double trackWidth = 14.5;
-
-	public static DifferentialPilot pilot =
-	  new DifferentialPilot(5.6f, 5.6f, trackWidth, Motor.A, Motor.B, false);
-
 	public static void main(String[] args) {
 
-		pilot.setRotateSpeed(45);
-		pilot.setTravelSpeed(20);
+		RobotState.pilot.setRotateSpeed(45);
+		RobotState.pilot.setTravelSpeed(20);
 		
 		try { Thread.sleep(500); } catch ( Exception e ) { }
 

@@ -23,14 +23,14 @@ public class Sweep implements Recipe {
 		
 	public boolean execute() {
 
-		Robot.pilot.travel(-1.5*Robot.trackWidth);	
+		RobotState.pilot.travel(-1.5*RobotState.trackWidth);	
 		
 		if ( !sprinting ) {
 
 			if ( nextTurnIsLeft ) {
-				Robot.pilot.arc(Robot.trackWidth, 180);
+				RobotState.pilot.arc(RobotState.trackWidth, 180);
 			} else {
-				Robot.pilot.arc(-Robot.trackWidth, -180);
+				RobotState.pilot.arc(-RobotState.trackWidth, -180);
 			}
 
 			nextTurnIsLeft = !nextTurnIsLeft;
@@ -38,7 +38,7 @@ public class Sweep implements Recipe {
 		} else {
 
 			sprinting = false;
-			Robot.pilot.arc(Robot.trackWidth, 90);
+			RobotState.pilot.arc(RobotState.trackWidth, 90);
 			
 		}
 		
