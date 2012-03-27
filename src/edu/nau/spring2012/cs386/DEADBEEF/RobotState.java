@@ -10,7 +10,10 @@ public class RobotState {
 	private static LightSensor      light      = new LightSensor(SensorPort.S2);
 	private static UltrasonicSensor ultrasonic = new UltrasonicSensor(SensorPort.S3);
 
-	public static double trackWidth = 14.5;
+	public static double trackWidth = 13.65;
+	//
+	// measured to outside = 14.0 mm
+	// measure from inside = 13.3 mm
 	
 	public static boolean touched;
 	public static int     lightLevel;
@@ -24,7 +27,9 @@ public class RobotState {
 	public static int      itrsLost = 0;
 
 	public static DifferentialPilot pilot =
-			  new DifferentialPilot(5.6f, 5.6f, trackWidth, Motor.A, Motor.B, false);
+			  new DifferentialPilot(4f, 4f, trackWidth, Motor.A, Motor.B, false);
+	//
+	// actual gear diameter to edge of tooth is 42 mm
 
 	public static OdometryPoseProvider poseProvider =
 			  new OdometryPoseProvider(pilot);
@@ -78,6 +83,14 @@ public class RobotState {
 				LCD.drawInt((int)range,5,11,7);
 			}
 			ultrasonic.ping();
+		}
+		
+		// Positioning debug
+		//
+		if ( Robot.DEBUG ) {
+			if ( Math.abs(poseProvider.getPose().getY()) < 1.0 ) {
+				Sound.beep();
+			}
 		}
 		
 		if ( !Button.ESCAPE.isPressed() ) {

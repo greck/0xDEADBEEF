@@ -4,6 +4,8 @@ import lejos.nxt.*;
 
 public class Robot {
 
+    public static final boolean DEBUG = true;
+	
 	public static void main(String[] args) {
 
 		RobotState.pilot.setRotateSpeed(45);
