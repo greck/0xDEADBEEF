@@ -1,38 +1,54 @@
 #!/usr/bin/perl
 
+use Data::Dumper;
+
+ $stateCount = 0;
+$recipeCount = 0;
+
 open FSM, "FSM.dot";
 
 while ( <FSM> ) {
 
-	( $recipe ) = /r=(\w+)/ if /r=(\w+)/;
+	last if /->/;
+
+	( $state, $recipe ) = /(\w+)\s+.+r=(\w+)/ if /r=(\w+)/;
+
+	if ( $state ne "" and $recipe ne "" ) {
+
+		if ( !defined($states{$state}) ) {
+		
+#			print STDERR "$state is state #" . $stateCount . "\n";
+			$states{$state} = $stateCount++;
+			
+		}
+	
+		if ( !defined($recipes{$recipe}) ) {
+	
+#			print STDERR "$recipe is recipe #" . $recipeCount . "\n";
+			$recipes{$recipe} = $recipeCount++;
+			
+		}
+
+		$state2recipe[$states{$state}] = $recipes{$recipe};
+#		print STDERR "state #" . $states{$state} . " uses recipe #" . $recipes{$recipe} . "\n";
+
+		undef $state, $recipe;
+
+	}
+
+}
+
+while ( <FSM> ) {
 
 	( $src_state, $dst_state, $condition ) = /(\w+)\s+-> (\w+)\s+\[ label = \"(.+)\" \]/;
 
-#	print "[$src_state][$dst_state][$condition][$recipe];\n" if $condition;
-
-	if ( $recipe ne "" and !defined($recipes{$recipe}) ) {
-	
-		$recipes{$recipe} = $recipeCount++;
-		
-	}
-
-	if ( $src_state ne "" and !defined($states{$src_state}) ) {
-	
-		$states{$src_state} = $stateCount++;
-		
-	}
-
-	if ( $dst_state ne "" and !defined($states{$dst_state}) ) {
-
-		$states{$dst_state} = $stateCount++;
-
-	}
-
 	if ( $condition ) {
 
-		$state_machine[$states{$src_state}][0] = $recipes{$recipe};
+		$state_machine[$states{$src_state}][0] = $state2recipe[$states{$src_state}];
 		$state_machine[$states{$src_state}][1] = $states{$dst_state} if $condition =~ /T/;		
 		$state_machine[$states{$src_state}][2] = $states{$dst_state} if $condition =~ /F/;		
+
+		undef $condition;
 
 	}
 
