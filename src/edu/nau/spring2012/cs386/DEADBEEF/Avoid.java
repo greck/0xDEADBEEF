@@ -8,12 +8,6 @@ public class Avoid implements Recipe {
 
 		Sound.buzz();
 		
-		RobotState.pilot.rotate(45);
-		RobotState.pilot.travel(3*RobotState.trackWidth);
-		RobotState.pilot.rotate(-90);
-		RobotState.pilot.travel(3*RobotState.trackWidth);
-		RobotState.pilot.rotate(45);
-		
 		return true;
 		
 	}
