@@ -1,6 +1,5 @@
 package edu.nau.spring2012.cs386.DEADBEEF;
 
-import lejos.nxt.Button;
 import lejos.nxt.Motor;
 
 public class CheckColor implements Recipe {
