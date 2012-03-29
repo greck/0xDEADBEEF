@@ -9,7 +9,7 @@ public class Robot {
 	public static void main(String[] args) {
 
 		RobotState.pilot.setRotateSpeed(45);
-		RobotState.pilot.setTravelSpeed(5);
+		RobotState.pilot.setTravelSpeed(10);
 		
 		try { Thread.sleep(500); } catch ( Exception e ) { }
 

@@ -6,7 +6,7 @@ public class StartStraight implements Recipe {
 
 		RobotState.itrsLost = 0;
 		
-		RobotState.pilot.travel(5);
+		RobotState.pilot.travel(5,true);
 
 		return true;
 		
