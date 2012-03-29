@@ -4,6 +4,8 @@ public class HuntLeft implements Recipe {
 
 	public boolean execute() {
 
+		RobotState.pilot.rotate(15,false);
+		
 		return true;
 		
 	}

@@ -57,7 +57,7 @@ public class Robot {
 		}
 		RobotState.nonLineLevel /= 4;
 
-		Recipe[] r = new Recipe[12];
+		Recipe[] r = new Recipe[13];
 		r[0] = new Quiesce();
 		r[1] = new IsNotTouched();
 		r[2] = new IsTouched();
@@ -68,10 +68,11 @@ public class Robot {
 		r[7] = new Avoid();
 		r[8] = new HuntLeft();
 		r[9] = new HuntRight();
-		r[10] = new Sweep();
-		r[11] = new GoHome();
-		
-		int[][] s = new int[26][3];
+		r[10] = new Straighten();
+		r[11] = new Sweep();
+		r[12] = new GoHome();
+
+		int[][] s = new int[27][3];
 
 //		     +----------+
 //		     |          |
@@ -84,106 +85,110 @@ public class Robot {
 //		  |       this is the state to transition to
 //		  |		
 //		  this is the current state
-	
+
 		s[1][0] = 1;
 		s[1][1] = 2;
 		s[1][2] = 1;
-	
+
 		s[2][0] = 2;
 		s[2][1] = 3;
 		s[2][2] = 2;
-	
+
 		s[3][0] = 1;
 		s[3][1] = 4;
 		s[3][2] = 3;
-	
+
 		s[4][0] = 3;
 		s[4][1] = 5;
 		s[4][2] = 10;
-	
+
 		s[5][0] = 4;
-		s[5][1] = 20;
+		s[5][1] = 21;
 		s[5][2] = 6;
-	
+
 		s[6][0] = 5;
 		s[6][1] = 7;
 		s[6][2] = 9;
-	
+
 		s[7][0] = 6;
-		s[7][1] = 25;
+		s[7][1] = 26;
 		s[7][2] = 8;
-	
+
 		s[8][0] = 7;
 		s[8][1] = 4;
 		s[8][2] = 4;
-	
+
 		s[9][0] = 2;
 		s[9][1] = 0;
 		s[9][2] = 4;
-	
+
 		s[10][0] = 8;
 		s[10][1] = 11;
 		s[10][2] = 11;
-	
+
 		s[11][0] = 5;
 		s[11][1] = 12;
 		s[11][2] = 14;
-	
+
 		s[12][0] = 6;
-		s[12][1] = 25;
+		s[12][1] = 26;
 		s[12][2] = 13;
-	
+
 		s[13][0] = 7;
 		s[13][1] = 14;
 		s[13][2] = 14;
-	
+
 		s[14][0] = 2;
 		s[14][1] = 0;
 		s[14][2] = 15;
-	
+
 		s[15][0] = 9;
 		s[15][1] = 16;
 		s[15][2] = 16;
-	
+
 		s[16][0] = 5;
 		s[16][1] = 17;
 		s[16][2] = 19;
-	
+
 		s[17][0] = 6;
-		s[17][1] = 25;
+		s[17][1] = 26;
 		s[17][2] = 18;
-	
+
 		s[18][0] = 7;
 		s[18][1] = 19;
 		s[18][2] = 19;
-	
+
 		s[19][0] = 2;
 		s[19][1] = 0;
-		s[19][2] = 4;
-	
+		s[19][2] = 20;
+
 		s[20][0] = 10;
-		s[20][1] = 21;
-		s[20][2] = 21;
-	
-		s[21][0] = 5;
+		s[20][1] = 4;
+		s[20][2] = 4;
+
+		s[21][0] = 11;
 		s[21][1] = 22;
-		s[21][2] = 24;
-	
-		s[22][0] = 6;
-		s[22][1] = 25;
-		s[22][2] = 23;
-	
-		s[23][0] = 7;
-		s[23][1] = 20;
-		s[23][2] = 20;
-	
-		s[24][0] = 2;
-		s[24][1] = 0;
-		s[24][2] = 20;
-	
-		s[25][0] = 11;
+		s[21][2] = 22;
+
+		s[22][0] = 5;
+		s[22][1] = 23;
+		s[22][2] = 25;
+
+		s[23][0] = 6;
+		s[23][1] = 26;
+		s[23][2] = 24;
+
+		s[24][0] = 7;
+		s[24][1] = 21;
+		s[24][2] = 21;
+
+		s[25][0] = 2;
 		s[25][1] = 0;
-		s[25][2] = 0;
+		s[25][2] = 21;
+
+		s[26][0] = 12;
+		s[26][1] = 0;
+		s[26][2] = 0;
 
 		// free and clear to navigate!
 		//
@@ -217,12 +222,13 @@ public class Robot {
 				case 17: LCD.drawString("R_CHECK_COLOR___",0,0); break;
 				case 18: LCD.drawString("R_AVOID_________",0,0); break;
 				case 19: LCD.drawString("R_CHECK_STOP_DN_",0,0); break;
-				case 20: LCD.drawString("P_SEARCH_PATTERN",0,0); break;
-				case 21: LCD.drawString("P_DETECT_BALL___",0,0); break;
-				case 22: LCD.drawString("P_CHECK_COLOR___",0,0); break;
-				case 23: LCD.drawString("P_AVOID_________",0,0); break;
-				case 24: LCD.drawString("P_CHECK_STOP_DN_",0,0); break;
-				case 25: LCD.drawString("H_GO_HOME_______",0,0); break;
+				case 20: LCD.drawString("R_STRAIGHTEN____",0,0); break;
+				case 21: LCD.drawString("P_SEARCH_PATTERN",0,0); break;
+				case 22: LCD.drawString("P_DETECT_BALL___",0,0); break;
+				case 23: LCD.drawString("P_CHECK_COLOR___",0,0); break;
+				case 24: LCD.drawString("P_AVOID_________",0,0); break;
+				case 25: LCD.drawString("P_CHECK_STOP_DN_",0,0); break;
+				case 26: LCD.drawString("H_GO_HOME_______",0,0); break;
 			
 			}
 			
