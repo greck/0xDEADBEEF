@@ -85,14 +85,6 @@ public class RobotState {
 			ultrasonic.ping();
 		}
 		
-		// Positioning debug
-		//
-		if ( Robot.DEBUG ) {
-			if ( Math.abs(poseProvider.getPose().getY()) < 1.0 ) {
-				Sound.beep();
-			}
-		}
-		
 		if ( !Button.ESCAPE.isPressed() ) {
 			return true;
 		} else {
