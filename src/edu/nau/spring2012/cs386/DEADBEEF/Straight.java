@@ -5,10 +5,18 @@ public class Straight implements Recipe {
 	public boolean execute() {
 
 		RobotState.itrsLost = 0;
-
-		RobotState.pilot.forward();
 		
-		return true;
+		if ( !RobotState.hunt && !RobotState.pilot.isMoving() ) {
+
+			RobotState.pilot.travel(5);
+			
+		} else {
+			
+			RobotState.hunt = true;
+			
+		}
+		
+		return !RobotState.hunt;
 		
 	}
 
