@@ -4,7 +4,15 @@ public class CheckColor implements Recipe {
 
 	public boolean execute() {
 
-		return true;
+		if ( RobotState.colorObj.getRed() > RobotState.colorObj.getBlue() ) {
+			
+			return true;
+			
+		} else {
+			
+			return false;
+			
+		}
 		
 	}
 
