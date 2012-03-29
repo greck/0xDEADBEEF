@@ -12,10 +12,7 @@ public class RobotState {
 	private static UltrasonicSensor ultrasonic = new UltrasonicSensor(SensorPort.S3);
 	private static ColorSensor      color      = new ColorSensor(SensorPort.S4);
 
-	public static double trackWidth = 13.65;
-	//
-	// measured to outside = 14.0 mm
-	// measure from inside = 13.3 mm
+	public static double trackWidth = 13.6795;
 	
 	public static boolean touched;
 	public static int     lightLevel;
@@ -30,7 +27,7 @@ public class RobotState {
 	public static int      itrsLost = 0;
 
 	public static DifferentialPilot pilot =
-			  new DifferentialPilot(4f, 4f, trackWidth, Motor.A, Motor.B, false);
+			  new DifferentialPilot(4.156f, 4.156f, trackWidth, Motor.A, Motor.B, false);
 	//
 	// actual gear diameter to edge of tooth is 42 mm
 
