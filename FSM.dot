@@ -61,7 +61,13 @@ digraph FSM {
 		P_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">P_AVOID</td></tr><tr><td align="left">r=Avoid</td></tr></table>> ];
 		P_CHECK_STOP_DN  [ shape=box label=<<table border="0"><tr><td align="left">P_CHECK_STOP_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ];
 
-	}		
+	}
+	
+	subgraph cluster_5 {
+	
+		H_GO_HOME        [ shape=box label=<<table border="0"><tr><td align="left">H_GO_HOME</td></tr><tr><td align="left">r=GoHome</td></tr></table>> ];
+	
+	}
 
 	START            -> Q_QUIESCE;
 	Q_QUIESCE        -> Q_WAIT_STOP_UP   [ label = "T/F" ];
@@ -110,5 +116,7 @@ digraph FSM {
 	P_AVOID          -> P_SEARCH_PATTERN [ label = "T/F" ];
 	P_CHECK_STOP_DN  -> Q_QUIESCE        [ label = "T" ];
 	P_CHECK_STOP_DN  -> P_SEARCH_PATTERN [ label = "F" ];
+	
+	H_GO_HOME        -> Q_QUIESCE        [ label = "T/F" ];
 	
 }
