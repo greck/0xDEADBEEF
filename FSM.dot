@@ -18,7 +18,8 @@ digraph FSM {
 	
 		color = gray;
 
-		S_STRAIGHT       [ shape=box label=<<table border="0"><tr><td align="left">S_STRAIGHT</td></tr><tr><td align="left">r=Straight</td></tr></table>> ];
+		S_START_STRAIGHT [ shape=box label=<<table border="0"><tr><td align="left">S_START_STRAIGHT</td></tr><tr><td align="left">r=StartStraight</td></tr></table>> ];
+		S_KEEP_STRAIGHT  [ shape=box label=<<table border="0"><tr><td align="left">S_KEEP_STRAIGHT</td></tr><tr><td align="left">r=KeepStraight</td></tr></table>> ];
 		S_BOUNDARY_CHECK [ shape=box label=<<table border="0"><tr><td align="left">S_BOUNDARY_CHECK</td></tr><tr><td align="left">r=BoundaryCheck</td></tr></table>> ];
 		S_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">S_DETECT_BALL</td></tr><tr><td align="left">r=DetectBall</td></tr></table>> ];
 		S_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">S_CHECK_COLOR</td></tr><tr><td align="left">r=CheckColor</td></tr></table>> ];
@@ -76,20 +77,21 @@ digraph FSM {
 	Q_WAIT_STOP_UP   -> Q_WAIT_STOP_UP   [ label = "F" ];
 	Q_WAIT_START_DN  -> Q_WAIT_START_UP  [ label = "T" ];
 	Q_WAIT_START_DN  -> Q_WAIT_START_DN  [ label = "F" ];
-	Q_WAIT_START_UP  -> S_STRAIGHT       [ label = "T" ];
+	Q_WAIT_START_UP  -> S_START_STRAIGHT [ label = "T" ];
 	Q_WAIT_START_UP  -> Q_WAIT_START_UP  [ label = "F" ];
 
-	S_STRAIGHT       -> S_BOUNDARY_CHECK [ label = "T" ];
-	S_STRAIGHT       -> L_HUNT           [ label = "F" ];
+	S_START_STRAIGHT -> S_KEEP_STRAIGHT  [ label = "T/F" ];
+	S_KEEP_STRAIGHT  -> S_BOUNDARY_CHECK [ label = "T" ];
+	S_KEEP_STRAIGHT  -> L_HUNT           [ label = "F" ];
 	S_BOUNDARY_CHECK -> P_SEARCH_PATTERN [ label = "T" ];
 	S_BOUNDARY_CHECK -> S_DETECT_BALL    [ label = "F" ];
 	S_DETECT_BALL    -> S_CHECK_COLOR    [ label = "T" ];
 	S_DETECT_BALL    -> S_CHECK_STOP_DN  [ label = "F" ];
 	S_CHECK_COLOR    -> H_GO_HOME        [ label = "T" ];
 	S_CHECK_COLOR    -> S_AVOID          [ label = "F" ];
-	S_AVOID          -> S_STRAIGHT       [ label = "T/F" ];
+	S_AVOID          -> S_START_STRAIGHT [ label = "T/F" ];
 	S_CHECK_STOP_DN  -> Q_QUIESCE        [ label = "T" ];
-	S_CHECK_STOP_DN  -> S_STRAIGHT       [ label = "F" ];
+	S_CHECK_STOP_DN  -> S_KEEP_STRAIGHT  [ label = "F" ];
 
 	L_HUNT           -> L_DETECT_BALL    [ label = "T/F" ];
 	L_DETECT_BALL    -> L_CHECK_COLOR    [ label = "T" ];
@@ -108,7 +110,7 @@ digraph FSM {
 	R_AVOID          -> R_CHECK_STOP_DN  [ label = "T/F" ];
 	R_CHECK_STOP_DN  -> Q_QUIESCE        [ label = "T" ];
 	R_CHECK_STOP_DN  -> R_STRAIGHTEN     [ label = "F" ];
-	R_STRAIGHTEN     -> S_STRAIGHT       [ label = "T/F" ];
+	R_STRAIGHTEN     -> S_START_STRAIGHT [ label = "T/F" ];
 
 	P_SEARCH_PATTERN -> P_DETECT_BALL    [ label = "T/F" ];
 	P_DETECT_BALL    -> P_CHECK_COLOR    [ label = "T" ];
