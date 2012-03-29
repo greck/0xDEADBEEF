@@ -9,9 +9,11 @@ public class CheckColor implements Recipe {
 		
 		// Code to close the claw.
 		Motor.C.rotate(80);
+		Button.ENTER.waitForPressAndRelease();
 		
 		// ----- CODE TO OPEN CLAW:
 		// Motor.C.rotate(-80);
+		// Button.ENTER.waitForPressAndRelease();
 		
 		if ( RobotState.colorObj.getRed() > RobotState.colorObj.getBlue() ) {
 			
