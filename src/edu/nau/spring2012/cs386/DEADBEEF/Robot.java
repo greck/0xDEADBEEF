@@ -57,6 +57,10 @@ public class Robot {
 		}
 		RobotState.nonLineLevel /= 4;
 
+		// open the claw
+		//
+		Motor.C.rotate(-80);
+		
 		Recipe[] r = new Recipe[14];
 		r[0] = new Quiesce();
 		r[1] = new IsNotTouched();
@@ -189,7 +193,7 @@ public class Robot {
 
 		s[26][0] = 2;
 		s[26][1] = 0;
-		s[26][2] = 22;
+		s[26][2] = 4;
 
 		s[27][0] = 13;
 		s[27][1] = 0;

@@ -119,7 +119,7 @@ digraph FSM {
 	P_CHECK_COLOR    -> P_AVOID          [ label = "F" ];
 	P_AVOID          -> P_SEARCH_PATTERN [ label = "T/F" ];
 	P_CHECK_STOP_DN  -> Q_QUIESCE        [ label = "T" ];
-	P_CHECK_STOP_DN  -> P_SEARCH_PATTERN [ label = "F" ];
+	P_CHECK_STOP_DN  -> S_START_STRAIGHT [ label = "F" ];
 	
 	H_GO_HOME        -> Q_QUIESCE        [ label = "T/F" ];
 	
