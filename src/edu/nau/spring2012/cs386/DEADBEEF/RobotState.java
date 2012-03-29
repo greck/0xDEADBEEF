@@ -23,7 +23,7 @@ public class RobotState {
 	public static Color   colorObj;
 
 	public static int     totalItrs = 0;
-	public static boolean    moving = false;
+	public static boolean      hunt = false;
 	public static int     lineLevel;
 	public static int  nonLineLevel;
 	public static int  lineLevelErr;
