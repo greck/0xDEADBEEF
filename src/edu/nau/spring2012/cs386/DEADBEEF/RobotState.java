@@ -3,11 +3,9 @@ package edu.nau.spring2012.cs386.DEADBEEF;
 import lejos.nxt.*;
 import lejos.nxt.addon.ColorSensorHT;
 import lejos.robotics.localization.OdometryPoseProvider;
-import lejos.robotics.navigation.DifferentialPilot;
 
 public class RobotState {
 
-	private static TouchSensor      touch      = new TouchSensor(SensorPort.S1);
 	private static LightSensor      light      = new LightSensor(SensorPort.S2);
 	private static UltrasonicSensor ultrasonic = new UltrasonicSensor(SensorPort.S3);
 	private static ColorSensorHT    color      = new ColorSensorHT(SensorPort.S4);
@@ -29,8 +27,8 @@ public class RobotState {
 	public static int  lineLevelErr;
 	public static int      itrsLost = 0;
 
-	public static DifferentialPilot pilot =
-			  new DifferentialPilot(4f, 4f, trackWidth, Motor.A, Motor.B, false);
+	public static CompassCorrectedDifferentialPilot pilot =
+			  new CompassCorrectedDifferentialPilot(4f, 4f, trackWidth, Motor.A, Motor.B, false);
 	//
 	// actual gear diameter to edge of tooth is 42 mm
 
@@ -61,7 +59,7 @@ public class RobotState {
 		
 		// TouchSensor
 		//
-		touched = touch.isPressed();
+		touched = Button.ENTER.isPressed();
 		LCD.drawString("Touched:   ",0,5);
 		if ( touched ) {
 			LCD.drawString(" true",11,5);
