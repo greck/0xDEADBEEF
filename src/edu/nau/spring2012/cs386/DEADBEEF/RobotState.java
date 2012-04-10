@@ -1,8 +1,7 @@
 package edu.nau.spring2012.cs386.DEADBEEF;
 
 import lejos.nxt.*;
-//import lejos.nxt.ColorSensor.Color;
-import lejos.nxt.addon.ColorSensorHT; //added
+import lejos.nxt.addon.ColorSensorHT;
 import lejos.robotics.localization.OdometryPoseProvider;
 import lejos.robotics.navigation.DifferentialPilot;
 
@@ -11,7 +10,6 @@ public class RobotState {
 	private static TouchSensor      touch      = new TouchSensor(SensorPort.S1);
 	private static LightSensor      light      = new LightSensor(SensorPort.S2);
 	private static UltrasonicSensor ultrasonic = new UltrasonicSensor(SensorPort.S3);
-	//private static ColorSensor      color      = new ColorSensor(SensorPort.S4);
 	private static ColorSensorHT    color      = new ColorSensorHT(SensorPort.S4);
 
 	public static double trackWidth = 13.65;
@@ -22,7 +20,6 @@ public class RobotState {
 	public static boolean touched;
 	public static int     lightLevel;
 	public static float   range;
-	//public static Color   colorObj;
 	public static int     colorId;
 
 	public static int     totalItrs = 0;
@@ -93,7 +90,6 @@ public class RobotState {
 		
 		// ColorSensor
 		//
-		//colorObj = color.getColor();
 		colorId = color.getColorID();
 		
 		if ( !Button.ESCAPE.isPressed() ) {
