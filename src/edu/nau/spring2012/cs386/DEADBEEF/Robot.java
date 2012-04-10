@@ -8,11 +8,50 @@ public class Robot {
 	
 	public static void main(String[] args) {
 
+		try { Thread.sleep(500); } catch ( Exception e ) { }
+
+		//
+		// make sure the claw is closed
+		//
+		
+		System.out.println("Ensure that the ");
+		System.out.println("claw is in the  ");
+		System.out.println("closed position,");
+		System.out.println("and then press  ");
+		System.out.println("ENTER.          ");
+		System.out.println("                ");
+		System.out.println("                ");
+		System.out.println("                ");
+
+		Button.ENTER.waitForPressAndRelease();
+		
+		//
+		// calibrate the compass
+		//
+		
+		System.out.println("Press ENTER and ");
+		System.out.println("stand back while");
+		System.out.println("the compass is  ");
+		System.out.println("calibrated.     ");
+		System.out.println("                ");
+		System.out.println("                ");
+		System.out.println("                ");
+		System.out.println("                ");
+
+		Button.ENTER.waitForPressAndRelease();
+
+		LCD.clear();
+		LCD.drawString("CALIBRATING_____",0,0);
+
+		RobotState.calibrateCompass();
+
 		RobotState.pilot.setRotateSpeed(45);
 		RobotState.pilot.setTravelSpeed(10);
 		
-		try { Thread.sleep(500); } catch ( Exception e ) { }
-
+		//
+		// calibrate the light sensor
+		//
+		
 		RobotState.preCalibrateLight();
 		
 		System.out.println("Please place the");
