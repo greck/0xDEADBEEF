@@ -46,6 +46,8 @@ public class GoHome implements Recipe {
 		// drop the ball
 		//
 		Motor.C.rotate(-80);
+
+		Sound.beepSequence();
 		
 		return true;
 		

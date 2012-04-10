@@ -34,7 +34,7 @@ public class RobotState {
 
 	public static OdometryPoseProvider poseProvider =
 			  new OdometryPoseProvider(pilot);
-	
+
 	public static void preCalibrateLight() {
 		light.setFloodlight(true);
 	}
@@ -42,7 +42,11 @@ public class RobotState {
 	public static void calibrateLight() {
 		lightLevel = light.getNormalizedLightValue();
 	}
-	
+
+	public static void setContinuousMode() {
+		ultrasonic.continuous();
+	}
+
 	public static boolean poll() {
 
 		totalItrs++;
@@ -77,14 +81,9 @@ public class RobotState {
 				
 		// UltrasonicSensor
 		//
-		if ( totalItrs % 25 == 0 ) {
-			if ( totalItrs >= 25 ) {
-				range = ultrasonic.getRange();
-				LCD.drawString("Range:      ",0,7);
-				LCD.drawInt((int)range,5,11,7);
-			}
-			ultrasonic.ping();
-		}
+		range = ultrasonic.getRange();
+		LCD.drawString("Range:      ",0,7);
+		LCD.drawInt((int)range,5,11,7);
 		
 		// ColorSensor
 		//
