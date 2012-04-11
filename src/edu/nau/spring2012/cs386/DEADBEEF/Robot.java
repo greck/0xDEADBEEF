@@ -13,7 +13,6 @@ public class Robot {
 		//
 		// make sure the claw is closed
 		//
-		
 		System.out.println("Ensure that the ");
 		System.out.println("claw is in the  ");
 		System.out.println("closed position,");
@@ -24,34 +23,16 @@ public class Robot {
 		System.out.println("                ");
 
 		Button.ENTER.waitForPressAndRelease();
-		
+
 		//
-		// calibrate the compass
+		// set base pilot variables
 		//
-		
-		System.out.println("Press ENTER and ");
-		System.out.println("stand back while");
-		System.out.println("the compass is  ");
-		System.out.println("calibrated.     ");
-		System.out.println("                ");
-		System.out.println("                ");
-		System.out.println("                ");
-		System.out.println("                ");
-
-		Button.ENTER.waitForPressAndRelease();
-
-		LCD.clear();
-		LCD.drawString("CALIBRATING_____",0,0);
-
-		RobotState.calibrateCompass();
-
 		RobotState.pilot.setRotateSpeed(45);
 		RobotState.pilot.setTravelSpeed(10);
 		
 		//
 		// calibrate the light sensor
 		//
-		
 		RobotState.preCalibrateLight();
 		
 		System.out.println("Please place the");
@@ -96,6 +77,7 @@ public class Robot {
 		}
 		RobotState.nonLineLevel /= 4;
 
+		//
 		// open the claw
 		//
 		Motor.C.rotate(-80);
@@ -295,10 +277,9 @@ public class Robot {
 
 		LCD.clear();
 
-		System.out.println("average");
-		System.out.println("milliseconds");
-		System.out.println("per");
-		System.out.println("main loop:");
+		System.out.println("average         ");
+		System.out.println("milliseconds    ");
+		System.out.println("per mail loop:  ");
 		System.out.println(timePerItr);
 
 		Button.ENTER.waitForPressAndRelease();

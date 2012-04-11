@@ -50,10 +50,6 @@ public class RobotState {
 		ultrasonic.continuous();
 	}
 
-	public static void calibrateCompass() {
-		pilot.calibrate();
-	}
-	
 	public static boolean poll() {
 
 		totalItrs++;
