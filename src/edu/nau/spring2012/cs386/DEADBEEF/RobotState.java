@@ -38,6 +38,10 @@ public class RobotState {
 	public static OdometryPoseProvider poseProvider =
 			  new OdometryPoseProvider(pilot);
 
+	public static void resetCartesianZero() {
+		compass.resetCartesianZero();
+	}
+
 	public static void preCalibrateLight() {
 		light.setFloodlight(true);
 	}
