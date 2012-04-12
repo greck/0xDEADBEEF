@@ -253,34 +253,118 @@ public class Robot {
 
 			switch(state) {
 
-				case  0: LCD.drawString("Q_QUIESCE_______",0,0); break;
-				case  1: LCD.drawString("Q_WAIT_STOP_UP__",0,0); break;
-				case  2: LCD.drawString("Q_WAIT_START_DN_",0,0); break;
-				case  3: LCD.drawString("Q_WAIT_START_UP_",0,0); break;
-				case  4: LCD.drawString("S_START_STRAIGHT",0,0); break;
-				case  5: LCD.drawString("S_KEEP_STRAIGHT_",0,0); break;
-				case  6: LCD.drawString("S_BOUNDARY_CHECK",0,0); break;
-				case  7: LCD.drawString("S_DETECT_BALL___",0,0); break;
-				case  8: LCD.drawString("S_CHECK_COLOR___",0,0); break;
-				case  9: LCD.drawString("S_AVOID_________",0,0); break;
-				case 10: LCD.drawString("S_CHECK_STOP_DN_",0,0); break;
-				case 11: LCD.drawString("L_HUNT__________",0,0); break;
-				case 12: LCD.drawString("L_DETECT_BALL___",0,0); break;
-				case 13: LCD.drawString("L_CHECK_COLOR___",0,0); break;
-				case 14: LCD.drawString("L_AVOID_________",0,0); break;
-				case 15: LCD.drawString("L_CHECK_STOP_DN_",0,0); break;
-				case 16: LCD.drawString("R_HUNT__________",0,0); break;
-				case 17: LCD.drawString("R_DETECT_BALL___",0,0); break;
-				case 18: LCD.drawString("R_CHECK_COLOR___",0,0); break;
-				case 19: LCD.drawString("R_AVOID_________",0,0); break;
-				case 20: LCD.drawString("R_CHECK_STOP_DN_",0,0); break;
-				case 21: LCD.drawString("R_STRAIGHTEN____",0,0); break;
-				case 22: LCD.drawString("P_SEARCH_PATTERN",0,0); break;
-				case 23: LCD.drawString("P_DETECT_BALL___",0,0); break;
-				case 24: LCD.drawString("P_CHECK_COLOR___",0,0); break;
-				case 25: LCD.drawString("P_AVOID_________",0,0); break;
-				case 26: LCD.drawString("P_CHECK_STOP_DN_",0,0); break;
-				case 27: LCD.drawString("H_GO_HOME_______",0,0); break;
+			case  0:
+				LCD.drawString("Q_QUIESCE_______",0,0);
+				if ( DEBUG ) { RConsole.println("Q_QUIESCE_______"); }
+				break;
+			case  1:
+				LCD.drawString("Q_WAIT_STOP_UP__",0,0);
+				if ( DEBUG ) { RConsole.println("Q_WAIT_STOP_UP__"); }
+				break;
+			case  2:
+				LCD.drawString("Q_WAIT_START_DN_",0,0);
+				if ( DEBUG ) { RConsole.println("Q_WAIT_START_DN_"); }
+				break;
+			case  3:
+				LCD.drawString("Q_WAIT_START_UP_",0,0);
+				if ( DEBUG ) { RConsole.println("Q_WAIT_START_UP_"); }
+				break;
+			case  4:
+				LCD.drawString("S_START_STRAIGHT",0,0);
+				if ( DEBUG ) { RConsole.println("S_START_STRAIGHT"); }
+				break;
+			case  5:
+				LCD.drawString("S_KEEP_STRAIGHT_",0,0);
+				if ( DEBUG ) { RConsole.println("S_KEEP_STRAIGHT_"); }
+				break;
+			case  6:
+				LCD.drawString("S_BOUNDARY_CHECK",0,0);
+				if ( DEBUG ) { RConsole.println("S_BOUNDARY_CHECK"); }
+				break;
+			case  7:
+				LCD.drawString("S_DETECT_BALL___",0,0);
+				if ( DEBUG ) { RConsole.println("S_DETECT_BALL___"); }
+				break;
+			case  8:
+				LCD.drawString("S_CHECK_COLOR___",0,0);
+				if ( DEBUG ) { RConsole.println("S_CHECK_COLOR___"); }
+				break;
+			case  9:
+				LCD.drawString("S_AVOID_________",0,0);
+				if ( DEBUG ) { RConsole.println("S_AVOID_________"); }
+				break;
+			case 10:
+				LCD.drawString("S_CHECK_STOP_DN_",0,0);
+				if ( DEBUG ) { RConsole.println("S_CHECK_STOP_DN_"); }
+				break;
+			case 11:
+				LCD.drawString("L_HUNT__________",0,0);
+				if ( DEBUG ) { RConsole.println("L_HUNT__________"); }
+				break;
+			case 12:
+				LCD.drawString("L_DETECT_BALL___",0,0);
+				if ( DEBUG ) { RConsole.println("L_DETECT_BALL___"); }
+				break;
+			case 13:
+				LCD.drawString("L_CHECK_COLOR___",0,0);
+				if ( DEBUG ) { RConsole.println("L_CHECK_COLOR___"); }
+				break;
+			case 14:
+				LCD.drawString("L_AVOID_________",0,0);
+				if ( DEBUG ) { RConsole.println("L_AVOID_________"); }
+				break;
+			case 15:
+				LCD.drawString("L_CHECK_STOP_DN_",0,0);
+				if ( DEBUG ) { RConsole.println("L_CHECK_STOP_DN_"); }
+				break;
+			case 16:
+				LCD.drawString("R_HUNT__________",0,0);
+				if ( DEBUG ) { RConsole.println("R_HUNT__________"); }
+				break;
+			case 17:
+				LCD.drawString("R_DETECT_BALL___",0,0);
+				if ( DEBUG ) { RConsole.println("R_DETECT_BALL___"); }
+				break;
+			case 18:
+				LCD.drawString("R_CHECK_COLOR___",0,0);
+				if ( DEBUG ) { RConsole.println("R_CHECK_COLOR___"); }
+				break;
+			case 19:
+				LCD.drawString("R_AVOID_________",0,0);
+				if ( DEBUG ) { RConsole.println("R_AVOID_________"); }
+				break;
+			case 20:
+				LCD.drawString("R_CHECK_STOP_DN_",0,0);
+				if ( DEBUG ) { RConsole.println("R_CHECK_STOP_DN_"); }
+				break;
+			case 21:
+				LCD.drawString("R_STRAIGHTEN____",0,0);
+				if ( DEBUG ) { RConsole.println("R_STRAIGHTEN____"); }
+				break;
+			case 22:
+				LCD.drawString("P_SEARCH_PATTERN",0,0);
+				if ( DEBUG ) { RConsole.println("P_SEARCH_PATTERN"); }
+				break;
+			case 23:
+				LCD.drawString("P_DETECT_BALL___",0,0);
+				if ( DEBUG ) { RConsole.println("P_DETECT_BALL___"); }
+				break;
+			case 24:
+				LCD.drawString("P_CHECK_COLOR___",0,0);
+				if ( DEBUG ) { RConsole.println("P_CHECK_COLOR___"); }
+				break;
+			case 25:
+				LCD.drawString("P_AVOID_________",0,0);
+				if ( DEBUG ) { RConsole.println("P_AVOID_________"); }
+				break;
+			case 26:
+				LCD.drawString("P_CHECK_STOP_DN_",0,0);
+				if ( DEBUG ) { RConsole.println("P_CHECK_STOP_DN_"); }
+				break;
+			case 27:
+				LCD.drawString("H_GO_HOME_______",0,0);
+				if ( DEBUG ) { RConsole.println("H_GO_HOME_______"); }
+				break;
 
 			}
 			
