@@ -111,6 +111,9 @@ for ( my $i = 0; $i < $stateCount; $i++ ) {
 
 	print "\t\tcase ";
 	print $i>9?"":" ";
-	print "$i: LCD.drawString(\"$stateStr\",0,0); break;\n";
+	print "$i:\n";
+	print "\t\t\tLCD.drawString(\"$stateStr\",0,0);\n";
+	print "\t\t\tif ( DEBUG ) { RConsole.println(\"$stateStr\"); }\n";
+	print "\t\t\tbreak;\n";
 
 }

@@ -10,7 +10,7 @@ public class CheckColor implements Recipe {
 		//
 		Motor.C.rotate(80);
 		
-		if ( RobotState.colorId == 0) { //0 == red
+		if ( RobotState.colorObj.getRed() > RobotState.colorObj.getRed() ) {
 			
 			return true;
 			

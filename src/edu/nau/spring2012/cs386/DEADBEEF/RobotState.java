@@ -1,13 +1,11 @@
 package edu.nau.spring2012.cs386.DEADBEEF;
 
 import lejos.nxt.*;
+import lejos.nxt.ColorSensor.Color;
 import lejos.nxt.addon.ColorSensorHT;
-import lejos.robotics.localization.OdometryPoseProvider;
-import lejos.robotics.navigation.DifferentialPilot;
 
 public class RobotState {
 
-	private static TouchSensor      touch      = new TouchSensor(SensorPort.S1);
 	private static LightSensor      light      = new LightSensor(SensorPort.S2);
 	private static UltrasonicSensor ultrasonic = new UltrasonicSensor(SensorPort.S3);
 	private static ColorSensorHT    color      = new ColorSensorHT(SensorPort.S4);
@@ -20,7 +18,7 @@ public class RobotState {
 	public static boolean touched;
 	public static int     lightLevel;
 	public static float   range;
-	public static int     colorId;
+	public static Color   colorObj;
 
 	public static int     totalItrs = 0;
 	public static boolean      hunt = false;
@@ -29,20 +27,25 @@ public class RobotState {
 	public static int  lineLevelErr;
 	public static int      itrsLost = 0;
 
-	public static DifferentialPilot pilot =
-			  new DifferentialPilot(4f, 4f, trackWidth, Motor.A, Motor.B, false);
+	public static CompassDifferentialPilot pilot =
+			  new CompassDifferentialPilot(4.0f, 4.0f, (float)trackWidth, Motor.A, Motor.B, false);
 	//
 	// actual gear diameter to edge of tooth is 42 mm
 
-	public static OdometryPoseProvider poseProvider =
-			  new OdometryPoseProvider(pilot);
-	
 	public static void preCalibrateLight() {
 		light.setFloodlight(true);
 	}
 
 	public static void calibrateLight() {
 		lightLevel = light.getNormalizedLightValue();
+	}
+
+	public static void setContinuousMode() {
+		ultrasonic.continuous();
+	}
+
+	public static void zeroCompass() {
+		pilot.zeroCompass();
 	}
 	
 	public static boolean poll() {
@@ -61,7 +64,7 @@ public class RobotState {
 		
 		// TouchSensor
 		//
-		touched = touch.isPressed();
+		touched = Button.ENTER.isPressed();
 		LCD.drawString("Touched:   ",0,5);
 		if ( touched ) {
 			LCD.drawString(" true",11,5);
@@ -79,18 +82,13 @@ public class RobotState {
 				
 		// UltrasonicSensor
 		//
-		if ( totalItrs % 25 == 0 ) {
-			if ( totalItrs >= 25 ) {
-				range = ultrasonic.getRange();
-				LCD.drawString("Range:      ",0,7);
-				LCD.drawInt((int)range,5,11,7);
-			}
-			ultrasonic.ping();
-		}
+		range = ultrasonic.getRange();
+		LCD.drawString("Range:      ",0,7);
+		LCD.drawInt((int)range,5,11,7);
 		
 		// ColorSensor
 		//
-		colorId = color.getColorID();
+		colorObj = (Color)color.getColor();
 		
 		if ( !Button.ESCAPE.isPressed() ) {
 			return true;
