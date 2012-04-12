@@ -48,26 +48,29 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 		}
 
 		Pose  curPose = poseProvider.getPose();
-		float curHeading;
+		int curHeading, poseHeading;
 		String buf;
 
 		do {
 
-			curHeading = compass.getDegreesCartesian();
-
+			curHeading  = Math.round(compass.getDegreesCartesian());
+			poseHeading = Math.round(curPose.getHeading());
+			
 			if ( curHeading > 180 ) {
 				curHeading -= 360;
 			}
 			
 			buf = "cur=";
-			buf += (int)curHeading;
+			buf += curHeading;
 			buf += ", pose=";
-			buf += (int)curPose.getHeading();
+			buf += poseHeading;
 			RConsole.println(buf);
 
-			try { Thread.sleep(250); } catch( Exception e) { }
+//			try { Thread.sleep(250); } catch( Exception e) { }
 
-			if ( curHeading - curPose.getHeading() > 0 ) {
+			int deviation = curHeading - poseHeading;
+			
+			if ( deviation > 0 ) {
 				
 				super.rotate(-1,false);
 				
@@ -76,8 +79,8 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 				super.rotate(1,false);
 				
 			}
-
-		} while ( Math.abs( (int)curHeading - (int)curPose.getHeading() ) > 0 );
+			
+		} while ( Math.abs( curHeading - poseHeading ) > 0 );
 
 		poseProvider.setPose(curPose);
 		
@@ -98,8 +101,26 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 		if ( Robot.DEBUG ) {
 			RConsole.println("arc()");
 		}
+
+		Pose  curPose = poseProvider.getPose();
+		int heading = Math.round(curPose.getHeading());
+
+		heading += angle;
+
+		if ( heading < -180 ) {
+			heading += 360;
+		}
+
+		if ( heading > 180 ) {
+			heading -= 360;
+		}
 		
 		super.arc(radius,angle,immediateReturn);
+
+		curPose = poseProvider.getPose();
+		curPose.setHeading(heading);
+		poseProvider.setPose(curPose);
+		
 		adjustHeading();
 		
 	}
@@ -115,7 +136,7 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 		}
 
 		Pose  curPose = poseProvider.getPose();
-		float heading = curPose.getHeading();
+		int heading = Math.round(curPose.getHeading());
 
 		heading += angle;
 
