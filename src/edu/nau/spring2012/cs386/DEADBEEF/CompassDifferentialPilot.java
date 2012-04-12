@@ -43,10 +43,6 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 
 	public void adjustHeading() {
 		
-		if ( Robot.DEBUG ) {
-			RConsole.println("adjustHeading()");
-		}
-
 		Pose  curPose = poseProvider.getPose();
 		int curHeading, poseHeading;
 		String buf;
@@ -98,10 +94,6 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 		//
 		if ( immediateReturn ) { System.exit(-1); }
 
-		if ( Robot.DEBUG ) {
-			RConsole.println("arc()");
-		}
-
 		Pose  curPose = poseProvider.getPose();
 		int heading = Math.round(curPose.getHeading());
 
@@ -131,10 +123,6 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 		//
 		if ( immediateReturn ) { System.exit(-1); }
 		
-		if ( Robot.DEBUG ) {
-			RConsole.println("rotate()");
-		}
-
 		Pose  curPose = poseProvider.getPose();
 		int heading = Math.round(curPose.getHeading());
 
