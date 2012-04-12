@@ -18,8 +18,10 @@ public class RobotState {
 	public static boolean touched;
 	public static int     lightLevel;
 	public static float   range;
-	public static Color   colorObj;
-
+	public static int     redLevel;
+	public static int     blueLevel;
+	public static int     greenLevel;
+	
 	public static int     totalItrs = 0;
 	public static boolean      hunt = false;
 	public static int     lineLevel;
@@ -88,7 +90,9 @@ public class RobotState {
 		
 		// ColorSensor
 		//
-		colorObj = (Color)color.getColor();
+		redLevel = color.getColor().getRed();
+		blueLevel = color.getColor().getBlue();
+		greenLevel = color.getColor().getGreen();
 		
 		if ( !Button.ESCAPE.isPressed() ) {
 			return true;
