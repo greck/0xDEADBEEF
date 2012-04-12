@@ -103,7 +103,7 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 			heading += 360;
 		}
 
-		if ( heading > 180 ) {
+		if ( heading >= 180 ) {
 			heading -= 360;
 		}
 		
@@ -132,7 +132,7 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 			heading += 360;
 		}
 
-		if ( heading > 180 ) {
+		if ( heading >= 180 ) {
 			heading -= 360;
 		}
 		

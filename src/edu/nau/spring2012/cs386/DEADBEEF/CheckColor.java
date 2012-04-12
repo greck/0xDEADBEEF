@@ -6,10 +6,6 @@ public class CheckColor implements Recipe {
 
 	public boolean execute() {
 		
-		// Code to close the claw.
-		//
-		Motor.C.rotate(80);
-		
 		if ( RobotState.colorObj.getRed() > RobotState.colorObj.getRed() ) {
 			
 			return true;
