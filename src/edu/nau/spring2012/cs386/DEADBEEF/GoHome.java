@@ -14,23 +14,23 @@ public class GoHome implements Recipe {
 		// get back to the X axis
 		//
 
-		if ( RobotState.poseProvider.getPose().getY() > 0 ) {
+		if ( RobotState.pilot.getPose().getY() > 0 ) {
 			
-			angle = 270 - RobotState.poseProvider.getPose().getHeading();
+			angle = 270 - RobotState.pilot.getPose().getHeading();
 			
 		} else {
 			
-			angle = RobotState.poseProvider.getPose().getHeading() - 90;
+			angle = RobotState.pilot.getPose().getHeading() - 90;
 			
 		}
 
 		RobotState.pilot.rotate(angle,false);
-		RobotState.pilot.travel(Math.abs(RobotState.poseProvider.getPose().getY()),false);
+		RobotState.pilot.travel(Math.abs(RobotState.pilot.getPose().getY()),false);
 
 		// point towards the negative end of the x axis
 		//
 		
-		if ( RobotState.poseProvider.getPose().getHeading() == 90 ) {
+		if ( RobotState.pilot.getPose().getHeading() == 90 ) {
 			
 			RobotState.pilot.rotate(90);
 			
@@ -41,7 +41,7 @@ public class GoHome implements Recipe {
 
 		// go home!
 		//
-		RobotState.pilot.travel(Math.abs(RobotState.poseProvider.getPose().getX())-15,false);
+		RobotState.pilot.travel(Math.abs(RobotState.pilot.getPose().getX())-15,false);
 
 		// drop the ball
 		//

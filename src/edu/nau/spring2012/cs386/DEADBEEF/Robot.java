@@ -78,6 +78,22 @@ public class Robot {
 		RobotState.nonLineLevel /= 4;
 
 		//
+		// make sure the claw is closed
+		//
+		System.out.println("Place the robot ");
+		System.out.println("in the starting ");
+		System.out.println("location and    ");
+		System.out.println("then press      ");
+		System.out.println("ENTER.          ");
+		System.out.println("                ");
+		System.out.println("                ");
+		System.out.println("                ");
+
+		Button.ENTER.waitForPressAndRelease();
+
+		RobotState.zeroCompass();
+		
+		//
 		// open the claw
 		//
 		Motor.C.rotate(-80);
