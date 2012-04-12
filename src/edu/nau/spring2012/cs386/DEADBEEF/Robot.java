@@ -1,6 +1,7 @@
 package edu.nau.spring2012.cs386.DEADBEEF;
 
 import lejos.nxt.*;
+import lejos.nxt.comm.RConsole;
 
 public class Robot {
 
@@ -8,6 +9,10 @@ public class Robot {
 	
 	public static void main(String[] args) {
 
+		if ( DEBUG ) {
+			RConsole.open();
+		}
+		
 		try { Thread.sleep(500); } catch ( Exception e ) { }
 
 		//
@@ -299,6 +304,10 @@ public class Robot {
 		System.out.println(timePerItr);
 
 		Button.ENTER.waitForPressAndRelease();
+
+		if ( DEBUG ) {
+			RConsole.close();
+		}
 		
 	}
 

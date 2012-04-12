@@ -3,6 +3,7 @@ package edu.nau.spring2012.cs386.DEADBEEF;
 import java.lang.String;
 import lejos.nxt.SensorPort;
 import lejos.nxt.addon.CompassSensor;
+import lejos.nxt.comm.RConsole;
 import lejos.robotics.RegulatedMotor;
 import lejos.robotics.localization.OdometryPoseProvider;
 import lejos.robotics.navigation.DifferentialPilot;
@@ -42,6 +43,10 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 
 	public void adjustHeading() {
 		
+		if ( Robot.DEBUG ) {
+			RConsole.println("adjustHeading()");
+		}
+
 		Pose  curPose = poseProvider.getPose();
 		float curHeading;
 		String buf;
@@ -58,7 +63,7 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 			buf += (int)curHeading;
 			buf += ", pose=";
 			buf += (int)curPose.getHeading();
-			System.out.println(buf);
+			RConsole.println(buf);
 
 			try { Thread.sleep(250); } catch( Exception e) { }
 
@@ -90,6 +95,10 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 		//
 		if ( immediateReturn ) { System.exit(-1); }
 
+		if ( Robot.DEBUG ) {
+			RConsole.println("arc()");
+		}
+		
 		super.arc(radius,angle,immediateReturn);
 		adjustHeading();
 		
@@ -101,6 +110,10 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 		//
 		if ( immediateReturn ) { System.exit(-1); }
 		
+		if ( Robot.DEBUG ) {
+			RConsole.println("rotate()");
+		}
+
 		Pose  curPose = poseProvider.getPose();
 		float heading = curPose.getHeading();
 
