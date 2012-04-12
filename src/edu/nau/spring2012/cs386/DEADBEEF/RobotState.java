@@ -1,6 +1,7 @@
 package edu.nau.spring2012.cs386.DEADBEEF;
 
 import lejos.nxt.*;
+import lejos.nxt.ColorSensor.Color;
 import lejos.nxt.addon.ColorSensorHT;
 
 public class RobotState {
@@ -17,7 +18,7 @@ public class RobotState {
 	public static boolean touched;
 	public static int     lightLevel;
 	public static float   range;
-	public static int     colorId;
+	public static Color   colorObj;
 
 	public static int     totalItrs = 0;
 	public static boolean      hunt = false;
@@ -87,7 +88,7 @@ public class RobotState {
 		
 		// ColorSensor
 		//
-		colorId = color.getColorID();
+		colorObj = (Color)color.getColor();
 		
 		if ( !Button.ESCAPE.isPressed() ) {
 			return true;
