@@ -40,7 +40,7 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 		
 	}
 
-	private void adjustHeading() {
+	public void adjustHeading() {
 		
 		Pose  curPose = poseProvider.getPose();
 		float curHeading;
@@ -60,6 +60,8 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 			buf += (int)curPose.getHeading();
 			System.out.println(buf);
 
+			try { Thread.sleep(250); } catch( Exception e) { }
+
 			if ( curHeading - curPose.getHeading() > 0 ) {
 				
 				super.rotate(-1,false);
@@ -70,7 +72,7 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 				
 			}
 
-		} while ( Math.abs( curHeading - curPose.getHeading() ) > 1.5 );
+		} while ( Math.abs( (int)curHeading - (int)curPose.getHeading() ) > 0 );
 
 		poseProvider.setPose(curPose);
 		
@@ -84,21 +86,40 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 	
 	public void arc(double radius, double angle, boolean immediateReturn) {
 		
+		// assert no immediate return
+		//
+		if ( immediateReturn ) { System.exit(-1); }
+
 		super.arc(radius,angle,immediateReturn);
 		adjustHeading();
 		
 	}
 
 	public void rotate(double angle, boolean immediateReturn) {
+
+		// assert no immediate return
+		//
+		if ( immediateReturn ) { System.exit(-1); }
+		
+		Pose  curPose = poseProvider.getPose();
+		float heading = curPose.getHeading();
+
+		heading += angle;
+
+		if ( heading < -180 ) {
+			heading += 360;
+		}
+
+		if ( heading > 180 ) {
+			heading -= 360;
+		}
 		
 		super.rotate(angle,immediateReturn);
-		adjustHeading();
+
+		curPose = poseProvider.getPose();
+		curPose.setHeading(heading);
+		poseProvider.setPose(curPose);
 		
-	}
-	
-	public void travel(double distance, boolean immediateReturn) {
-		
-		super.travel(distance,immediateReturn);
 		adjustHeading();
 		
 	}
