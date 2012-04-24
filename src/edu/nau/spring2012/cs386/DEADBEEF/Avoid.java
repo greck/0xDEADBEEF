@@ -1,7 +1,6 @@
 package edu.nau.spring2012.cs386.DEADBEEF;
 
 import lejos.nxt.Motor;
-import lejos.nxt.Sound;
 
 public class Avoid implements Recipe {
 
