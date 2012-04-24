@@ -1,7 +1,6 @@
 package edu.nau.spring2012.cs386.DEADBEEF;
 
 import lejos.nxt.*;
-import lejos.nxt.ColorSensor.Color;
 import lejos.nxt.addon.ColorSensorHT;
 
 public class RobotState {
