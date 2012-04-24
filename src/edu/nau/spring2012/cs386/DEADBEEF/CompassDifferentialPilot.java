@@ -113,8 +113,6 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 		curPose.setHeading(heading);
 		poseProvider.setPose(curPose);
 		
-		adjustHeading();
-		
 	}
 
 	public void rotate(double angle, boolean immediateReturn) {
@@ -141,8 +139,6 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 		curPose = poseProvider.getPose();
 		curPose.setHeading(heading);
 		poseProvider.setPose(curPose);
-		
-		adjustHeading();
 		
 	}
 	
