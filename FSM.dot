@@ -18,6 +18,7 @@ digraph FSM {
 	
 		color = gray;
 
+		S_ADJUST_HEADING [ shape=box label=<<table border="0"><tr><td align="left">S_ADJUST_HEADING</td></tr><tr><td align="left">r=AdjustHeading</td></tr></table>> ];
 		S_START_STRAIGHT [ shape=box label=<<table border="0"><tr><td align="left">S_START_STRAIGHT</td></tr><tr><td align="left">r=StartStraight</td></tr></table>> ];
 		S_KEEP_STRAIGHT  [ shape=box label=<<table border="0"><tr><td align="left">S_KEEP_STRAIGHT</td></tr><tr><td align="left">r=KeepStraight</td></tr></table>> ];
 		S_BOUNDARY_CHECK [ shape=box label=<<table border="0"><tr><td align="left">S_BOUNDARY_CHECK</td></tr><tr><td align="left">r=BoundaryCheck</td></tr></table>> ];
@@ -77,9 +78,10 @@ digraph FSM {
 	Q_WAIT_STOP_UP   -> Q_WAIT_STOP_UP   [ label = "F" ];
 	Q_WAIT_START_DN  -> Q_WAIT_START_UP  [ label = "T" ];
 	Q_WAIT_START_DN  -> Q_WAIT_START_DN  [ label = "F" ];
-	Q_WAIT_START_UP  -> S_START_STRAIGHT [ label = "T" ];
+	Q_WAIT_START_UP  -> S_ADJUST_HEADING [ label = "T" ];
 	Q_WAIT_START_UP  -> Q_WAIT_START_UP  [ label = "F" ];
 
+	S_ADJUST_HEADING -> S_START_STRAIGHT [ label = "T/F" ];
 	S_START_STRAIGHT -> S_KEEP_STRAIGHT  [ label = "T/F" ];
 	S_KEEP_STRAIGHT  -> S_BOUNDARY_CHECK [ label = "T" ];
 	S_KEEP_STRAIGHT  -> L_HUNT           [ label = "F" ];
@@ -89,7 +91,7 @@ digraph FSM {
 	S_DETECT_BALL    -> S_CHECK_STOP_DN  [ label = "F" ];
 	S_CHECK_COLOR    -> H_GO_HOME        [ label = "T" ];
 	S_CHECK_COLOR    -> S_AVOID          [ label = "F" ];
-	S_AVOID          -> S_START_STRAIGHT [ label = "T/F" ];
+	S_AVOID          -> S_ADJUST_HEADING [ label = "T/F" ];
 	S_CHECK_STOP_DN  -> Q_QUIESCE        [ label = "T" ];
 	S_CHECK_STOP_DN  -> S_KEEP_STRAIGHT  [ label = "F" ];
 
@@ -110,7 +112,7 @@ digraph FSM {
 	R_AVOID          -> R_CHECK_STOP_DN  [ label = "T/F" ];
 	R_CHECK_STOP_DN  -> Q_QUIESCE        [ label = "T" ];
 	R_CHECK_STOP_DN  -> R_STRAIGHTEN     [ label = "F" ];
-	R_STRAIGHTEN     -> S_START_STRAIGHT [ label = "T/F" ];
+	R_STRAIGHTEN     -> S_ADJUST_HEADING [ label = "T/F" ];
 
 	P_SEARCH_PATTERN -> P_DETECT_BALL    [ label = "T/F" ];
 	P_DETECT_BALL    -> P_CHECK_COLOR    [ label = "T" ];
@@ -119,7 +121,7 @@ digraph FSM {
 	P_CHECK_COLOR    -> P_AVOID          [ label = "F" ];
 	P_AVOID          -> P_SEARCH_PATTERN [ label = "T/F" ];
 	P_CHECK_STOP_DN  -> Q_QUIESCE        [ label = "T" ];
-	P_CHECK_STOP_DN  -> S_START_STRAIGHT [ label = "F" ];
+	P_CHECK_STOP_DN  -> S_ADJUST_HEADING [ label = "F" ];
 	
 	H_GO_HOME        -> Q_QUIESCE        [ label = "T/F" ];
 	
