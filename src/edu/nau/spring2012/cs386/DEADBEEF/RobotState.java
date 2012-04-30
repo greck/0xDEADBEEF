@@ -25,7 +25,6 @@ public class RobotState {
 	public static int     lineLevel;
 	public static int  nonLineLevel;
 	public static int  lineLevelErr;
-	public static int      itrsLost = 0;
 
 	public static CompassDifferentialPilot pilot =
 			  new CompassDifferentialPilot(4.0f, 4.0f, (float)trackWidth, Motor.A, Motor.B, false);
@@ -59,9 +58,6 @@ public class RobotState {
 		LCD.drawString("LineLvl:   ",0,2);
 		LCD.drawInt(lineLevel,5,11,2);
 
-		LCD.drawString("LostItrs:  ",0,3);
-		LCD.drawInt(itrsLost,5,11,3);
-		
 		// TouchSensor
 		//
 		touched = Button.ENTER.isPressed();
