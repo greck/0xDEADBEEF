@@ -4,16 +4,8 @@ public class KeepMoving implements Recipe {
 
 	public boolean execute() {
 
-		if ( RobotState.pilot.isMoving() ) {
-			
-			return true;
-			
-		} else {
-			
-			return false;
-			
-		}
-		
+		return RobotState.pilot.isMoving();
+	
 	}
 
 }
