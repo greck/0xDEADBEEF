@@ -5,7 +5,6 @@ public class Straighten implements Recipe {
 	public boolean execute() {
 
 		RobotState.pilot.rotate(20,false);
-		RobotState.hunt = false;
 		
 		return true;
 		
