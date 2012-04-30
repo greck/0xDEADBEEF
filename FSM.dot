@@ -23,6 +23,7 @@ digraph FSM {
 		B_START_STRAIGHT [ shape=box label=<<table border="0"><tr><td align="left">B_START_STRAIGHT</td></tr><tr><td align="left">r=StartStraight</td></tr></table>> ];
 		B_KEEP_STRAIGHT  [ shape=box label=<<table border="0"><tr><td align="left">B_KEEP_STRAIGHT</td></tr><tr><td align="left">r=KeepMoving</td></tr></table>> ];
 		B_BOUNDARY_CHECK [ shape=box label=<<table border="0"><tr><td align="left">B_BOUNDARY_CHECK</td></tr><tr><td align="left">r=BoundaryCheck</td></tr></table>> ];
+		B_HIT_BOUNDARY   [ shape=box label=<<table border="0"><tr><td align="left">B_HIT_BOUNDARY</td></tr><tr><td align="left">r=HitBoundary</td></tr></table>> ];
 		B_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">B_DETECT_BALL</td></tr><tr><td align="left">r=DetectBall</td></tr></table>> ];
 		B_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">B_CHECK_COLOR</td></tr><tr><td align="left">r=CheckColor</td></tr></table>> ];
 		B_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">B_AVOID</td></tr><tr><td align="left">r=Avoid</td></tr></table>> ];
@@ -123,6 +124,7 @@ digraph FSM {
 		I_START_STRAIGHT [ shape=box label=<<table border="0"><tr><td align="left">I_START_STRAIGHT</td></tr><tr><td align="left">r=StartStraight</td></tr></table>> ];
 		I_KEEP_STRAIGHT  [ shape=box label=<<table border="0"><tr><td align="left">I_KEEP_STRAIGHT</td></tr><tr><td align="left">r=KeepMoving</td></tr></table>> ];
 		I_BOUNDARY_CHECK [ shape=box label=<<table border="0"><tr><td align="left">I_BOUNDARY_CHECK</td></tr><tr><td align="left">r=BoundaryCheck</td></tr></table>> ];
+		I_HIT_BOUNDARY   [ shape=box label=<<table border="0"><tr><td align="left">I_HIT_BOUNDARY</td></tr><tr><td align="left">r=HitBoundary</td></tr></table>> ];
 		I_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">I_DETECT_BALL</td></tr><tr><td align="left">r=DetectBall</td></tr></table>> ];
 		I_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">I_CHECK_COLOR</td></tr><tr><td align="left">r=CheckColor</td></tr></table>> ];
 		I_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">I_AVOID</td></tr><tr><td align="left">r=Avoid</td></tr></table>> ];
@@ -203,6 +205,7 @@ digraph FSM {
 		N_START_STRAIGHT [ shape=box label=<<table border="0"><tr><td align="left">N_START_STRAIGHT</td></tr><tr><td align="left">r=StartStraight</td></tr></table>> ];
 		N_KEEP_STRAIGHT  [ shape=box label=<<table border="0"><tr><td align="left">N_KEEP_STRAIGHT</td></tr><tr><td align="left">r=KeepMoving</td></tr></table>> ];
 		N_BOUNDARY_CHECK [ shape=box label=<<table border="0"><tr><td align="left">N_BOUNDARY_CHECK</td></tr><tr><td align="left">r=BoundaryCheck</td></tr></table>> ];
+		N_HIT_BOUNDARY   [ shape=box label=<<table border="0"><tr><td align="left">N_HIT_BOUNDARY</td></tr><tr><td align="left">r=HitBoundary</td></tr></table>> ];
 		N_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">N_DETECT_BALL</td></tr><tr><td align="left">r=DetectBall</td></tr></table>> ];
 		N_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">N_CHECK_COLOR</td></tr><tr><td align="left">r=CheckColor</td></tr></table>> ];
 		N_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">N_AVOID</td></tr><tr><td align="left">r=Avoid</td></tr></table>> ];
@@ -282,8 +285,9 @@ digraph FSM {
 	B_START_STRAIGHT -> B_KEEP_STRAIGHT  [ label = "T/F" ];
 	B_KEEP_STRAIGHT  -> B_BOUNDARY_CHECK [ label = "T" ];
 	B_KEEP_STRAIGHT  -> C_HUNT           [ label = "F" ];
-	B_BOUNDARY_CHECK -> L_ADJUST_HEADING [ label = "T" ];
+	B_BOUNDARY_CHECK -> B_HIT_BOUNDARY   [ label = "T" ];
 	B_BOUNDARY_CHECK -> B_DETECT_BALL    [ label = "F" ];
+	B_HIT_BOUNDARY   -> L_ADJUST_HEADING [ label = "T/F" ];
 	B_DETECT_BALL    -> B_CHECK_COLOR    [ label = "T" ];
 	B_DETECT_BALL    -> B_CHECK_STOP_DN  [ label = "F" ];
 	B_CHECK_COLOR    -> F_GO_HOME        [ label = "T" ];
@@ -348,8 +352,9 @@ digraph FSM {
 	I_START_STRAIGHT -> I_KEEP_STRAIGHT  [ label = "T/F" ];
 	I_KEEP_STRAIGHT  -> I_BOUNDARY_CHECK [ label = "T" ];
 	I_KEEP_STRAIGHT  -> J_HUNT           [ label = "F" ];
-	I_BOUNDARY_CHECK -> E_ADJUST_HEADING [ label = "T" ];
+	I_BOUNDARY_CHECK -> I_HIT_BOUNDARY   [ label = "T" ];
 	I_BOUNDARY_CHECK -> I_DETECT_BALL    [ label = "F" ];
+	I_HIT_BOUNDARY   -> E_ADJUST_HEADING [ label = "T/F" ];
 	I_DETECT_BALL    -> I_CHECK_COLOR    [ label = "T" ];
 	I_DETECT_BALL    -> I_CHECK_STOP_DN  [ label = "F" ];
 	I_CHECK_COLOR    -> F_GO_HOME        [ label = "T" ];
@@ -409,8 +414,9 @@ digraph FSM {
 	N_START_STRAIGHT -> N_KEEP_STRAIGHT  [ label = "T/F" ];
 	N_KEEP_STRAIGHT  -> N_BOUNDARY_CHECK [ label = "T" ];
 	N_KEEP_STRAIGHT  -> O_HUNT           [ label = "F" ];
-	N_BOUNDARY_CHECK -> Q_ADJUST_HEADING [ label = "T" ];
+	N_BOUNDARY_CHECK -> N_HIT_BOUNDARY   [ label = "T" ];
 	N_BOUNDARY_CHECK -> N_DETECT_BALL    [ label = "F" ];
+	N_HIT_BOUNDARY   -> Q_ADJUST_HEADING [ label = "T/F" ];
 	N_DETECT_BALL    -> N_CHECK_COLOR    [ label = "T" ];
 	N_DETECT_BALL    -> N_CHECK_STOP_DN  [ label = "F" ];
 	N_CHECK_COLOR    -> F_GO_HOME        [ label = "T" ];
@@ -465,6 +471,5 @@ digraph FSM {
 	R_AVOID          -> R_ADJUST_HEADING [ label = "T/F" ];
 	R_CHECK_STOP_DN  -> A_VERY_EMERGENCY [ label = "T" ];
 	R_CHECK_STOP_DN  -> R_KEEP_TURNING   [ label = "F" ];
-
 
 }
