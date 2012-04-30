@@ -90,10 +90,6 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 	
 	public void arc(double radius, double angle, boolean immediateReturn) {
 		
-		// assert no immediate return
-		//
-		if ( immediateReturn ) { System.exit(-1); }
-
 		Pose  curPose = poseProvider.getPose();
 		int heading = Math.round(curPose.getHeading());
 
@@ -117,10 +113,6 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 
 	public void rotate(double angle, boolean immediateReturn) {
 
-		// assert no immediate return
-		//
-		if ( immediateReturn ) { System.exit(-1); }
-		
 		Pose  curPose = poseProvider.getPose();
 		int heading = Math.round(curPose.getHeading());
 
