@@ -9,7 +9,12 @@ open FSM, "FSM.dot";
 
 while ( <FSM> ) {
 
-	last if /->/;
+	if ( /START            ->/ ) {
+	
+		( $start_state ) = /START            -> (\w+);/;
+		last;
+
+	}
 
 	( $state, $recipe ) = /(\w+)\s+.+r=(\w+)/ if /r=(\w+)/;
 
@@ -54,42 +59,54 @@ while ( <FSM> ) {
 
 }
 
-print "\tRecipe[] r = new Recipe[$recipeCount];\n";
+print <<END;
+package edu.nau.spring2012.cs386.DEADBEEF;
+
+import lejos.nxt.*;
+import lejos.nxt.comm.RConsole;
+
+public class FSM {
+
+	public static void bobbyHenderson() {
+	
+END
+
+print "\t\tRecipe[] r = new Recipe[$recipeCount];\n";
 
 for ( my $i = 0; $i < $recipeCount; $i++ ) {
 
 	foreach $r ( keys %recipes ) {
 
-		print "\tr[$recipes{$r}] = new $r();\n" if $recipes{$r} == $i;
+		print "\t\tr[$recipes{$r}] = new $r();\n" if $recipes{$r} == $i;
 
 	}
 
 }
 
-print "\n\tint[][] s = new int[$stateCount][3];\n\n";
-print "//\t     +----------+\n";
-print "//\t     |          |\n";
-print "//\t     v          v\n";
+print "\n\t\tint[][] s = new int[$stateCount][3];\n\n";
+print "//\t\t     +----------+\n";
+print "//\t\t     |          |\n";
+print "//\t\t     v          v\n";
 
 for ( my $i = 0; $i < $stateCount; $i++ ) {
 
-	print "\ts[$i][0] = $state_machine[$i][0];";
+	print "\t\ts[$i][0] = $state_machine[$i][0];";
 	print " // recipe to execute" if $i == 0;
 	print "\n";
-	print "\ts[$i][1] = $state_machine[$i][1];";
+	print "\t\ts[$i][1] = $state_machine[$i][1];";
 	print " // next state if recipe return true" if $i == 0;
 	print "\n";
-	print "\ts[$i][2] = $state_machine[$i][2];";
+	print "\t\ts[$i][2] = $state_machine[$i][2];";
 	print " // next state if recipe returns false" if $i == 0;
 	print "\n";
 
 	if ( $i == 0 ) {
 
-		print "//\t  ^       ^\n";
-		print "//\t  |       |\n";
-		print "//\t  |       this is the state to transition to\n";
-		print "//\t  |		\n";
-		print "//\t  this is the current state\n";
+		print "//\t\t  ^       ^\n";
+		print "//\t\t  |       |\n";
+		print "//\t\t  |       this is the state to transition to\n";
+		print "//\t\t  |		\n";
+		print "//\t\t  this is the current state\n";
 	
 	}
 
@@ -97,7 +114,25 @@ for ( my $i = 0; $i < $stateCount; $i++ ) {
 
 }
 
-print "\n###########################\n\n";
+print <<END;
+		
+		// free and clear to navigate!
+		//
+		Sound.twoBeeps();
+
+		// INITIAL STATE
+		//
+END
+
+print "\t\tint state = " . $states{$start_state} . ";\n";		
+
+print <<END;
+
+		while ( RobotState.poll() ) {
+
+			switch(state) {
+
+END
 
 for ( my $i = 0; $i < $stateCount; $i++ ) {
 
@@ -109,11 +144,26 @@ for ( my $i = 0; $i < $stateCount; $i++ ) {
 
     $stateStr .= '_' x ( 16 - length($stateStr) );  
 
-	print "\t\tcase ";
+	print "\t\t\t\tcase ";
 	print $i>9?"":" ";
 	print "$i:\n";
-	print "\t\t\tLCD.drawString(\"$stateStr\",0,0);\n";
-	print "\t\t\tif ( DEBUG ) { RConsole.println(\"$stateStr\"); }\n";
-	print "\t\t\tbreak;\n";
+	print "\t\t\t\t\tLCD.drawString(\"$stateStr\",0,0);\n";
+	print "\t\t\t\t\tif ( Robot.DEBUG ) { RConsole.println(\"$stateStr\"); }\n";
+	print "\t\t\t\t\tbreak;\n";
 
 }
+
+print <<END;
+				
+			}
+			
+			if( r[s[state][0]].execute() ) {
+				state = s[state][1];
+			} else {
+				state = s[state][2];
+			}
+
+		}
+	}
+}
+END
