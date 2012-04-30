@@ -2,127 +2,174 @@ digraph FSM {
 
 "START" [ shape=circle label="start" ];
 
-	subgraph cluster_0 {
+# "normal" QUIESCE sequence
+#
+	subgraph cluster_A {
 
 		color = gray;
 
-		Q_QUIESCE        [ shape=box label=<<table border="0"><tr><td align="left">Q_QUIESCE</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ];
-		Q_WAIT_STOP_UP   [ shape=box label=<<table border="0"><tr><td align="left">Q_WAIT_STOP_UP</td></tr><tr><td align="left">r=IsNotTouched</td></tr></table>> ];
-		Q_WAIT_START_DN  [ shape=box label=<<table border="0"><tr><td align="left">Q_WAIT_START_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ];
-		Q_WAIT_START_UP  [ shape=box label=<<table border="0"><tr><td align="left">Q_WAIT_START_UP</td></tr><tr><td align="left">r=IsNotTouched</td></tr></table>> ];
+		A_VERY_EMERGENCY [ shape=box label=<<table border="0"><tr><td align="left">A_VERY_EMERGENCY</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ];
 
 	}
 
-
-	subgraph cluster_1 {
+# "normal" STRAIGHT sequence
+#
+	subgraph cluster_B {
 	
 		color = gray;
 
-		S_ADJUST_HEADING [ shape=box label=<<table border="0"><tr><td align="left">S_ADJUST_HEADING</td></tr><tr><td align="left">r=AdjustHeading</td></tr></table>> ];
-		S_START_STRAIGHT [ shape=box label=<<table border="0"><tr><td align="left">S_START_STRAIGHT</td></tr><tr><td align="left">r=StartStraight</td></tr></table>> ];
-		S_KEEP_STRAIGHT  [ shape=box label=<<table border="0"><tr><td align="left">S_KEEP_STRAIGHT</td></tr><tr><td align="left">r=KeepStraight</td></tr></table>> ];
-		S_BOUNDARY_CHECK [ shape=box label=<<table border="0"><tr><td align="left">S_BOUNDARY_CHECK</td></tr><tr><td align="left">r=BoundaryCheck</td></tr></table>> ];
-		S_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">S_DETECT_BALL</td></tr><tr><td align="left">r=DetectBall</td></tr></table>> ];
-		S_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">S_CHECK_COLOR</td></tr><tr><td align="left">r=CheckColor</td></tr></table>> ];
-		S_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">S_AVOID</td></tr><tr><td align="left">r=Avoid</td></tr></table>> ];
-		S_CHECK_STOP_DN  [ shape=box label=<<table border="0"><tr><td align="left">S_CHECK_STOP_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ];
+		B_ADJUST_HEADING [ shape=box label=<<table border="0"><tr><td align="left">B_ADJUST_HEADING</td></tr><tr><td align="left">r=AdjustHeading</td></tr></table>> ];
+		B_START_STRAIGHT [ shape=box label=<<table border="0"><tr><td align="left">B_START_STRAIGHT</td></tr><tr><td align="left">r=StartStraight</td></tr></table>> ];
+		B_KEEP_STRAIGHT  [ shape=box label=<<table border="0"><tr><td align="left">B_KEEP_STRAIGHT</td></tr><tr><td align="left">r=KeepStraight</td></tr></table>> ];
+		B_BOUNDARY_CHECK [ shape=box label=<<table border="0"><tr><td align="left">B_BOUNDARY_CHECK</td></tr><tr><td align="left">r=BoundaryCheck</td></tr></table>> ];
+		B_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">B_DETECT_BALL</td></tr><tr><td align="left">r=DetectBall</td></tr></table>> ];
+		B_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">B_CHECK_COLOR</td></tr><tr><td align="left">r=CheckColor</td></tr></table>> ];
+		B_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">B_AVOID</td></tr><tr><td align="left">r=Avoid</td></tr></table>> ];
+		B_CHECK_STOP_DN  [ shape=box label=<<table border="0"><tr><td align="left">B_CHECK_STOP_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ];
 
 	}		
 
-	subgraph cluster_2 {
+# "normal" HUNT LEFT sequence
+#
+	subgraph cluster_C {
 	
 		color = gray;
 
-		L_HUNT           [ shape=box label=<<table border="0"><tr><td align="left">L_HUNT</td></tr><tr><td align="left">r=HuntLeft</td></tr></table>> ];
-		L_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">L_DETECT_BALL</td></tr><tr><td align="left">r=DetectBall</td></tr></table>> ];
-		L_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">L_CHECK_COLOR</td></tr><tr><td align="left">r=CheckColor</td></tr></table>> ];
-		L_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">L_AVOID</td></tr><tr><td align="left">r=Avoid</td></tr></table>> ];
-		L_CHECK_STOP_DN  [ shape=box label=<<table border="0"><tr><td align="left">L_CHECK_STOP_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ];
+		C_HUNT           [ shape=box label=<<table border="0"><tr><td align="left">C_HUNT</td></tr><tr><td align="left">r=HuntLeft</td></tr></table>> ];
+		C_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">C_DETECT_BALL</td></tr><tr><td align="left">r=DetectBall</td></tr></table>> ];
+		C_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">C_CHECK_COLOR</td></tr><tr><td align="left">r=CheckColor</td></tr></table>> ];
+		C_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">C_AVOID</td></tr><tr><td align="left">r=Avoid</td></tr></table>> ];
+		C_CHECK_STOP_DN  [ shape=box label=<<table border="0"><tr><td align="left">C_CHECK_STOP_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ];
 
 	}		
 
-	subgraph cluster_3 {
+# "normal" HUNT RIGHT sequence
+#
+	subgraph cluster_D {
 	
 		color = gray;
 
-		R_HUNT           [ shape=box label=<<table border="0"><tr><td align="left">R_HUNT</td></tr><tr><td align="left">r=HuntRight</td></tr></table>> ];
-		R_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">R_DETECT_BALL</td></tr><tr><td align="left">r=DetectBall</td></tr></table>> ];
-		R_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">R_CHECK_COLOR</td></tr><tr><td align="left">r=CheckColor</td></tr></table>> ];
-		R_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">R_AVOID</td></tr><tr><td align="left">r=Avoid</td></tr></table>> ];
-		R_CHECK_STOP_DN  [ shape=box label=<<table border="0"><tr><td align="left">R_CHECK_STOP_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ];
-		R_STRAIGHTEN     [ shape=box label=<<table border="0"><tr><td align="left">R_STRAIGHTEN</td></tr><tr><td align="left">r=Straighten</td></tr></table>> ];
+		D_HUNT           [ shape=box label=<<table border="0"><tr><td align="left">D_HUNT</td></tr><tr><td align="left">r=HuntRight</td></tr></table>> ];
+		D_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">D_DETECT_BALL</td></tr><tr><td align="left">r=DetectBall</td></tr></table>> ];
+		D_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">D_CHECK_COLOR</td></tr><tr><td align="left">r=CheckColor</td></tr></table>> ];
+		D_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">D_AVOID</td></tr><tr><td align="left">r=Avoid</td></tr></table>> ];
+		D_CHECK_STOP_DN  [ shape=box label=<<table border="0"><tr><td align="left">D_CHECK_STOP_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ];
+		D_STRAIGHTEN     [ shape=box label=<<table border="0"><tr><td align="left">D_STRAIGHTEN</td></tr><tr><td align="left">r=Straighten</td></tr></table>> ];
 
 	}		
 
-	subgraph cluster_4 {
+# "normal" SEARCH PATTERN sequence
+#
+	subgraph cluster_E {
 	
 		color = gray;
 
-		P_SEARCH_PATTERN [ shape=box label=<<table border="0"><tr><td align="left">P_SEARCH_PATTERN</td></tr><tr><td align="left">r=Sweep</td></tr></table>> ];
-		P_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">P_DETECT_BALL</td></tr><tr><td align="left">r=DetectBall</td></tr></table>> ];
-		P_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">P_CHECK_COLOR</td></tr><tr><td align="left">r=CheckColor</td></tr></table>> ];
-		P_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">P_AVOID</td></tr><tr><td align="left">r=Avoid</td></tr></table>> ];
-		P_CHECK_STOP_DN  [ shape=box label=<<table border="0"><tr><td align="left">P_CHECK_STOP_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ];
+		E_SEARCH_PATTERN [ shape=box label=<<table border="0"><tr><td align="left">E_SEARCH_PATTERN</td></tr><tr><td align="left">r=Sweep</td></tr></table>> ];
+		E_DETECT_BALL    [ shape=box label=<<table border="0"><tr><td align="left">E_DETECT_BALL</td></tr><tr><td align="left">r=DetectBall</td></tr></table>> ];
+		E_CHECK_COLOR    [ shape=box label=<<table border="0"><tr><td align="left">E_CHECK_COLOR</td></tr><tr><td align="left">r=CheckColor</td></tr></table>> ];
+		E_AVOID          [ shape=box label=<<table border="0"><tr><td align="left">E_AVOID</td></tr><tr><td align="left">r=Avoid</td></tr></table>> ];
+		E_CHECK_STOP_DN  [ shape=box label=<<table border="0"><tr><td align="left">E_CHECK_STOP_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ];
 
 	}
+
+# HOME sequence
+#	
+	subgraph cluster_F {
 	
-	subgraph cluster_5 {
-	
-		H_GO_HOME        [ shape=box label=<<table border="0"><tr><td align="left">H_GO_HOME</td></tr><tr><td align="left">r=GoHome</td></tr></table>> ];
+		F_GO_HOME        [ shape=box label=<<table border="0"><tr><td align="left">H_GO_HOME</td></tr><tr><td align="left">r=GoHome</td></tr></table>> ];
 	
 	}
 
-	START            -> Q_QUIESCE;
-	Q_QUIESCE        -> Q_WAIT_STOP_UP   [ label = "T/F" ];
-	Q_WAIT_STOP_UP   -> Q_WAIT_START_DN  [ label = "T" ];
-	Q_WAIT_STOP_UP   -> Q_WAIT_STOP_UP   [ label = "F" ];
-	Q_WAIT_START_DN  -> Q_WAIT_START_UP  [ label = "T" ];
-	Q_WAIT_START_DN  -> Q_WAIT_START_DN  [ label = "F" ];
-	Q_WAIT_START_UP  -> S_ADJUST_HEADING [ label = "T" ];
-	Q_WAIT_START_UP  -> Q_WAIT_START_UP  [ label = "F" ];
-
-	S_ADJUST_HEADING -> S_START_STRAIGHT [ label = "T/F" ];
-	S_START_STRAIGHT -> S_KEEP_STRAIGHT  [ label = "T/F" ];
-	S_KEEP_STRAIGHT  -> S_BOUNDARY_CHECK [ label = "T" ];
-	S_KEEP_STRAIGHT  -> L_HUNT           [ label = "F" ];
-	S_BOUNDARY_CHECK -> P_SEARCH_PATTERN [ label = "T" ];
-	S_BOUNDARY_CHECK -> S_DETECT_BALL    [ label = "F" ];
-	S_DETECT_BALL    -> S_CHECK_COLOR    [ label = "T" ];
-	S_DETECT_BALL    -> S_CHECK_STOP_DN  [ label = "F" ];
-	S_CHECK_COLOR    -> H_GO_HOME        [ label = "T" ];
-	S_CHECK_COLOR    -> S_AVOID          [ label = "F" ];
-	S_AVOID          -> S_ADJUST_HEADING [ label = "T/F" ];
-	S_CHECK_STOP_DN  -> Q_QUIESCE        [ label = "T" ];
-	S_CHECK_STOP_DN  -> S_KEEP_STRAIGHT  [ label = "F" ];
-
-	L_HUNT           -> L_DETECT_BALL    [ label = "T/F" ];
-	L_DETECT_BALL    -> L_CHECK_COLOR    [ label = "T" ];
-	L_DETECT_BALL    -> L_CHECK_STOP_DN  [ label = "F" ];
-	L_CHECK_COLOR    -> H_GO_HOME        [ label = "T" ];
-	L_CHECK_COLOR    -> L_AVOID          [ label = "F" ];
-	L_AVOID          -> L_CHECK_STOP_DN  [ label = "T/F" ];
-	L_CHECK_STOP_DN  -> Q_QUIESCE        [ label = "T" ];
-	L_CHECK_STOP_DN  -> R_HUNT           [ label = "F" ];
-
-	R_HUNT           -> R_DETECT_BALL    [ label = "T/F" ];
-	R_DETECT_BALL    -> R_CHECK_COLOR    [ label = "T" ];
-	R_DETECT_BALL    -> R_CHECK_STOP_DN  [ label = "F" ];
-	R_CHECK_COLOR    -> H_GO_HOME        [ label = "T" ];
-	R_CHECK_COLOR    -> R_AVOID          [ label = "F" ];
-	R_AVOID          -> R_CHECK_STOP_DN  [ label = "T/F" ];
-	R_CHECK_STOP_DN  -> Q_QUIESCE        [ label = "T" ];
-	R_CHECK_STOP_DN  -> R_STRAIGHTEN     [ label = "F" ];
-	R_STRAIGHTEN     -> S_ADJUST_HEADING [ label = "T/F" ];
-
-	P_SEARCH_PATTERN -> P_DETECT_BALL    [ label = "T/F" ];
-	P_DETECT_BALL    -> P_CHECK_COLOR    [ label = "T" ];
-	P_DETECT_BALL    -> P_CHECK_STOP_DN  [ label = "F" ];
-	P_CHECK_COLOR    -> H_GO_HOME        [ label = "T" ];
-	P_CHECK_COLOR    -> P_AVOID          [ label = "F" ];
-	P_AVOID          -> P_SEARCH_PATTERN [ label = "T/F" ];
-	P_CHECK_STOP_DN  -> Q_QUIESCE        [ label = "T" ];
-	P_CHECK_STOP_DN  -> S_ADJUST_HEADING [ label = "F" ];
+# "think outside the box" STRAIGHT sequence
+#
+	subgraph cluster_G {
 	
-	H_GO_HOME        -> Q_QUIESCE        [ label = "T/F" ];
+		color = gray;
+
+		G_ADJUST_HEADING [ shape=box label=<<table border="0"><tr><td align="left">G_ADJUST_HEADING</td></tr><tr><td align="left">r=AdjustHeading</td></tr></table>> ];
+		G_START_STRAIGHT [ shape=box label=<<table border="0"><tr><td align="left">G_START_STRAIGHT</td></tr><tr><td align="left">r=StartStraight</td></tr></table>> ];
+		G_KEEP_STRAIGHT  [ shape=box label=<<table border="0"><tr><td align="left">G_KEEP_STRAIGHT</td></tr><tr><td align="left">r=KeepStraight</td></tr></table>> ];
+		G_BOUNDARY_CHECK [ shape=box label=<<table border="0"><tr><td align="left">G_BOUNDARY_CHECK</td></tr><tr><td align="left">r=BoundaryCheck</td></tr></table>> ];
+		G_CHECK_STOP_DN  [ shape=box label=<<table border="0"><tr><td align="left">G_CHECK_STOP_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ];
+
+	}		
+
+# "think outside the box" QUIESCE sequence
+#
+	subgraph cluster_H {
+
+		color = gray;
+
+		H_QUIESCE        [ shape=box label=<<table border="0"><tr><td align="left">H_QUIESCE</td></tr><tr><td align="left">r=Quiesce</td></tr></table>> ];
+		H_WAIT_STOP_UP   [ shape=box label=<<table border="0"><tr><td align="left">H_WAIT_STOP_UP</td></tr><tr><td align="left">r=IsNotTouched</td></tr></table>> ];
+		H_WAIT_START_DN  [ shape=box label=<<table border="0"><tr><td align="left">H_WAIT_START_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ];
+		H_WAIT_START_UP  [ shape=box label=<<table border="0"><tr><td align="left">H_WAIT_START_UP</td></tr><tr><td align="left">r=IsNotTouched</td></tr></table>> ];
+
+	}
+
+	START            -> H_QUIESCE;
+
+	A_VERY_EMERGENCY -> A_VERY_EMERGENCY [ label = "T/F" ];
+
+	B_ADJUST_HEADING -> B_START_STRAIGHT [ label = "T/F" ];
+	B_START_STRAIGHT -> B_KEEP_STRAIGHT  [ label = "T/F" ];
+	B_KEEP_STRAIGHT  -> B_BOUNDARY_CHECK [ label = "T" ];
+	B_KEEP_STRAIGHT  -> C_HUNT           [ label = "F" ];
+	B_BOUNDARY_CHECK -> E_SEARCH_PATTERN [ label = "T" ];
+	B_BOUNDARY_CHECK -> B_DETECT_BALL    [ label = "F" ];
+	B_DETECT_BALL    -> B_CHECK_COLOR    [ label = "T" ];
+	B_DETECT_BALL    -> B_CHECK_STOP_DN  [ label = "F" ];
+	B_CHECK_COLOR    -> F_GO_HOME        [ label = "T" ];
+	B_CHECK_COLOR    -> B_AVOID          [ label = "F" ];
+	B_AVOID          -> B_ADJUST_HEADING [ label = "T/F" ];
+	B_CHECK_STOP_DN  -> A_VERY_EMERGENCY [ label = "T" ];
+	B_CHECK_STOP_DN  -> B_KEEP_STRAIGHT  [ label = "F" ];
+
+	C_HUNT           -> C_DETECT_BALL    [ label = "T/F" ];
+	C_DETECT_BALL    -> C_CHECK_COLOR    [ label = "T" ];
+	C_DETECT_BALL    -> C_CHECK_STOP_DN  [ label = "F" ];
+	C_CHECK_COLOR    -> F_GO_HOME        [ label = "T" ];
+	C_CHECK_COLOR    -> C_AVOID          [ label = "F" ];
+	C_AVOID          -> C_CHECK_STOP_DN  [ label = "T/F" ];
+	C_CHECK_STOP_DN  -> A_VERY_EMERGENCY [ label = "T" ];
+	C_CHECK_STOP_DN  -> D_HUNT           [ label = "F" ];
+
+	D_HUNT           -> D_DETECT_BALL    [ label = "T/F" ];
+	D_DETECT_BALL    -> D_CHECK_COLOR    [ label = "T" ];
+	D_DETECT_BALL    -> D_CHECK_STOP_DN  [ label = "F" ];
+	D_CHECK_COLOR    -> F_GO_HOME        [ label = "T" ];
+	D_CHECK_COLOR    -> D_AVOID          [ label = "F" ];
+	D_AVOID          -> D_CHECK_STOP_DN  [ label = "T/F" ];
+	D_CHECK_STOP_DN  -> A_VERY_EMERGENCY [ label = "T" ];
+	D_CHECK_STOP_DN  -> D_STRAIGHTEN     [ label = "F" ];
+	D_STRAIGHTEN     -> B_ADJUST_HEADING [ label = "T/F" ];
+
+	E_SEARCH_PATTERN -> E_DETECT_BALL    [ label = "T/F" ];
+	E_DETECT_BALL    -> E_CHECK_COLOR    [ label = "T" ];
+	E_DETECT_BALL    -> E_CHECK_STOP_DN  [ label = "F" ];
+	E_CHECK_COLOR    -> F_GO_HOME        [ label = "T" ];
+	E_CHECK_COLOR    -> E_AVOID          [ label = "F" ];
+	E_AVOID          -> E_SEARCH_PATTERN [ label = "T/F" ];
+	E_CHECK_STOP_DN  -> A_VERY_EMERGENCY [ label = "T" ];
+	E_CHECK_STOP_DN  -> B_ADJUST_HEADING [ label = "F" ];
+	
+	F_GO_HOME        -> A_VERY_EMERGENCY [ label = "T/F" ];
+
+	G_ADJUST_HEADING -> G_START_STRAIGHT [ label = "T/F" ];
+	G_START_STRAIGHT -> G_KEEP_STRAIGHT  [ label = "T/F" ];
+	G_KEEP_STRAIGHT  -> G_BOUNDARY_CHECK [ label = "T" ];
+	G_KEEP_STRAIGHT  -> G_ADJUST_HEADING [ label = "F" ];
+	G_BOUNDARY_CHECK -> B_ADJUST_HEADING [ label = "T" ];
+	G_BOUNDARY_CHECK -> G_CHECK_STOP_DN  [ label = "F" ];
+	G_CHECK_STOP_DN  -> H_QUIESCE        [ label = "T" ];
+	G_CHECK_STOP_DN  -> G_ADJUST_HEADING [ label = "F" ];
+
+	H_QUIESCE        -> H_WAIT_STOP_UP   [ label = "T/F" ];
+	H_WAIT_STOP_UP   -> H_WAIT_START_DN  [ label = "T" ];
+	H_WAIT_STOP_UP   -> H_WAIT_STOP_UP   [ label = "F" ];
+	H_WAIT_START_DN  -> H_WAIT_START_UP  [ label = "T" ];
+	H_WAIT_START_DN  -> H_WAIT_START_DN  [ label = "F" ];
+	H_WAIT_START_UP  -> G_ADJUST_HEADING [ label = "T" ];
+	H_WAIT_START_UP  -> H_WAIT_START_UP  [ label = "F" ];
 	
 }
