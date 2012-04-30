@@ -9,9 +9,15 @@ public class BoundaryCheck implements Recipe {
 	public boolean execute() {
 
 		if ( RobotState.lineLevelErr < varianceAllowed ) {
+
+			RobotState.pilot.travel(-1.5*RobotState.trackWidth);    
+
 			return true;
+
 		} else {
+
 			return false;
+
 		}
 		
 	}

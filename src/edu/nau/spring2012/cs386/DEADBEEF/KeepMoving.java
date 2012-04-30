@@ -1,6 +1,6 @@
 package edu.nau.spring2012.cs386.DEADBEEF;
 
-public class KeepStraight implements Recipe {
+public class KeepMoving implements Recipe {
 
 	public boolean execute() {
 

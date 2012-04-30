@@ -7,7 +7,7 @@ public class GoHome implements Recipe {
 
 	public boolean execute() {
 
-		Sound.buzz();
+		Sound.beep();
 
 		float angle;
 		
