@@ -8,13 +8,15 @@ public class Avoid implements Recipe {
 
 		RobotState.pilot.travel(20,false);
 		RobotState.pilot.rotate(180,false);
-
+		RobotState.pilot.adjustHeading();
+		
 		// drop the ball
 		//
 		Motor.C.rotate(-80);
 		
 		RobotState.pilot.travel(-10,false);
 		RobotState.pilot.rotate(180,false);
+		RobotState.pilot.adjustHeading();
 		
 		return true;
 		
