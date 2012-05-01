@@ -8,7 +8,7 @@ public class TurnRight implements Recipe {
 
 		LCD.drawString("Turning: R ",0,4);
 
-		RobotState.pilot.arc(-RobotState.trackWidth, -90, true);
+		RobotState.pilot.arc(-RobotState.trackWidth/2, -90, true);
 		
 		return true;
 		

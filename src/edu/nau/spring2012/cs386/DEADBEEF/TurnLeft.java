@@ -8,7 +8,7 @@ public class TurnLeft implements Recipe {
 
 		LCD.drawString("Turning: L ",0,4);
 
-		RobotState.pilot.arc(RobotState.trackWidth, 90, true);
+		RobotState.pilot.arc(RobotState.trackWidth/2, 90, true);
 		
 		return true;
 		
