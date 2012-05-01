@@ -41,7 +41,7 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 		
 	}
 
-	public void debugHeadings(String tag, int curHeading, int poseHeading) {
+	public void debugHeadings(String tag, int curHeading, int poseHeading, int deviation) {
 		
 		String buf;
 		
@@ -50,6 +50,8 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 		buf += curHeading;
 		buf += ", pose=";
 		buf += poseHeading;
+		buf += ", deviation=";
+		buf += deviation;
 		RConsole.println(buf);
 		
 	}
@@ -68,26 +70,31 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 	
 	public void adjustHeading() {
 		
-		Pose  curPose = poseProvider.getPose();
 		int curHeading, deviation;
+		Pose       curPose = poseProvider.getPose();
+		int desiredHeading = RobotState.desiredHeading;
 		
 		do {
 
 			curHeading = Math.round(compass.getDegreesCartesian());
-
+			
 			while ( curHeading > 180 ) {
 				curHeading -= 360;
 			}
 			
-			if ( Robot.DEBUG ) { debugHeadings("adjHeading:",curHeading,RobotState.desiredHeading); }
+			deviation = ( ( ( ( desiredHeading + 179 ) - ( curHeading + 179 ) ) + 360 ) % 360 );
 
-			deviation = ( ( ( ( RobotState.desiredHeading + 179 ) - ( curHeading + 179 ) ) + 360 ) % 360 ) - 179;
+			while ( deviation > 180 ) {
+				deviation -= 360;
+			}
+
+			if ( Robot.DEBUG ) { debugHeadings("adjHeading:",curHeading,desiredHeading,deviation); }
 
 			RobotState.pilot.rotate(deviation,false);
+			RobotState.desiredHeading = desiredHeading;
 			
 		} while ( Math.abs( curHeading - RobotState.desiredHeading ) > 0 );
 
-		curPose.setHeading(RobotState.desiredHeading);
 		poseProvider.setPose(curPose);
 		
 	}
