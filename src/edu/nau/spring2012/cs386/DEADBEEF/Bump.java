@@ -4,7 +4,7 @@ public class Bump implements Recipe {
 
 	public boolean execute() {
 
-		RobotState.pilot.travel(2.5,false);
+		RobotState.pilot.travel(5,false);
 
 		return true;
 		
