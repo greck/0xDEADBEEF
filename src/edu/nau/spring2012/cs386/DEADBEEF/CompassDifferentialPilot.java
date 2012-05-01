@@ -88,8 +88,6 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 				deviation -= 360;
 			}
 
-			deviation = Math.round( deviation/2 );
-			
 			if ( Robot.DEBUG ) { debugHeadings("adjHeading:",curHeading,desiredHeading,deviation); }
 
 			RobotState.pilot.rotate(deviation,false);
