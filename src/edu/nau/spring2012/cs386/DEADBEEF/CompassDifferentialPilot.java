@@ -53,24 +53,35 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 		RConsole.println(buf);
 		
 	}
+
+	private void reduceHeading() {
+		
+		if ( RobotState.desiredHeading < -180 ) {
+			RobotState.desiredHeading += 360;
+		}
+
+		if ( RobotState.desiredHeading >= 180 ) {
+			RobotState.desiredHeading -= 360;
+		}
+		
+	}
 	
 	public void adjustHeading() {
 		
 		Pose  curPose = poseProvider.getPose();
-		int curHeading, poseHeading;
+		int curHeading;
 
 		do {
 
-			curHeading  = Math.round(compass.getDegreesCartesian());
-			poseHeading = Math.round(curPose.getHeading());
+			curHeading = Math.round(compass.getDegreesCartesian());
 			
 			if ( curHeading > 180 ) {
 				curHeading -= 360;
 			}
 			
-			if ( Robot.DEBUG ) { debugHeadings("adjH",curHeading,poseHeading); }
+			if ( Robot.DEBUG ) { debugHeadings("adjHeading:",curHeading,RobotState.desiredHeading); }
 			
-			int deviation = curHeading - poseHeading;
+			int deviation = curHeading - RobotState.desiredHeading;
 			
 			if ( deviation > 0 ) {
 				
@@ -82,8 +93,9 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 				
 			}
 			
-		} while ( Math.abs( curHeading - poseHeading ) > 0 );
+		} while ( Math.abs( curHeading - RobotState.desiredHeading ) > 0 );
 
+		curPose.setHeading(RobotState.desiredHeading);
 		poseProvider.setPose(curPose);
 		
 	}
@@ -96,47 +108,19 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 	
 	public void arc(double radius, double angle, boolean immediateReturn) {
 		
-		Pose  curPose = poseProvider.getPose();
-		int heading = Math.round(curPose.getHeading());
-
-		heading += angle;
-
-		if ( heading < -180 ) {
-			heading += 360;
-		}
-
-		if ( heading >= 180 ) {
-			heading -= 360;
-		}
+		RobotState.desiredHeading += angle;
+		reduceHeading();
 		
 		super.arc(radius,angle,immediateReturn);
 
-		curPose = poseProvider.getPose();
-		curPose.setHeading(heading);
-		poseProvider.setPose(curPose);
-		
 	}
 
 	public void rotate(double angle, boolean immediateReturn) {
 
-		Pose  curPose = poseProvider.getPose();
-		int heading = Math.round(curPose.getHeading());
-
-		heading += angle;
-
-		if ( heading < -180 ) {
-			heading += 360;
-		}
-
-		if ( heading >= 180 ) {
-			heading -= 360;
-		}
+		RobotState.desiredHeading += angle;
+		reduceHeading();
 		
 		super.rotate(angle,immediateReturn);
-
-		curPose = poseProvider.getPose();
-		curPose.setHeading(heading);
-		poseProvider.setPose(curPose);
 		
 	}
 	

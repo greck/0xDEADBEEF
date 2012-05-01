@@ -14,6 +14,8 @@ public class RobotState {
 	// measured to outside = 14.0 mm
 	// measure from inside = 13.3 mm
 	
+	public static int     desiredHeading = 0;
+	
 	public static boolean touched;
 	public static int     lightLevel;
 	public static float   range;
