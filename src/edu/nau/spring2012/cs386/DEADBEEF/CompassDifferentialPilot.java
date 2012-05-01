@@ -60,7 +60,7 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 			RobotState.desiredHeading += 360;
 		}
 
-		if ( RobotState.desiredHeading >= 180 ) {
+		if ( RobotState.desiredHeading > 180 ) {
 			RobotState.desiredHeading -= 360;
 		}
 		
@@ -83,15 +83,7 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 			
 			int deviation = curHeading - RobotState.desiredHeading;
 			
-			if ( deviation > 0 ) {
-				
-				super.rotate(-1,false);
-				
-			} else {
-				
-				super.rotate(1,false);
-				
-			}
+			super.rotate(-1*deviation,false);
 			
 		} while ( Math.abs( curHeading - RobotState.desiredHeading ) > 0 );
 
