@@ -97,6 +97,7 @@ digraph FSM {
 		G_START_STRAIGHT [ shape=box label=<<table border="0"><tr><td align="left">G_START_STRAIGHT</td></tr><tr><td align="left">r=StartStraight</td></tr></table>> ];
 		G_KEEP_STRAIGHT  [ shape=box label=<<table border="0"><tr><td align="left">G_KEEP_STRAIGHT</td></tr><tr><td align="left">r=KeepMoving</td></tr></table>> ];
 		G_BOUNDARY_CHECK [ shape=box label=<<table border="0"><tr><td align="left">G_BOUNDARY_CHECK</td></tr><tr><td align="left">r=BoundaryCheck</td></tr></table>> ];
+		G_BUMP           [ shape=box label=<<table border="0"><tr><td align="left">G_BUMP</td></tr><tr><td align="left">r=Bump</td></tr></table>> ];
 		G_CHECK_STOP_DN  [ shape=box label=<<table border="0"><tr><td align="left">G_CHECK_STOP_DN</td></tr><tr><td align="left">r=IsTouched</td></tr></table>> ];
 
 	}		
@@ -335,8 +336,9 @@ digraph FSM {
 	G_START_STRAIGHT -> G_KEEP_STRAIGHT  [ label = "T/F" ];
 	G_KEEP_STRAIGHT  -> G_BOUNDARY_CHECK [ label = "T" ];
 	G_KEEP_STRAIGHT  -> G_ADJUST_HEADING [ label = "F" ];
-	G_BOUNDARY_CHECK -> I_ADJUST_HEADING [ label = "T" ];
+	G_BOUNDARY_CHECK -> G_BUMP           [ label = "T" ];
 	G_BOUNDARY_CHECK -> G_CHECK_STOP_DN  [ label = "F" ];
+	G_BUMP           -> I_ADJUST_HEADING [ label = "T/F" ];
 	G_CHECK_STOP_DN  -> H_QUIESCE        [ label = "T" ];
 	G_CHECK_STOP_DN  -> G_KEEP_STRAIGHT  [ label = "F" ];
 

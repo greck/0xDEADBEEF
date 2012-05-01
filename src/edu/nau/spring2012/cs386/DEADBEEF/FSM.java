@@ -7,7 +7,7 @@ public class FSM {
 
 	public static void bobbyHenderson() {
 	
-		Recipe[] r = new Recipe[18];
+		Recipe[] r = new Recipe[19];
 		r[0] = new Panic();
 		r[1] = new Quiesce();
 		r[2] = new AdjustHeading();
@@ -24,10 +24,11 @@ public class FSM {
 		r[13] = new Straighten();
 		r[14] = new TurnLeft();
 		r[15] = new GoHome();
-		r[16] = new IsNotTouched();
-		r[17] = new TurnRight();
+		r[16] = new Bump();
+		r[17] = new IsNotTouched();
+		r[18] = new TurnRight();
 
-		int[][] s = new int[112][3];
+		int[][] s = new int[113][3];
 
 //		     +----------+
 //		     |          |
@@ -62,8 +63,8 @@ public class FSM {
 		s[5][2] = 7;
 
 		s[6][0] = 6;
-		s[6][1] = 60;
-		s[6][2] = 60;
+		s[6][1] = 61;
+		s[6][2] = 61;
 
 		s[7][0] = 7;
 		s[7][1] = 8;
@@ -174,316 +175,320 @@ public class FSM {
 		s[33][2] = 31;
 
 		s[34][0] = 5;
-		s[34][1] = 40;
-		s[34][2] = 35;
+		s[34][1] = 35;
+		s[34][2] = 36;
 
-		s[35][0] = 10;
-		s[35][1] = 36;
-		s[35][2] = 33;
+		s[35][0] = 16;
+		s[35][1] = 41;
+		s[35][2] = 41;
 
-		s[36][0] = 1;
+		s[36][0] = 10;
 		s[36][1] = 37;
-		s[36][2] = 37;
+		s[36][2] = 33;
 
-		s[37][0] = 16;
+		s[37][0] = 1;
 		s[37][1] = 38;
-		s[37][2] = 37;
+		s[37][2] = 38;
 
-		s[38][0] = 10;
+		s[38][0] = 17;
 		s[38][1] = 39;
 		s[38][2] = 38;
 
-		s[39][0] = 16;
-		s[39][1] = 31;
+		s[39][0] = 10;
+		s[39][1] = 40;
 		s[39][2] = 39;
 
-		s[40][0] = 2;
-		s[40][1] = 41;
-		s[40][2] = 41;
+		s[40][0] = 17;
+		s[40][1] = 31;
+		s[40][2] = 40;
 
-		s[41][0] = 3;
+		s[41][0] = 2;
 		s[41][1] = 42;
 		s[41][2] = 42;
 
-		s[42][0] = 4;
+		s[42][0] = 3;
 		s[42][1] = 43;
-		s[42][2] = 49;
+		s[42][2] = 43;
 
-		s[43][0] = 5;
+		s[43][0] = 4;
 		s[43][1] = 44;
-		s[43][2] = 45;
+		s[43][2] = 50;
 
-		s[44][0] = 6;
-		s[44][1] = 22;
-		s[44][2] = 22;
+		s[44][0] = 5;
+		s[44][1] = 45;
+		s[44][2] = 46;
 
-		s[45][0] = 7;
-		s[45][1] = 46;
-		s[45][2] = 48;
+		s[45][0] = 6;
+		s[45][1] = 22;
+		s[45][2] = 22;
 
-		s[46][0] = 8;
-		s[46][1] = 30;
-		s[46][2] = 47;
+		s[46][0] = 7;
+		s[46][1] = 47;
+		s[46][2] = 49;
 
-		s[47][0] = 9;
-		s[47][1] = 40;
-		s[47][2] = 40;
+		s[47][0] = 8;
+		s[47][1] = 30;
+		s[47][2] = 48;
 
-		s[48][0] = 10;
-		s[48][1] = 1;
-		s[48][2] = 42;
+		s[48][0] = 9;
+		s[48][1] = 41;
+		s[48][2] = 41;
 
-		s[49][0] = 11;
-		s[49][1] = 50;
-		s[49][2] = 50;
+		s[49][0] = 10;
+		s[49][1] = 1;
+		s[49][2] = 43;
 
-		s[50][0] = 7;
+		s[50][0] = 11;
 		s[50][1] = 51;
-		s[50][2] = 53;
+		s[50][2] = 51;
 
-		s[51][0] = 8;
-		s[51][1] = 30;
-		s[51][2] = 52;
+		s[51][0] = 7;
+		s[51][1] = 52;
+		s[51][2] = 54;
 
-		s[52][0] = 9;
-		s[52][1] = 53;
+		s[52][0] = 8;
+		s[52][1] = 30;
 		s[52][2] = 53;
 
-		s[53][0] = 10;
-		s[53][1] = 1;
+		s[53][0] = 9;
+		s[53][1] = 54;
 		s[53][2] = 54;
 
-		s[54][0] = 12;
-		s[54][1] = 55;
+		s[54][0] = 10;
+		s[54][1] = 1;
 		s[54][2] = 55;
 
-		s[55][0] = 7;
+		s[55][0] = 12;
 		s[55][1] = 56;
-		s[55][2] = 58;
+		s[55][2] = 56;
 
-		s[56][0] = 8;
-		s[56][1] = 30;
-		s[56][2] = 57;
+		s[56][0] = 7;
+		s[56][1] = 57;
+		s[56][2] = 59;
 
-		s[57][0] = 9;
-		s[57][1] = 58;
+		s[57][0] = 8;
+		s[57][1] = 30;
 		s[57][2] = 58;
 
-		s[58][0] = 10;
-		s[58][1] = 1;
+		s[58][0] = 9;
+		s[58][1] = 59;
 		s[58][2] = 59;
 
-		s[59][0] = 13;
-		s[59][1] = 40;
-		s[59][2] = 40;
+		s[59][0] = 10;
+		s[59][1] = 1;
+		s[59][2] = 60;
 
-		s[60][0] = 2;
-		s[60][1] = 61;
-		s[60][2] = 61;
+		s[60][0] = 13;
+		s[60][1] = 41;
+		s[60][2] = 41;
 
-		s[61][0] = 14;
+		s[61][0] = 2;
 		s[61][1] = 62;
 		s[61][2] = 62;
 
-		s[62][0] = 4;
+		s[62][0] = 14;
 		s[62][1] = 63;
-		s[62][2] = 68;
+		s[62][2] = 63;
 
-		s[63][0] = 5;
-		s[63][1] = 0;
-		s[63][2] = 64;
+		s[63][0] = 4;
+		s[63][1] = 64;
+		s[63][2] = 69;
 
-		s[64][0] = 7;
-		s[64][1] = 65;
-		s[64][2] = 67;
+		s[64][0] = 5;
+		s[64][1] = 0;
+		s[64][2] = 65;
 
-		s[65][0] = 8;
-		s[65][1] = 30;
-		s[65][2] = 66;
+		s[65][0] = 7;
+		s[65][1] = 66;
+		s[65][2] = 68;
 
-		s[66][0] = 9;
-		s[66][1] = 60;
-		s[66][2] = 60;
+		s[66][0] = 8;
+		s[66][1] = 30;
+		s[66][2] = 67;
 
-		s[67][0] = 10;
-		s[67][1] = 1;
-		s[67][2] = 62;
+		s[67][0] = 9;
+		s[67][1] = 61;
+		s[67][2] = 61;
 
-		s[68][0] = 2;
-		s[68][1] = 69;
-		s[68][2] = 69;
+		s[68][0] = 10;
+		s[68][1] = 1;
+		s[68][2] = 63;
 
-		s[69][0] = 14;
+		s[69][0] = 2;
 		s[69][1] = 70;
 		s[69][2] = 70;
 
-		s[70][0] = 4;
+		s[70][0] = 14;
 		s[70][1] = 71;
-		s[70][2] = 76;
+		s[70][2] = 71;
 
-		s[71][0] = 5;
-		s[71][1] = 0;
-		s[71][2] = 72;
+		s[71][0] = 4;
+		s[71][1] = 72;
+		s[71][2] = 77;
 
-		s[72][0] = 7;
-		s[72][1] = 73;
-		s[72][2] = 75;
+		s[72][0] = 5;
+		s[72][1] = 0;
+		s[72][2] = 73;
 
-		s[73][0] = 8;
-		s[73][1] = 30;
-		s[73][2] = 74;
+		s[73][0] = 7;
+		s[73][1] = 74;
+		s[73][2] = 76;
 
-		s[74][0] = 9;
-		s[74][1] = 68;
-		s[74][2] = 68;
+		s[74][0] = 8;
+		s[74][1] = 30;
+		s[74][2] = 75;
 
-		s[75][0] = 10;
-		s[75][1] = 1;
-		s[75][2] = 70;
+		s[75][0] = 9;
+		s[75][1] = 69;
+		s[75][2] = 69;
 
-		s[76][0] = 2;
-		s[76][1] = 77;
-		s[76][2] = 77;
+		s[76][0] = 10;
+		s[76][1] = 1;
+		s[76][2] = 71;
 
-		s[77][0] = 3;
+		s[77][0] = 2;
 		s[77][1] = 78;
 		s[77][2] = 78;
 
-		s[78][0] = 4;
+		s[78][0] = 3;
 		s[78][1] = 79;
-		s[78][2] = 85;
+		s[78][2] = 79;
 
-		s[79][0] = 5;
+		s[79][0] = 4;
 		s[79][1] = 80;
-		s[79][2] = 81;
+		s[79][2] = 86;
 
-		s[80][0] = 6;
-		s[80][1] = 96;
-		s[80][2] = 96;
+		s[80][0] = 5;
+		s[80][1] = 81;
+		s[80][2] = 82;
 
-		s[81][0] = 7;
-		s[81][1] = 82;
-		s[81][2] = 84;
+		s[81][0] = 6;
+		s[81][1] = 97;
+		s[81][2] = 97;
 
-		s[82][0] = 8;
-		s[82][1] = 30;
-		s[82][2] = 83;
+		s[82][0] = 7;
+		s[82][1] = 83;
+		s[82][2] = 85;
 
-		s[83][0] = 9;
-		s[83][1] = 76;
-		s[83][2] = 76;
+		s[83][0] = 8;
+		s[83][1] = 30;
+		s[83][2] = 84;
 
-		s[84][0] = 10;
-		s[84][1] = 1;
-		s[84][2] = 78;
+		s[84][0] = 9;
+		s[84][1] = 77;
+		s[84][2] = 77;
 
-		s[85][0] = 11;
-		s[85][1] = 86;
-		s[85][2] = 86;
+		s[85][0] = 10;
+		s[85][1] = 1;
+		s[85][2] = 79;
 
-		s[86][0] = 7;
+		s[86][0] = 11;
 		s[86][1] = 87;
-		s[86][2] = 89;
+		s[86][2] = 87;
 
-		s[87][0] = 8;
-		s[87][1] = 30;
-		s[87][2] = 88;
+		s[87][0] = 7;
+		s[87][1] = 88;
+		s[87][2] = 90;
 
-		s[88][0] = 9;
-		s[88][1] = 89;
+		s[88][0] = 8;
+		s[88][1] = 30;
 		s[88][2] = 89;
 
-		s[89][0] = 10;
-		s[89][1] = 1;
+		s[89][0] = 9;
+		s[89][1] = 90;
 		s[89][2] = 90;
 
-		s[90][0] = 12;
-		s[90][1] = 91;
+		s[90][0] = 10;
+		s[90][1] = 1;
 		s[90][2] = 91;
 
-		s[91][0] = 7;
+		s[91][0] = 12;
 		s[91][1] = 92;
-		s[91][2] = 94;
+		s[91][2] = 92;
 
-		s[92][0] = 8;
-		s[92][1] = 30;
-		s[92][2] = 93;
+		s[92][0] = 7;
+		s[92][1] = 93;
+		s[92][2] = 95;
 
-		s[93][0] = 9;
-		s[93][1] = 94;
+		s[93][0] = 8;
+		s[93][1] = 30;
 		s[93][2] = 94;
 
-		s[94][0] = 10;
-		s[94][1] = 1;
+		s[94][0] = 9;
+		s[94][1] = 95;
 		s[94][2] = 95;
 
-		s[95][0] = 13;
-		s[95][1] = 76;
-		s[95][2] = 76;
+		s[95][0] = 10;
+		s[95][1] = 1;
+		s[95][2] = 96;
 
-		s[96][0] = 2;
-		s[96][1] = 97;
-		s[96][2] = 97;
+		s[96][0] = 13;
+		s[96][1] = 77;
+		s[96][2] = 77;
 
-		s[97][0] = 17;
+		s[97][0] = 2;
 		s[97][1] = 98;
 		s[97][2] = 98;
 
-		s[98][0] = 4;
+		s[98][0] = 18;
 		s[98][1] = 99;
-		s[98][2] = 104;
+		s[98][2] = 99;
 
-		s[99][0] = 5;
-		s[99][1] = 0;
-		s[99][2] = 100;
+		s[99][0] = 4;
+		s[99][1] = 100;
+		s[99][2] = 105;
 
-		s[100][0] = 7;
-		s[100][1] = 101;
-		s[100][2] = 103;
+		s[100][0] = 5;
+		s[100][1] = 0;
+		s[100][2] = 101;
 
-		s[101][0] = 8;
-		s[101][1] = 30;
-		s[101][2] = 102;
+		s[101][0] = 7;
+		s[101][1] = 102;
+		s[101][2] = 104;
 
-		s[102][0] = 9;
-		s[102][1] = 96;
-		s[102][2] = 96;
+		s[102][0] = 8;
+		s[102][1] = 30;
+		s[102][2] = 103;
 
-		s[103][0] = 10;
-		s[103][1] = 1;
-		s[103][2] = 98;
+		s[103][0] = 9;
+		s[103][1] = 97;
+		s[103][2] = 97;
 
-		s[104][0] = 2;
-		s[104][1] = 105;
-		s[104][2] = 105;
+		s[104][0] = 10;
+		s[104][1] = 1;
+		s[104][2] = 99;
 
-		s[105][0] = 17;
+		s[105][0] = 2;
 		s[105][1] = 106;
 		s[105][2] = 106;
 
-		s[106][0] = 4;
+		s[106][0] = 18;
 		s[106][1] = 107;
-		s[106][2] = 2;
+		s[106][2] = 107;
 
-		s[107][0] = 5;
-		s[107][1] = 0;
-		s[107][2] = 108;
+		s[107][0] = 4;
+		s[107][1] = 108;
+		s[107][2] = 2;
 
-		s[108][0] = 7;
-		s[108][1] = 109;
-		s[108][2] = 111;
+		s[108][0] = 5;
+		s[108][1] = 0;
+		s[108][2] = 109;
 
-		s[109][0] = 8;
-		s[109][1] = 30;
-		s[109][2] = 110;
+		s[109][0] = 7;
+		s[109][1] = 110;
+		s[109][2] = 112;
 
-		s[110][0] = 9;
-		s[110][1] = 104;
-		s[110][2] = 104;
+		s[110][0] = 8;
+		s[110][1] = 30;
+		s[110][2] = 111;
 
-		s[111][0] = 10;
-		s[111][1] = 1;
-		s[111][2] = 106;
+		s[111][0] = 9;
+		s[111][1] = 105;
+		s[111][2] = 105;
+
+		s[112][0] = 10;
+		s[112][1] = 1;
+		s[112][2] = 107;
 		
 		// free and clear to navigate!
 		//
@@ -491,7 +496,7 @@ public class FSM {
 
 		// INITIAL STATE
 		//
-		int state = 36;
+		int state = 37;
 
 		while ( RobotState.poll() ) {
 
@@ -638,310 +643,314 @@ public class FSM {
 					if ( Robot.DEBUG ) { RConsole.println("G_BOUNDARY_CHECK"); }
 					break;
 				case 35:
+					LCD.drawString("G_BUMP__________",0,0);
+					if ( Robot.DEBUG ) { RConsole.println("G_BUMP__________"); }
+					break;
+				case 36:
 					LCD.drawString("G_CHECK_STOP_DN_",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("G_CHECK_STOP_DN_"); }
 					break;
-				case 36:
+				case 37:
 					LCD.drawString("H_QUIESCE_______",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("H_QUIESCE_______"); }
 					break;
-				case 37:
+				case 38:
 					LCD.drawString("H_WAIT_STOP_UP__",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("H_WAIT_STOP_UP__"); }
 					break;
-				case 38:
+				case 39:
 					LCD.drawString("H_WAIT_START_DN_",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("H_WAIT_START_DN_"); }
 					break;
-				case 39:
+				case 40:
 					LCD.drawString("H_WAIT_START_UP_",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("H_WAIT_START_UP_"); }
 					break;
-				case 40:
+				case 41:
 					LCD.drawString("I_ADJUST_HEADING",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("I_ADJUST_HEADING"); }
 					break;
-				case 41:
+				case 42:
 					LCD.drawString("I_START_STRAIGHT",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("I_START_STRAIGHT"); }
 					break;
-				case 42:
+				case 43:
 					LCD.drawString("I_KEEP_STRAIGHT_",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("I_KEEP_STRAIGHT_"); }
 					break;
-				case 43:
+				case 44:
 					LCD.drawString("I_BOUNDARY_CHECK",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("I_BOUNDARY_CHECK"); }
 					break;
-				case 44:
+				case 45:
 					LCD.drawString("I_HIT_BOUNDARY__",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("I_HIT_BOUNDARY__"); }
 					break;
-				case 45:
+				case 46:
 					LCD.drawString("I_DETECT_BALL___",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("I_DETECT_BALL___"); }
 					break;
-				case 46:
+				case 47:
 					LCD.drawString("I_CHECK_COLOR___",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("I_CHECK_COLOR___"); }
 					break;
-				case 47:
+				case 48:
 					LCD.drawString("I_AVOID_________",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("I_AVOID_________"); }
 					break;
-				case 48:
+				case 49:
 					LCD.drawString("I_CHECK_STOP_DN_",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("I_CHECK_STOP_DN_"); }
 					break;
-				case 49:
+				case 50:
 					LCD.drawString("J_HUNT__________",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("J_HUNT__________"); }
 					break;
-				case 50:
+				case 51:
 					LCD.drawString("J_DETECT_BALL___",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("J_DETECT_BALL___"); }
 					break;
-				case 51:
+				case 52:
 					LCD.drawString("J_CHECK_COLOR___",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("J_CHECK_COLOR___"); }
 					break;
-				case 52:
+				case 53:
 					LCD.drawString("J_AVOID_________",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("J_AVOID_________"); }
 					break;
-				case 53:
+				case 54:
 					LCD.drawString("J_CHECK_STOP_DN_",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("J_CHECK_STOP_DN_"); }
 					break;
-				case 54:
+				case 55:
 					LCD.drawString("K_HUNT__________",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("K_HUNT__________"); }
 					break;
-				case 55:
+				case 56:
 					LCD.drawString("K_DETECT_BALL___",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("K_DETECT_BALL___"); }
 					break;
-				case 56:
+				case 57:
 					LCD.drawString("K_CHECK_COLOR___",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("K_CHECK_COLOR___"); }
 					break;
-				case 57:
+				case 58:
 					LCD.drawString("K_AVOID_________",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("K_AVOID_________"); }
 					break;
-				case 58:
+				case 59:
 					LCD.drawString("K_CHECK_STOP_DN_",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("K_CHECK_STOP_DN_"); }
 					break;
-				case 59:
+				case 60:
 					LCD.drawString("K_STRAIGHTEN____",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("K_STRAIGHTEN____"); }
 					break;
-				case 60:
+				case 61:
 					LCD.drawString("L_ADJUST_HEADING",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("L_ADJUST_HEADING"); }
 					break;
-				case 61:
+				case 62:
 					LCD.drawString("L_START_TURN____",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("L_START_TURN____"); }
 					break;
-				case 62:
+				case 63:
 					LCD.drawString("L_KEEP_TURNING__",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("L_KEEP_TURNING__"); }
 					break;
-				case 63:
+				case 64:
 					LCD.drawString("L_BOUNDARY_CHECK",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("L_BOUNDARY_CHECK"); }
 					break;
-				case 64:
+				case 65:
 					LCD.drawString("L_DETECT_BALL___",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("L_DETECT_BALL___"); }
 					break;
-				case 65:
+				case 66:
 					LCD.drawString("L_CHECK_COLOR___",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("L_CHECK_COLOR___"); }
 					break;
-				case 66:
+				case 67:
 					LCD.drawString("L_AVOID_________",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("L_AVOID_________"); }
 					break;
-				case 67:
+				case 68:
 					LCD.drawString("L_CHECK_STOP_DN_",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("L_CHECK_STOP_DN_"); }
 					break;
-				case 68:
+				case 69:
 					LCD.drawString("M_ADJUST_HEADING",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("M_ADJUST_HEADING"); }
 					break;
-				case 69:
+				case 70:
 					LCD.drawString("M_START_TURN____",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("M_START_TURN____"); }
 					break;
-				case 70:
+				case 71:
 					LCD.drawString("M_KEEP_TURNING__",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("M_KEEP_TURNING__"); }
 					break;
-				case 71:
+				case 72:
 					LCD.drawString("M_BOUNDARY_CHECK",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("M_BOUNDARY_CHECK"); }
 					break;
-				case 72:
+				case 73:
 					LCD.drawString("M_DETECT_BALL___",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("M_DETECT_BALL___"); }
 					break;
-				case 73:
+				case 74:
 					LCD.drawString("M_CHECK_COLOR___",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("M_CHECK_COLOR___"); }
 					break;
-				case 74:
+				case 75:
 					LCD.drawString("M_AVOID_________",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("M_AVOID_________"); }
 					break;
-				case 75:
+				case 76:
 					LCD.drawString("M_CHECK_STOP_DN_",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("M_CHECK_STOP_DN_"); }
 					break;
-				case 76:
+				case 77:
 					LCD.drawString("N_ADJUST_HEADING",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("N_ADJUST_HEADING"); }
 					break;
-				case 77:
+				case 78:
 					LCD.drawString("N_START_STRAIGHT",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("N_START_STRAIGHT"); }
 					break;
-				case 78:
+				case 79:
 					LCD.drawString("N_KEEP_STRAIGHT_",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("N_KEEP_STRAIGHT_"); }
 					break;
-				case 79:
+				case 80:
 					LCD.drawString("N_BOUNDARY_CHECK",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("N_BOUNDARY_CHECK"); }
 					break;
-				case 80:
+				case 81:
 					LCD.drawString("N_HIT_BOUNDARY__",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("N_HIT_BOUNDARY__"); }
 					break;
-				case 81:
+				case 82:
 					LCD.drawString("N_DETECT_BALL___",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("N_DETECT_BALL___"); }
 					break;
-				case 82:
+				case 83:
 					LCD.drawString("N_CHECK_COLOR___",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("N_CHECK_COLOR___"); }
 					break;
-				case 83:
+				case 84:
 					LCD.drawString("N_AVOID_________",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("N_AVOID_________"); }
 					break;
-				case 84:
+				case 85:
 					LCD.drawString("N_CHECK_STOP_DN_",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("N_CHECK_STOP_DN_"); }
 					break;
-				case 85:
+				case 86:
 					LCD.drawString("O_HUNT__________",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("O_HUNT__________"); }
 					break;
-				case 86:
+				case 87:
 					LCD.drawString("O_DETECT_BALL___",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("O_DETECT_BALL___"); }
 					break;
-				case 87:
+				case 88:
 					LCD.drawString("O_CHECK_COLOR___",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("O_CHECK_COLOR___"); }
 					break;
-				case 88:
+				case 89:
 					LCD.drawString("O_AVOID_________",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("O_AVOID_________"); }
 					break;
-				case 89:
+				case 90:
 					LCD.drawString("O_CHECK_STOP_DN_",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("O_CHECK_STOP_DN_"); }
 					break;
-				case 90:
+				case 91:
 					LCD.drawString("P_HUNT__________",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("P_HUNT__________"); }
 					break;
-				case 91:
+				case 92:
 					LCD.drawString("P_DETECT_BALL___",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("P_DETECT_BALL___"); }
 					break;
-				case 92:
+				case 93:
 					LCD.drawString("P_CHECK_COLOR___",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("P_CHECK_COLOR___"); }
 					break;
-				case 93:
+				case 94:
 					LCD.drawString("P_AVOID_________",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("P_AVOID_________"); }
 					break;
-				case 94:
+				case 95:
 					LCD.drawString("P_CHECK_STOP_DN_",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("P_CHECK_STOP_DN_"); }
 					break;
-				case 95:
+				case 96:
 					LCD.drawString("P_STRAIGHTEN____",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("P_STRAIGHTEN____"); }
 					break;
-				case 96:
+				case 97:
 					LCD.drawString("Q_ADJUST_HEADING",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("Q_ADJUST_HEADING"); }
 					break;
-				case 97:
+				case 98:
 					LCD.drawString("Q_START_TURN____",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("Q_START_TURN____"); }
 					break;
-				case 98:
+				case 99:
 					LCD.drawString("Q_KEEP_TURNING__",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("Q_KEEP_TURNING__"); }
 					break;
-				case 99:
+				case 100:
 					LCD.drawString("Q_BOUNDARY_CHECK",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("Q_BOUNDARY_CHECK"); }
 					break;
-				case 100:
+				case 101:
 					LCD.drawString("Q_DETECT_BALL___",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("Q_DETECT_BALL___"); }
 					break;
-				case 101:
+				case 102:
 					LCD.drawString("Q_CHECK_COLOR___",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("Q_CHECK_COLOR___"); }
 					break;
-				case 102:
+				case 103:
 					LCD.drawString("Q_AVOID_________",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("Q_AVOID_________"); }
 					break;
-				case 103:
+				case 104:
 					LCD.drawString("Q_CHECK_STOP_DN_",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("Q_CHECK_STOP_DN_"); }
 					break;
-				case 104:
+				case 105:
 					LCD.drawString("R_ADJUST_HEADING",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("R_ADJUST_HEADING"); }
 					break;
-				case 105:
+				case 106:
 					LCD.drawString("R_START_TURN____",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("R_START_TURN____"); }
 					break;
-				case 106:
+				case 107:
 					LCD.drawString("R_KEEP_TURNING__",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("R_KEEP_TURNING__"); }
 					break;
-				case 107:
+				case 108:
 					LCD.drawString("R_BOUNDARY_CHECK",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("R_BOUNDARY_CHECK"); }
 					break;
-				case 108:
+				case 109:
 					LCD.drawString("R_DETECT_BALL___",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("R_DETECT_BALL___"); }
 					break;
-				case 109:
+				case 110:
 					LCD.drawString("R_CHECK_COLOR___",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("R_CHECK_COLOR___"); }
 					break;
-				case 110:
+				case 111:
 					LCD.drawString("R_AVOID_________",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("R_AVOID_________"); }
 					break;
-				case 111:
+				case 112:
 					LCD.drawString("R_CHECK_STOP_DN_",0,0);
 					if ( Robot.DEBUG ) { RConsole.println("R_CHECK_STOP_DN_"); }
 					break;
