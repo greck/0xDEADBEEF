@@ -6,7 +6,7 @@ public class Avoid implements Recipe {
 
 	public boolean execute() {
 
-		RobotState.pilot.travel(20,false);
+		RobotState.pilot.travel(25,false);
 		RobotState.pilot.rotate(180,false);
 		RobotState.pilot.adjustHeading();
 		
