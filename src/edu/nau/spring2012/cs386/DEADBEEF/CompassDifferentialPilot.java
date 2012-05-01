@@ -56,7 +56,7 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 
 	private void reduceHeading() {
 		
-		if ( RobotState.desiredHeading < -180 ) {
+		if ( RobotState.desiredHeading <= -180 ) {
 			RobotState.desiredHeading += 360;
 		}
 
