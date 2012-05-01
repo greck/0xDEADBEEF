@@ -62,8 +62,6 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 			buf += poseHeading;
 			RConsole.println(buf);
 
-//			try { Thread.sleep(250); } catch( Exception e) { }
-
 			int deviation = curHeading - poseHeading;
 			
 			if ( deviation > 0 ) {
