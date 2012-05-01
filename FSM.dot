@@ -338,7 +338,7 @@ digraph FSM {
 	G_BOUNDARY_CHECK -> I_ADJUST_HEADING [ label = "T" ];
 	G_BOUNDARY_CHECK -> G_CHECK_STOP_DN  [ label = "F" ];
 	G_CHECK_STOP_DN  -> H_QUIESCE        [ label = "T" ];
-	G_CHECK_STOP_DN  -> G_ADJUST_HEADING [ label = "F" ];
+	G_CHECK_STOP_DN  -> G_KEEP_STRAIGHT  [ label = "F" ];
 
 	H_QUIESCE        -> H_WAIT_STOP_UP   [ label = "T/F" ];
 	H_WAIT_STOP_UP   -> H_WAIT_START_DN  [ label = "T" ];
