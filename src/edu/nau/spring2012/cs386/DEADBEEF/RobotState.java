@@ -2,6 +2,7 @@ package edu.nau.spring2012.cs386.DEADBEEF;
 
 import lejos.nxt.*;
 import lejos.nxt.addon.ColorSensorHT;
+import lejos.nxt.comm.RConsole;
 
 public class RobotState {
 
@@ -50,6 +51,12 @@ public class RobotState {
 	public static boolean poll() {
 
 		totalItrs++;
+		
+		String buf;
+		
+		buf = "poll: desiredHeading=";
+		buf += desiredHeading;
+		RConsole.println(buf);
 		
 		LCD.drawString("L        R      ",0,1);
 		LCD.drawInt(Motor.A.getSpeed(),5,2,1);
