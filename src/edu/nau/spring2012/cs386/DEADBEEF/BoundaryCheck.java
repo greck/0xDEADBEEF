@@ -9,9 +9,13 @@ public class BoundaryCheck implements Recipe {
 	public boolean execute() {
 
 		if ( RobotState.lineLevelErr < varianceAllowed ) {
+
 			return true;
+
 		} else {
+
 			return false;
+
 		}
 		
 	}

@@ -1,9 +1,13 @@
 package edu.nau.spring2012.cs386.DEADBEEF;
 
-public class Capture implements Recipe {
+import lejos.nxt.Sound;
+
+public class Panic implements Recipe {
 
 	public boolean execute() {
 
+		Sound.buzz();
+		
 		return true;
 		
 	}

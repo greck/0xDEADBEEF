@@ -7,7 +7,7 @@ public class GoHome implements Recipe {
 
 	public boolean execute() {
 
-		Sound.buzz();
+		Sound.beep();
 
 		float angle;
 		
@@ -25,6 +25,7 @@ public class GoHome implements Recipe {
 		}
 
 		RobotState.pilot.rotate(angle,false);
+		RobotState.pilot.adjustHeading();
 		RobotState.pilot.travel(Math.abs(RobotState.pilot.getPose().getY()),false);
 
 		// point towards the negative end of the x axis
@@ -38,6 +39,8 @@ public class GoHome implements Recipe {
 			
 			RobotState.pilot.rotate(-90);
 		}
+
+		RobotState.pilot.adjustHeading();
 
 		// go home!
 		//

@@ -41,42 +41,59 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 		
 	}
 
+	public void debugHeadings(String tag, int curHeading, int poseHeading, int deviation) {
+		
+		String buf;
+		
+		buf = tag;
+		buf += "cur=";
+		buf += curHeading;
+		buf += ", pose=";
+		buf += poseHeading;
+		buf += ", deviation=";
+		buf += deviation;
+		RConsole.println(buf);
+		
+	}
+
+	private void reduceHeading() {
+		
+		if ( RobotState.desiredHeading <= -180 ) {
+			RobotState.desiredHeading += 360;
+		}
+
+		if ( RobotState.desiredHeading > 180 ) {
+			RobotState.desiredHeading -= 360;
+		}
+		
+	}
+	
 	public void adjustHeading() {
 		
-		Pose  curPose = poseProvider.getPose();
-		int curHeading, poseHeading;
-		String buf;
-
+		int curHeading, deviation;
+		Pose       curPose = poseProvider.getPose();
+		int desiredHeading = RobotState.desiredHeading;
+		
 		do {
 
-			curHeading  = Math.round(compass.getDegreesCartesian());
-			poseHeading = Math.round(curPose.getHeading());
+			curHeading = Math.round(compass.getDegreesCartesian());
 			
-			if ( curHeading > 180 ) {
+			while ( curHeading > 180 ) {
 				curHeading -= 360;
 			}
 			
-			buf = "cur=";
-			buf += curHeading;
-			buf += ", pose=";
-			buf += poseHeading;
-			RConsole.println(buf);
+			deviation = ( ( ( ( desiredHeading + 179 ) - ( curHeading + 179 ) ) + 360 ) % 360 );
 
-//			try { Thread.sleep(250); } catch( Exception e) { }
-
-			int deviation = curHeading - poseHeading;
-			
-			if ( deviation > 0 ) {
-				
-				super.rotate(-1,false);
-				
-			} else {
-				
-				super.rotate(1,false);
-				
+			while ( deviation > 180 ) {
+				deviation -= 360;
 			}
+
+			if ( Robot.DEBUG ) { debugHeadings("adjHeading:",curHeading,desiredHeading,deviation); }
+
+			RobotState.pilot.rotate(deviation,false);
+			RobotState.desiredHeading = desiredHeading;
 			
-		} while ( Math.abs( curHeading - poseHeading ) > 0 );
+		} while ( Math.abs( curHeading - RobotState.desiredHeading ) > 0 );
 
 		poseProvider.setPose(curPose);
 		
@@ -90,55 +107,19 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 	
 	public void arc(double radius, double angle, boolean immediateReturn) {
 		
-		// assert no immediate return
-		//
-		if ( immediateReturn ) { System.exit(-1); }
-
-		Pose  curPose = poseProvider.getPose();
-		int heading = Math.round(curPose.getHeading());
-
-		heading += angle;
-
-		if ( heading < -180 ) {
-			heading += 360;
-		}
-
-		if ( heading >= 180 ) {
-			heading -= 360;
-		}
+		RobotState.desiredHeading += angle;
+		reduceHeading();
 		
 		super.arc(radius,angle,immediateReturn);
 
-		curPose = poseProvider.getPose();
-		curPose.setHeading(heading);
-		poseProvider.setPose(curPose);
-		
 	}
 
 	public void rotate(double angle, boolean immediateReturn) {
 
-		// assert no immediate return
-		//
-		if ( immediateReturn ) { System.exit(-1); }
-		
-		Pose  curPose = poseProvider.getPose();
-		int heading = Math.round(curPose.getHeading());
-
-		heading += angle;
-
-		if ( heading < -180 ) {
-			heading += 360;
-		}
-
-		if ( heading >= 180 ) {
-			heading -= 360;
-		}
+		RobotState.desiredHeading += angle;
+		reduceHeading();
 		
 		super.rotate(angle,immediateReturn);
-
-		curPose = poseProvider.getPose();
-		curPose.setHeading(heading);
-		poseProvider.setPose(curPose);
 		
 	}
 	

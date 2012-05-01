@@ -5,6 +5,7 @@ public class Quiesce implements Recipe {
 	public boolean execute() {
 
 		RobotState.pilot.stop();
+		
 		return true;
 		
 	}
