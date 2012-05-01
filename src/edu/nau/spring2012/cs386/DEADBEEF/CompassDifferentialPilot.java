@@ -69,20 +69,16 @@ public class CompassDifferentialPilot extends DifferentialPilot {
 	public void adjustHeading() {
 		
 		Pose  curPose = poseProvider.getPose();
-		int curHeading;
+		int curHeading, deviation;
 
 		do {
 
 			curHeading = Math.round(compass.getDegreesCartesian());
 			
-			if ( curHeading > 180 ) {
-				curHeading -= 360;
-			}
-			
 			if ( Robot.DEBUG ) { debugHeadings("adjHeading:",curHeading,RobotState.desiredHeading); }
 			
-			int deviation = curHeading - RobotState.desiredHeading;
-			
+			deviation = Math.round( ( curHeading - RobotState.desiredHeading ) /2 );
+
 			super.rotate(-1*deviation,false);
 			
 		} while ( Math.abs( curHeading - RobotState.desiredHeading ) > 0 );
