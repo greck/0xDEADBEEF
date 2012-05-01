@@ -29,9 +29,7 @@ public class RobotState {
 	public static int  lineLevelErr;
 
 	public static CompassDifferentialPilot pilot =
-			  new CompassDifferentialPilot(4.0f, 4.0f, (float)trackWidth, Motor.A, Motor.B, false);
-	//
-	// actual gear diameter to edge of tooth is 42 mm
+			  new CompassDifferentialPilot(4.32f, 4.32f, (float)trackWidth, Motor.A, Motor.B, false);
 
 	public static void preCalibrateLight() {
 		light.setFloodlight(true);
