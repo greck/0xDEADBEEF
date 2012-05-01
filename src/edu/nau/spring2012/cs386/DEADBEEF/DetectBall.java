@@ -6,7 +6,7 @@ public class DetectBall implements Recipe {
 
 	public boolean execute() {
 
-		if ( RobotState.range < 25 ) {
+		if ( RobotState.range < 30 ) {
 
 			RobotState.pilot.travel(20,false);
 
