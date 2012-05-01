@@ -29,11 +29,11 @@ public class GoHome implements Recipe {
 			
 			if ( RobotState.pilot.getPose().getHeading() > 90 ) {
 				
-				angle = RobotState.pilot.getPose().getHeading() - 90;
+				angle = - ( RobotState.pilot.getPose().getHeading() - 90 );
 
 			} else {
 				
-				angle = 90 - RobotState.pilot.getPose().getHeading();
+				angle = - ( 90 - RobotState.pilot.getPose().getHeading() );
 			}
 			
 		}
