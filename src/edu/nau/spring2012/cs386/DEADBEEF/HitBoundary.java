@@ -4,7 +4,7 @@ public class HitBoundary implements Recipe {
 
 	public boolean execute() {
 
-		RobotState.pilot.travel(-1.5*RobotState.trackWidth);	
+		RobotState.pilot.travel(-2*RobotState.trackWidth);	
 
 		return true;
 		
