@@ -13,6 +13,8 @@ public class DetectBall implements Recipe {
 			// Code to close the claw.
 			//
 			Motor.C.rotate(80);
+
+			RobotState.pilot.adjustHeading();
 			
 			return true;
 
